@@ -1,0 +1,41 @@
+# Ce fichier regroupe les parametres pour les lieux de combats
+# Differents bonus ou malus peuvent etre applique. (-1.0 = Damage - 100% ; 1.0 = damage + 100%)
+Arene_normal
+	Name	Arene
+	Id	1
+	Water	0.0
+	Rock	0.0
+	Electric	0.0
+	Fire	0.0
+	Grass	0.0
+EndArene_normal
+
+River_small
+	Name	Small River
+	Id	2
+	Water	0.25
+	Rock	0.0
+	Electric	-0.15
+	Fire	-0.25
+	Grass	0.1
+EndRiver_small
+
+Volcano_1
+	Name	Volcano
+	Id	3
+	Water	0.0
+	Rock	0.0
+	Electric	0.0
+	Fire	0.0
+	Grass	0.0
+EndVolcano_1
+
+Arene_cheat
+	Name	Arene 3
+	Id	4
+	Water	1.0
+	Rock	1.0
+	Electric	1.0
+	Fire	1.0
+	Grass	1.0
+EndArene_cheat
