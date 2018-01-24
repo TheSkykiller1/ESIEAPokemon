@@ -12,7 +12,7 @@ protected:
 	int self_id;
 	int id_pokemon = 0;
 	std::string s_pseudo;
-	bool isPlayable;//Si c'est une IA ou un vrai joueur
+	bool isPlayable;
 	short s_level;
 	int s_exp;//exp du level
 	int s_exp_up; //exp necessaire pour level up

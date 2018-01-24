@@ -108,7 +108,7 @@ void CPlayer::delete_pokemon()
 {
 	if (Pokeballs.size() < 1) { std::cout << "Vous n'avez pas de pokemon donc vous ne pouvez pas en relacher!\n"; return; }
 	list_pokemon();
-	std::cout << "Quel pokemon voulez-vous supprimer ? (ID)\n";
+	std::cout << "Quel Pokemon voulez-vous supprimer ? (ID)\n";
 	int choix;
 	std::cin >> choix;
 	delete_pokemon(choix);
