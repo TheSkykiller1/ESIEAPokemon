@@ -10,6 +10,7 @@ class CPlayer
 protected:
 	static int id;
 	int self_id;
+	int id_pokemon = 0;
 	std::string s_pseudo;
 	bool isPlayable;//Si c'est une IA ou un vrai joueur
 	short s_level;
@@ -23,7 +24,6 @@ protected:
 
 	void read_level_requirement();//read level and xp needed from config
 	void level_refresh(); //refresh player level
-
 public:
 	CPlayer();
 	CPlayer(std::string name, bool isPlayer, int posX, int posY, int fight_count = 0, int fight_win = 0, short level=0, int xp = 0);
@@ -49,10 +49,10 @@ public:
 	void set_exp(int exp);
 	void give_exp(int exp);
 	void match_fini(bool win,int exp=0); //add 1 match to the counter, and 1 to win if match is won, exp gain are handled by this function
-	void add_pokemon(int id, short type, std::string nom, short hpe, short vitesse, short attaque, short defense);//todo terminer addpoke
+	void add_pokemon(short type, std::string nom, short hpe, short vitesse, short attaque, short defense);//todo terminer addpoke
 	void add_pokemon(CMonster pokemon);
-	void delete_pokemon(int id_pokemon);
-
+	void delete_pokemon(int id_pokemon);//Delete directement le pokemon
+	void delete_pokemon();//Affiche les pokemon et demande lequel supprimer
 };
 #endif
 
