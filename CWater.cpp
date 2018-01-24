@@ -10,6 +10,11 @@ CWater::CWater(int id, short type, std::string nom, short HP, short vit, short a
 	CMonster(id, type, nom, HP, vit, att, def);
 }
 
+CWater::~CWater()
+{
+
+}
+
 //GETTERS
 
 float CWater::getFlood()

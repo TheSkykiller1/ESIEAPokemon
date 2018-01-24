@@ -57,8 +57,8 @@ public:
 	void setEtatTours(short tours);
 	
 	short updateEtat();
-	virtual void attaquer();
-	short degat(short num_att, CMonster &def);
+	//virtual void attaquer();
+	//short degat(short num_att, CMonster &def);
 };
 
 #endif
