@@ -16,7 +16,7 @@ protected:
 
 public:
 	CAttaque();
-	CAttaque(std::string nom, short nu, short pa, float pe);
+	CAttaque(std::string nom, short type, short nu, short pa, float pe);
 	~CAttaque();
 
 	std::string getNom();
