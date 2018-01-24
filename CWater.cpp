@@ -43,5 +43,13 @@ void CWater::setFall(float fall)
 
 bool CWater::flood()
 {
-	return false; //todo a modifier flood
+	short val = m_flood + rand() / RAND_MAX;
+	if (val)
+	{
+		return 0;
+	}
+	else
+	{
+		return 1;
+	}
 }

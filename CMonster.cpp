@@ -18,6 +18,7 @@ CMonster::CMonster(int id, short type, std::string nom, short HP, short vit, sho
 	m_defense = def;
 	m_etat = 0;
 	m_etat_tours = 0;
+	m_cache = 0;
 }
 
 CMonster::~CMonster()
@@ -82,6 +83,11 @@ std::vector<short> CMonster::getForce()
 	return m_force;
 }
 
+bool CMonster::getCache()
+{
+	return m_cache;
+}
+
 //SETTERS
 
 void CMonster::setId(int id)
@@ -132,6 +138,11 @@ void CMonster::setEtat(short etat)
 void CMonster::setEtatTours(short tours)
 {
 	m_etat_tours = tours;
+}
+
+void CMonster::setCache(bool cache)
+{
+	m_cache = cache;
 }
 
 //METHODES
@@ -186,6 +197,13 @@ short CMonster::degat(short num_att, CMonster &def)
 	float avantage = 1;
 	short base_type_att = m_type;
 	short base_type_def = def.getType();
+	if (def.getType() == 3) //si type terre
+	{
+		if (def.getCache() == 1)
+		{
+			defense *= 2;
+		}
+	}
 	for (unsigned short i = 0; i < m_force.size(); i++)
 	{
 		if (m_force[i+*m_force.begin()] == base_type_def)

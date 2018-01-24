@@ -7,16 +7,11 @@ class CRock:public CMonster
 {
 protected:
 	std::vector<short> m_force = { 4 };
-	bool m_cache;
 
 public:
 	CRock();
-	CRock(int id, short type, std::string nom, short HP, short vit, short att, short def, bool cache);
+	CRock(int id, short type, std::string nom, short HP, short vit, short att, short def);
 	~CRock();
-
-	bool getCache();
-
-	void setCache(bool cache);
 };
 
 #endif

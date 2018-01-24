@@ -22,6 +22,7 @@ protected:
 	short m_etat_tours;
 	std::vector<short> m_force;
 	//std::vector<CAttaque*> m_CS;
+	bool m_cache;
 
 	std::vector<std::string> m_nom_attaques;
 	std::vector<short> m_nu;
@@ -44,6 +45,7 @@ public:
 	short getEtatTours();
 	std::vector<short> getForce();
 	//std::vector<CAttaque> getCS();
+	bool getCache();
 
 	void setId(int id);
 	void setType(short type);
@@ -55,6 +57,7 @@ public:
 	void setDefense(short defense);
 	void setEtat(short etat);
 	void setEtatTours(short tours);
+	void setCache(bool cache);
 	
 	short updateEtat();
 	virtual bool attaquer(short num_att, CMonster &cible);
