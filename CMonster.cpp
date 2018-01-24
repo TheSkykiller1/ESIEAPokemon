@@ -172,15 +172,15 @@ short CMonster::updateEtat() //todo etat a finir
 	}
 	return etat;//todo a modifier temporaire
 }
-/*
+
 short CMonster::degat(short num_att, CMonster &def)
 {
 	short attaque = m_attaque_act;
 	short defense = def.getDefense();
 	float coeff = (float)(0.85 + (rand() % 15) / 100);
 	float avantage = 1;
-	float base_type_att = m_type;
-	float base_type_def = def.getType();
+	short base_type_att = m_type;
+	short base_type_def = def.getType();
 	for (unsigned short i = 0; i < m_force.size(); i++)
 	{
 		if (m_force[i+*m_force.begin()] == base_type_def)
@@ -188,9 +188,10 @@ short CMonster::degat(short num_att, CMonster &def)
 			avantage = 2;
 		}
 	}
-	for (unsigned short i = 0; i < def.getForce().size(); i++)
+	for (std::vector<short>::iterator it = def.getForce().begin(); it != def.getForce()
+		.end(); ++it)
 	{
-		if (def.getForce[i+def.getForce.begin()] == base_type_att)
+		if (*it == base_type_att)
 		{
 			avantage = 0.5;
 		}
@@ -198,4 +199,3 @@ short CMonster::degat(short num_att, CMonster &def)
 	short degat = ((11 * attaque*(m_pAttaques[num_att])) / (25 * defense) + 2)*avantage*coeff;
 	return degat;
 }
-*/
