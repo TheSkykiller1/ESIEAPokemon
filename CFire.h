@@ -10,6 +10,7 @@ protected:
 
 public:
 	CFire();
+	CFire(int id, short type, std::string nom, short HP, short vit, short att, short def);
 	~CFire();
 	void burn(CMonster* monstre);
 };

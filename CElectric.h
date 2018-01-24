@@ -13,7 +13,7 @@ protected:
 
 public:
 	CElectric();
-	CElectric(float paralysis);
+	CElectric(int id, short type, std::string nom, short HP, short vit, short att, short def, float paralysis);
 	~CElectric();
 
 	float getParalysis();

@@ -5,9 +5,9 @@ CRock::CRock()
 	CMonster();
 }
 
-CRock::CRock(bool cache)
+CRock::CRock(int id, short type, std::string nom, short HP, short vit, short att, short def, bool cache)
 {
-	CMonster();
+	CMonster(id, type, nom, HP, vit, att, def);
 	m_cache = cache;
 }
 

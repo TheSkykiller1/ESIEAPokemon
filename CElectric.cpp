@@ -5,9 +5,9 @@ CElectric::CElectric()
 	CMonster();
 }
 
-CElectric::CElectric(float paralysis)
+CElectric::CElectric(int id, short type, std::string nom, short HP, short vit, short att, short def, float paralysis)
 {
-	CMonster();
+	CMonster(id, type, nom, HP, vit, att, def);
 	m_paralysis = paralysis;
 	m_force = { 0 };
 }

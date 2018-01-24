@@ -11,7 +11,7 @@ protected:
 
 public:
 	CRock();
-	CRock(bool cache);
+	CRock(int id, short type, std::string nom, short HP, short vit, short att, short def, bool cache);
 	~CRock();
 
 	bool getCache();
