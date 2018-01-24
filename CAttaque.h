@@ -28,8 +28,6 @@ public:
 	void setPA(short pa);
 	void setPE(float pe);
 	void setCS(bool cs);
-
-	//short degat(CMonster * att, CMonster * def);
 };
 
 #endif

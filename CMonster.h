@@ -16,13 +16,17 @@ protected:
 	short m_vitesse;
 	short m_attaque;
 	short m_attaque_act;
-	//std::vector<CAttaque*> m_attaques;
+	//std::vector<CAttaque> m_attaques;
 	short m_defense;
 	short m_etat;
 	short m_etat_tours;
 	std::vector<short> m_force;
 	//std::vector<CAttaque*> m_CS;
 
+	std::vector<std::string> m_nom_attaques;
+	std::vector<short> m_nu;
+	std::vector<short> m_pAttaques;
+	std::vector<float > m_pEchec;
 public:
 	CMonster();
 	CMonster(int id, short type, std::string nom, short HP, short vit, short att, short def);
@@ -39,9 +43,9 @@ public:
 	short getEtat();
 	short getEtatTours();
 	std::vector<short> getForce();
-	//std::vector<CAttaque*> getCS();
+	//std::vector<CAttaque> getCS();
 
-	void sestId(int id);
+	void setId(int id);
 	void setType(short type);
 	void setNom(std::string nom);
 	void setHP(short HP);
@@ -51,7 +55,10 @@ public:
 	void setDefense(short defense);
 	void setEtat(short etat);
 	void setEtatTours(short tours);
+	
 	short updateEtat();
+	virtual void attaquer();
+	short degat(short num_att, CMonster &def);
 };
 
 #endif
