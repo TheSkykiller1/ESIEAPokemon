@@ -127,6 +127,7 @@
     <ClCompile Include="CFire.cpp" />
     <ClCompile Include="CGrass.cpp" />
     <ClCompile Include="CInsect.cpp" />
+    <ClCompile Include="CJeux.cpp" />
     <ClCompile Include="CMonster.cpp" />
     <ClCompile Include="CObject.cpp" />
     <ClCompile Include="CPlant.cpp" />
@@ -145,6 +146,7 @@
     <ClInclude Include="CFire.h" />
     <ClInclude Include="CGrass.h" />
     <ClInclude Include="CInsect.h" />
+    <ClInclude Include="CJeux.h" />
     <ClInclude Include="CMonster.h" />
     <ClInclude Include="CObject.h" />
     <ClInclude Include="CPlant.h" />

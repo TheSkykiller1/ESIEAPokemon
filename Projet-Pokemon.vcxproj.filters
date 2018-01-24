@@ -13,47 +13,35 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Fichiers sources\config">
+      <UniqueIdentifier>{cecf5f75-41f5-4a44-ab9c-836c21526470}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\ClassePoke">
+      <UniqueIdentifier>{c896d07c-8260-4fc3-bb0f-38a860624794}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\ClassePoke">
+      <UniqueIdentifier>{a6543725-9c54-4cac-abfb-24735e2bd911}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <None Include="attacks.pkmn">
-      <Filter>Fichiers sources</Filter>
-    </None>
     <None Include="monsters.pkmn">
-      <Filter>Fichiers sources</Filter>
+      <Filter>Fichiers sources\config</Filter>
     </None>
     <None Include="player.pkmn">
-      <Filter>Fichiers sources</Filter>
+      <Filter>Fichiers sources\config</Filter>
     </None>
     <None Include="terrain.pkmn">
-      <Filter>Fichiers sources</Filter>
+      <Filter>Fichiers sources\config</Filter>
+    </None>
+    <None Include="attacks.pkmn">
+      <Filter>Fichiers sources\config</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="CAttaque.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
     <ClCompile Include="CDrug.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
-    <ClCompile Include="CElectric.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
-    <ClCompile Include="CFire.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
-    <ClCompile Include="CGrass.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
-    <ClCompile Include="CInsect.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
-    <ClCompile Include="CMonster.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
     <ClCompile Include="CObject.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
-    <ClCompile Include="CPlant.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
     <ClCompile Include="CPlayer.cpp">
@@ -62,13 +50,7 @@
     <ClCompile Include="CPotion.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
-    <ClCompile Include="CRock.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
     <ClCompile Include="CTerrain.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
-    <ClCompile Include="CWater.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
     <ClCompile Include="CWorld.cpp">
@@ -77,30 +59,45 @@
     <ClCompile Include="main.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
+    <ClCompile Include="CAttaque.cpp">
+      <Filter>Fichiers sources\ClassePoke</Filter>
+    </ClCompile>
+    <ClCompile Include="CElectric.cpp">
+      <Filter>Fichiers sources\ClassePoke</Filter>
+    </ClCompile>
+    <ClCompile Include="CFire.cpp">
+      <Filter>Fichiers sources\ClassePoke</Filter>
+    </ClCompile>
+    <ClCompile Include="CGrass.cpp">
+      <Filter>Fichiers sources\ClassePoke</Filter>
+    </ClCompile>
+    <ClCompile Include="CInsect.cpp">
+      <Filter>Fichiers sources\ClassePoke</Filter>
+    </ClCompile>
+    <ClCompile Include="CMonster.cpp">
+      <Filter>Fichiers sources\ClassePoke</Filter>
+    </ClCompile>
+    <ClCompile Include="CRock.cpp">
+      <Filter>Fichiers sources\ClassePoke</Filter>
+    </ClCompile>
+    <ClCompile Include="CWater.cpp">
+      <Filter>Fichiers sources\ClassePoke</Filter>
+    </ClCompile>
+    <ClCompile Include="CPlant.cpp">
+      <Filter>Fichiers sources\ClassePoke</Filter>
+    </ClCompile>
+    <ClCompile Include="CJeux.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="CAttaque.h">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
     <ClInclude Include="CDrug.h">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
-    <ClInclude Include="CElectric.h">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
-    <ClInclude Include="CGrass.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
     <ClInclude Include="CWorld.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
-    <ClInclude Include="CWater.h">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
     <ClInclude Include="CTerrain.h">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
-    <ClInclude Include="CRock.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
     <ClInclude Include="CPotion.h">
@@ -109,19 +106,37 @@
     <ClInclude Include="CPlayer.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
-    <ClInclude Include="CPlant.h">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
     <ClInclude Include="CObject.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
-    <ClInclude Include="CMonster.h">
-      <Filter>Fichiers d%27en-tête</Filter>
+    <ClInclude Include="CAttaque.h">
+      <Filter>Fichiers d%27en-tête\ClassePoke</Filter>
     </ClInclude>
-    <ClInclude Include="CInsect.h">
-      <Filter>Fichiers d%27en-tête</Filter>
+    <ClInclude Include="CElectric.h">
+      <Filter>Fichiers d%27en-tête\ClassePoke</Filter>
     </ClInclude>
     <ClInclude Include="CFire.h">
+      <Filter>Fichiers d%27en-tête\ClassePoke</Filter>
+    </ClInclude>
+    <ClInclude Include="CGrass.h">
+      <Filter>Fichiers d%27en-tête\ClassePoke</Filter>
+    </ClInclude>
+    <ClInclude Include="CInsect.h">
+      <Filter>Fichiers d%27en-tête\ClassePoke</Filter>
+    </ClInclude>
+    <ClInclude Include="CMonster.h">
+      <Filter>Fichiers d%27en-tête\ClassePoke</Filter>
+    </ClInclude>
+    <ClInclude Include="CPlant.h">
+      <Filter>Fichiers d%27en-tête\ClassePoke</Filter>
+    </ClInclude>
+    <ClInclude Include="CRock.h">
+      <Filter>Fichiers d%27en-tête\ClassePoke</Filter>
+    </ClInclude>
+    <ClInclude Include="CWater.h">
+      <Filter>Fichiers d%27en-tête\ClassePoke</Filter>
+    </ClInclude>
+    <ClInclude Include="CJeux.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
   </ItemGroup>

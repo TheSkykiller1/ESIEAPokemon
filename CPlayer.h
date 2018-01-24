@@ -49,7 +49,8 @@ public:
 	void set_exp(int exp);
 	void give_exp(int exp);
 	void match_fini(bool win,int exp=0); //add 1 match to the counter, and 1 to win if match is won, exp gain are handled by this function
-	void add_pokemon(const CMonster& pokemon);
+	void add_pokemon(int id, short type, std::string nom, short hpe, short vitesse, short attaque, short defense);//todo terminer addpoke
+	void add_pokemon(CMonster pokemon);
 	void delete_pokemon(int id_pokemon);
 
 };

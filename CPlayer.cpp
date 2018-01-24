@@ -56,10 +56,17 @@ int CPlayer::fight_win() { return s_nb_win; }
 void CPlayer::list_pokemon()
 {
 	int nb_Pokeball = Pokeballs.size();
-	std::cout << "Liste des pokemons: \n";
-	for (int pokemon = 0; pokemon < nb_Pokeball; ++pokemon)
+	if (nb_Pokeball < 1)
 	{
-		//std::cout << pokemon << ") Nom: " << Pokeballs[pokemon].getNom() << " et de type: " << Pokeballs[pokemon].getType() << "\n";
+		std::cout << "Aucune pokeball n'a été trouvée dans sa poche, les a t'il fait tomber ? \n";
+	}
+	else
+	{
+		std::cout << "Liste des pokemons: \n";
+		for (int pokemon = 0; pokemon < nb_Pokeball; ++pokemon)
+		{
+			std::cout << pokemon << ") Nom: " << Pokeballs[pokemon].getNom() << " et de type: " << Pokeballs[pokemon].getType() << "\n";
+		}
 	}
 }//Affiche les pokemon et leur stats de base (base_damage, etc)
 
@@ -86,5 +93,13 @@ void CPlayer::match_fini(bool win, int exp)//add 1 match to the counter, and 1 t
 		level_refresh();
 	}
 }
-void CPlayer::add_pokemon(const CMonster& pokemon){}
+void CPlayer::add_pokemon(CMonster pokemon)
+{
+	Pokeballs.push_back(pokemon); //copy but not the same as sended (not pointer)
+}
+void CPlayer::add_pokemon(int id, short type, std::string nom, short hpe, short vitesse, short attaque, short defense)
+{
+	CMonster pokemon(id, type, nom, hpe, vitesse, attaque, defense);
+	Pokeballs.push_back(pokemon);
+}
 void CPlayer::delete_pokemon(int id_pokemon){}
