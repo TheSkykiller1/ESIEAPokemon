@@ -10,7 +10,7 @@ public:
 	int dimensionY;
 	int nb_joueur;
 	std::vector<CPlayer> joueurs; //Le joueur connait sa position
-	std::vector<CMonster> config_pokemon;
+	std::vector<CMonster> liste_pokemon;
 	CTerrain* Cases; //Defini la grille de jeu et le terrain de la case en question
 	CWorld();
 	//CWorld(int X, int Y);
@@ -22,8 +22,15 @@ public:
 	//CTerrain terrain(int posX, int posY);
 	//std::vector<CPlayer> Player(int posX, int posY); //Donne la liste des joueurs sur cette case, si > 2 alors un match est déclaré.
 
-	void read_config_pokemon();
+	std::vector<CMonster> read_config_pokemon();
 
+
+
+	//Utile pour split les chaines de string avec un delimiter
+	template<typename Out>
+	void split(const std::string &s, char delim, Out result);
+
+	std::vector<std::string> split(const std::string &s, char delim);
 
 
 
