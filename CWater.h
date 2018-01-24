@@ -11,6 +11,10 @@ protected:
 	float m_fall;
 
 public:
+	CWater();
+	CWater(int id, short type, std::string nom, short HP, short vit, short att, short def);
+	~CWater();
+
 	float getFlood();
 	float getFall();
 
