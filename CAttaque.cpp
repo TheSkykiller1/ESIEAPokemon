@@ -1,5 +1,24 @@
 #include "CAttaque.h"
 
+CAttaque::CAttaque()
+{
+
+}
+
+CAttaque::CAttaque(std::string nom, short type, short nu, short pa, float pe)
+{
+	m_nom = nom;
+	m_type = type;
+	m_nu = nu;
+	m_pAttaque = pa;
+	m_pEchec = pe;
+}
+
+CAttaque::~CAttaque()
+{
+
+}
+
 //GETTERS
 
 std::string CAttaque::getNom()

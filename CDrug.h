@@ -5,7 +5,10 @@
 
 class CDrug :public CObject
 {
-
+public:
+	CDrug();
+	CDrug(int id, std::string nom, std::vector<short> type, short vit, short att, short def, short HP);
+	~CDrug();
 };
 
 #endif

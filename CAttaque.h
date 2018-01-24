@@ -15,6 +15,10 @@ protected:
 	bool m_cs;//s'agit t'il d'une capacité spéciale ?
 
 public:
+	CAttaque();
+	CAttaque(std::string nom, short nu, short pa, float pe);
+	~CAttaque();
+
 	std::string getNom();
 	short getType();
 	short getNU();

@@ -18,6 +18,9 @@ protected:
 	//
 	short m_etat; //-1 si aucun forçage sinon prend la valeur de l'état forcé à l'utilisation
 public:
+	CObject();
+	CObject(int id, std::string nom, std::vector<short> type, short vit, short att, short def, short HP);
+	~CObject();
 	short getId();
 	std::string getNom();
 	std::vector<short> getType();
