@@ -109,11 +109,18 @@ void CPlayer::delete_pokemon()
 	if (Pokeballs.size() < 1) { std::cout << "Vous n'avez pas de pokemon donc vous ne pouvez pas en relacher!\n"; return; }
 	list_pokemon();
 	std::cout << "Quel pokemon voulez-vous supprimer ? (ID)\n";
-
-	std::cout << "myvector contains:";
-	for (std::vector<CMonster>::iterator it = Pokeballs.begin(); it != Pokeballs.end(); ++it)
-		std::cout << '\n' << "\t -" << it->getId() << " Et il sappele: " << it->getNom() << "\n";
-	std::cout << '\n';
+	int choix;
+	std::cin >> choix;
+	delete_pokemon(choix);
 
 }
-void CPlayer::delete_pokemon(int id_pokemon) { return; }
+void CPlayer::delete_pokemon(int id_pokemon) 
+{
+	for (std::vector<CMonster>::iterator it = Pokeballs.begin(); it != Pokeballs.end(); ++it)
+	{
+		if (id_pokemon == it->getId())
+		{
+			Pokeballs.erase(it);
+		}
+	}
+}
