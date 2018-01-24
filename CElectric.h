@@ -20,7 +20,7 @@ public:
 
 	void setParalysis(float paralysis);
 
-	void attaquer(short num_att, CMonster &cible);
+	bool attaquer(short num_att, CMonster &cible);
 };
 
 #endif

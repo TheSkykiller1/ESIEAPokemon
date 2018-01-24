@@ -173,9 +173,9 @@ short CMonster::updateEtat() //todo etat a finir
 	return etat;//todo a modifier temporaire
 }
 
-void CMonster::attaquer(short num_att, CMonster &cible)
+bool CMonster::attaquer(short num_att, CMonster &cible)
 {
-
+	return 0;
 }
 
 short CMonster::degat(short num_att, CMonster &def)
