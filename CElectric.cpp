@@ -24,6 +24,18 @@ bool CElectric::paralyze()
 	return false; //todo paralyser
 }
 
+void CElectric::attaquer(short num_att, CMonster &cible)
+{
+	if (m_nu[num_att] > 0)
+	{
+		short val_degat = degat(num_att, cible);
+		short HP1 = cible.getHP();
+		short HP2 = HP1 - val_degat;
+		cible.setHP(HP2);
+		m_nu[num_att]--;
+	}
+}
+
 //GETTERS
 
 float CElectric::getParalysis()

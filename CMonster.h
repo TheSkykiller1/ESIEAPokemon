@@ -26,7 +26,7 @@ protected:
 	std::vector<std::string> m_nom_attaques;
 	std::vector<short> m_nu;
 	std::vector<short> m_pAttaques;
-	std::vector<float > m_pEchec;
+	std::vector<float> m_pEchec;
 public:
 	CMonster();
 	CMonster(int id, short type, std::string nom, short HP, short vit, short att, short def);
@@ -57,8 +57,8 @@ public:
 	void setEtatTours(short tours);
 	
 	short updateEtat();
-	//virtual void attaquer();
-	//short degat(short num_att, CMonster &def);
+	virtual void attaquer(short num_att, CMonster &cible);
+	short degat(short num_att, CMonster &def);
 };
 
 #endif

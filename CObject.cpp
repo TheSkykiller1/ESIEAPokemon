@@ -1,5 +1,26 @@
 #include "CObject.h"
 
+CObject::CObject()
+{
+
+}
+
+CObject::CObject(int id, std::string nom, std::vector<short> type, short vit, short att, short def, short HP)
+{
+	m_id = id;
+	m_nom = nom;
+	m_type = type;
+	m_vit = vit;
+	m_att = att;
+	m_def = def;
+	m_HP = HP;
+}
+
+CObject::~CObject()
+{
+
+}
+
 //GETTERS
 
 short CObject::getId()
