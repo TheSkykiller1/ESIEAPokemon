@@ -65,7 +65,7 @@ void CPlayer::list_pokemon()
 		std::cout << "Liste des pokemons:  "<<nb_Pokeball<<" Pokemons!\n";
 		for (int pokemon = 0; pokemon < nb_Pokeball; ++pokemon)
 		{
-			std::cout << "-" << pokemon << ") ID: " << 42 << " Nom: " << Pokeballs[pokemon].getNom() << " et de type : " << Pokeballs[pokemon].getType() << "\n"\
+			std::cout << "-" << pokemon << ") ID: " << Pokeballs[pokemon].getId() << " Nom: " << Pokeballs[pokemon].getNom() << " et de type : " << Pokeballs[pokemon].getType() << "\n"\
 				<< "\t possede: " << Pokeballs[pokemon].getHP() << " HP et : " << Pokeballs[pokemon].getAttaque() << " Degats et " << Pokeballs[pokemon].getDefense() << " de defense.\n";
 		}
 	}
@@ -96,6 +96,7 @@ void CPlayer::match_fini(bool win, int exp)//add 1 match to the counter, and 1 t
 }
 void CPlayer::add_pokemon(CMonster pokemon)
 {
+	pokemon.setId(id_pokemon++);
 	Pokeballs.push_back(pokemon);
 }
 void CPlayer::add_pokemon(short type, std::string nom, short hpe, short vitesse, short attaque, short defense)
@@ -107,7 +108,12 @@ void CPlayer::delete_pokemon()
 {
 	if (Pokeballs.size() < 1) { std::cout << "Vous n'avez pas de pokemon donc vous ne pouvez pas en relacher!\n"; return; }
 	list_pokemon();
+	std::cout << "Quel pokemon voulez-vous supprimer ? (ID)\n";
 
+	std::cout << "myvector contains:";
+	for (std::vector<CMonster>::iterator it = Pokeballs.begin(); it != Pokeballs.end(); ++it)
+		std::cout << '\n' << "\t -" << it->getId() << " Et il sappele: " << it->getNom() << "\n";
+	std::cout << '\n';
 
 }
-void CPlayer::delete_pokemon(int id_pokemon) {}
+void CPlayer::delete_pokemon(int id_pokemon) { return; }
