@@ -6,14 +6,21 @@ class CTerrain
 {
 public:
 	CTerrain();
+	CTerrain(std::string name,int id, float fire, float electric, float water, float rock, float grass);
 	~CTerrain();
 	
 	//Getters
 	std::string Title();
+	int id();
+	float fire_bonus();
+	float electric_bonus();
+	float water_bonus();
+	float rock_bonus();
+	float grass_bonus();
 
 protected:
 	std::string s_name_terrain;
-	short s_id_terrain;
+	int s_id_terrain;
 	float s_fire;
 	float s_electric;
 	float s_water;

@@ -27,14 +27,17 @@ protected:
 	void split(const std::string &s, char delim, Out result);
 
 	std::vector<std::string> split(const std::string &s, char delim);
+	
+
 	void read_config_pokemon();
+	void read_config_terrain();
 public:
 	int dimensionX;
 	int dimensionY;
 	int nb_joueur;
 	std::vector<CPlayer> joueurs; //Le joueur connait sa position
 	std::vector<CMonster> ListePokemon;
-	//CTerrain* Cases; //Defini la grille de jeu et le terrain de la case en question
+	std::vector<CTerrain> ListeTerrain;
 	CWorld();
 	//CWorld(int X, int Y);
 	~CWorld();

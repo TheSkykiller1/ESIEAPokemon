@@ -9,7 +9,70 @@ CWorld::CWorld()
 CWorld::~CWorld()
 {
 }
+void CWorld::read_config_terrain()
+{
+	std::string row;
+	std::ifstream File("terrain.pkmn", std::ios::in);
+	srand(time(NULL));//Init random generator
+	if (File.is_open())
+	{
+		while (getline(File, row))
+		{
+			if (row == "terrain")//Debut du bloc
+			{	//Value only!
+				std::string name;
+				int id;
+				float water,rock,electric,fire,grass;
 
+				while (row != "Endterrain")//Tant que l'on est dans le bloc
+				{
+					getline(File, row);
+					if (row == "Endterrain") { break; }//Si on a fini le bloc on quitte
+					std::vector<std::string> token = split(row, '\t\t');
+					std::vector<std::string> element;
+					for (int i = 0;i < token.size();i++)//On clear les elements vides
+					{
+						if (token[i] != "") { element.push_back(token[i]); }
+					}
+
+					//Analyse des resultats
+					if (element[0] == "Name") { name = element[1]; }
+					else if (element[0] == "Id")
+					{
+						id = stoi(element[1]);
+					}
+					else if (element[0] == "Water")
+					{
+						water = stof(element[1]);
+					}
+					else if (element[0] == "Rock")
+					{
+						rock = stof(element[1]);
+					}
+					else if (element[0] == "Electric")
+					{
+						electric = stof(element[1]);
+					}
+					else if (element[0] == "Fire")
+					{
+						fire = stof(element[1]);
+					}
+					else if (element[0] == "Grass")
+					{
+						grass = stof(element[1]);
+					}
+				}
+				CTerrain terrain(name, id, fire, electric, water, rock, grass);
+				ListeTerrain.push_back(terrain);
+			}
+		}
+		File.close();
+	}
+	else
+	{
+		std::cout << "Impossible d’ouvrir le fichier \n";
+	}
+}
 void CWorld::read_config_pokemon()
 {
 	std::string row;
