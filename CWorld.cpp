@@ -1,12 +1,5 @@
 #include "CWorld.h"
-#include <iostream>
-#include <fstream>//ifstream
-#include <string>//getline
-#include <sstream>
-#include <vector>
-#include <time.h>
-#include <stdio.h>
-#include <stdlib.h>
+
 CWorld::CWorld()
 {
 }
@@ -18,10 +11,11 @@ CWorld::~CWorld()
 
 std::vector<CMonster> CWorld::read_config_pokemon()
 {
-	std::string row;std::string MESSAGE = "";
+	std::string row;
 	std::ifstream File("monsters.pkmn", std::ios::in);
 	srand(time(NULL));//Init random generator
 	std::vector<CMonster> ListePokemon;
+	int id = 0;
 	if (File.is_open())
 	{
 		while (getline(File, row))
@@ -30,6 +24,7 @@ std::vector<CMonster> CWorld::read_config_pokemon()
 			{	//Value only!
 				std::string name, type;
 				int hp, speed, attack, defense;
+				float paralyze, poison, fall, flood, burn;
 
 				while (row!="EndMonster")//Tant que l'on est dans le bloc
 				{	
@@ -69,30 +64,56 @@ std::vector<CMonster> CWorld::read_config_pokemon()
 						int max = std::stoi(element[2]);
 						defense = rand() % (max - min) + min;
 					}
+					else if (element[0] == "Paralysis")
+					{
+						paralyze=stof(element[1]);
+					}
+					else if (element[0] == "Flood")
+					{
+						flood=stof(element[1]);
+					}
+					else if (element[0] == "Fall")
+					{
+						fall = stof(element[1]);
+					}
+					else if (element[0] == "Poison")
+					{
+						poison = stof(element[1]);
+					}
+					else if (element[0] == "Burn")
+					{
+						burn = stof(element[1]);
+					}
 				}
 				if (type == "Electric")
 				{
-					
+					CElectric pokemon(id++, type, name, hp, speed, attack, defense);
+					ListePokemon.push_back(pokemon);
 				}
 				else if (type == "Fire")
 				{
-
+					CFire pokemon(id++, type, name, hp, speed, attack, defense);
+					ListePokemon.push_back(pokemon);
 				}
 				else if (type == "Rock")
 				{
-
+					CRock pokemon(id++, type, name, hp, speed, attack, defense);
+					ListePokemon.push_back(pokemon);
 				}
 				else if (type == "Plant")
 				{
-
+					CPlant pokemon(id++, type, name, hp, speed, attack, defense);
+					ListePokemon.push_back(pokemon);
 				}
 				else if (type == "Insect")
 				{
-
+					CInsect pokemon(id++, type, name, hp, speed, attack, defense);
+					ListePokemon.push_back(pokemon);
 				}
 				else if (type == "Water")
 				{
-
+					CWater pokemon(id++, type, name, hp, speed, attack, defense);
+					ListePokemon.push_back(pokemon);
 				}
 			}
 		}
@@ -102,6 +123,7 @@ std::vector<CMonster> CWorld::read_config_pokemon()
 	{
 		std::cout << "Impossible d’ouvrir le fichier \n";
 	}
+	return ListePokemon;
 }
 
 //La function template pour parser les donnees

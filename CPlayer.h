@@ -4,6 +4,11 @@
 #include <vector>
 #include <fstream>//ifstream
 #include <string>//getline
+#include <sstream>
+#include <time.h>
+#include <stdio.h>
+#include <stdlib.h>
+
 #include "CMonster.h"
 class CPlayer
 {
@@ -22,7 +27,15 @@ protected:
 	int s_posx;
 	int s_posy;
 
-	void read_level_requirement();//read level and xp needed from config
+
+	//Utile pour split les chaines de string avec un delimiter
+	template<typename Out>
+	void split(const std::string &s, char delim, Out result);
+
+	std::vector<std::string> split(const std::string &s, char delim);
+
+
+	std::vector<int> read_level_requirement();//read level and xp needed from config
 	void level_refresh(); //refresh player level
 public:
 	CPlayer();
@@ -49,7 +62,7 @@ public:
 	void set_exp(int exp);
 	void give_exp(int exp);
 	void match_fini(bool win,int exp=0); //add 1 match to the counter, and 1 to win if match is won, exp gain are handled by this function
-	void add_pokemon(short type, std::string nom, short hpe, short vitesse, short attaque, short defense);//todo terminer addpoke
+	void add_pokemon(std::string type, std::string nom, int hpe, int vitesse, int attaque, int defense);
 	void add_pokemon(CMonster pokemon);
 	void delete_pokemon(int id_pokemon);//Delete directement le pokemon
 	void delete_pokemon();//Affiche les pokemon et demande lequel supprimer
