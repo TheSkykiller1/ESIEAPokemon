@@ -11,10 +11,8 @@
 
 #include "CPlayer.h"
 #include "CTerrain.h"
-#include "CMonster.h"
 #include "CElectric.h"
 #include "CFire.h"
-#include "CGrass.h"
 #include "CInsect.h"
 #include "CPlant.h"
 #include "CRock.h"

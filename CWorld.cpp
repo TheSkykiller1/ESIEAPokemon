@@ -85,7 +85,7 @@ std::vector<CMonster> CWorld::read_config_pokemon()
 						burn = stof(element[1]);
 					}
 				}
-				/*if (type == "Electric")
+				if (type == "Electric")
 				{
 					CElectric pokemon(id++, type, name, hp, speed, attack, defense);
 					ListePokemon.push_back(pokemon);
@@ -114,7 +114,7 @@ std::vector<CMonster> CWorld::read_config_pokemon()
 				{
 					CWater pokemon(id++, type, name, hp, speed, attack, defense);
 					ListePokemon.push_back(pokemon);
-				}*/
+				}
 			}
 		}
 		File.close();
