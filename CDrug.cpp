@@ -2,15 +2,26 @@
 
 CDrug::CDrug()
 {
-
+	CObject();
 }
 
-CDrug::CDrug(int id, std::string nom, std::vector<short> type, short vit, short att, short def, short HP)
+CDrug::CDrug(int id, std::string nom, std::vector<std::string> type, int etat)
 {
-	CObject(id, nom, type, vit, att, def, HP);
+	CObject(id, nom, type);
+	m_etat = etat;
 }
 
 CDrug::~CDrug()
 {
 
+}
+
+int CDrug::getEtat()
+{
+	return m_etat;
+}
+
+void CDrug::setEtat(int etat)
+{
+	m_etat = etat;
 }

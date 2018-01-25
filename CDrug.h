@@ -5,10 +5,16 @@
 
 class CDrug :public CObject
 {
+protected:
+	int m_etat;
 public:
 	CDrug();
-	CDrug(int id, std::string nom, std::vector<short> type, short vit, short att, short def, short HP);
+	CDrug(int id, std::string nom, std::vector<std::string> type,int etat);
 	~CDrug();
+
+	int getEtat();
+
+	void setEtat(int etat);
 };
 
 #endif
