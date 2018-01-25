@@ -7,7 +7,7 @@ class CPlant :public CGrass
 {
 public:
 	CPlant();
-	CPlant(int id, short type, std::string nom, short HP, short vit, short att, short def);
+	CPlant(int id, std::string type, std::string nom, int HP, int vit, int att, int def);
 	~CPlant();
 };
 

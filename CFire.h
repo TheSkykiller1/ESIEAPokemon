@@ -6,11 +6,11 @@
 class CFire :public CMonster
 {
 protected:
-	std::vector<short> m_force = { 2 };
+	std::vector<std::string> m_force = { "Insect", "Plant" };
 
 public:
 	CFire();
-	CFire(int id, short type, std::string nom, short HP, short vit, short att, short def);
+	CFire(int id, std::string type, std::string nom, int HP, int vit, int att, int def);
 	~CFire();
 	void burn(CMonster* monstre);
 };

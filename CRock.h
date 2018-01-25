@@ -6,11 +6,11 @@
 class CRock:public CMonster
 {
 protected:
-	std::vector<short> m_force = { 4 };
+	std::vector<std::string> m_force = { "Electric" };
 
 public:
 	CRock();
-	CRock(int id, short type, std::string nom, short HP, short vit, short att, short def);
+	CRock(int id, std::string type, std::string nom, int HP, int vit, int att, int def);
 	~CRock();
 };
 

@@ -5,7 +5,7 @@ CGrass::CGrass()
 	CMonster();
 }
 
-CGrass::CGrass(int id, short type, std::string nom, short HP, short vit, short att, short def)
+CGrass::CGrass(int id, std::string type, std::string nom, int HP, int vit, int att, int def)
 {
 	CMonster(id, type, nom, HP, vit, att, def);
 }

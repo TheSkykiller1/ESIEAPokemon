@@ -5,7 +5,7 @@ CWater::CWater()
 	CMonster();
 }
 
-CWater::CWater(int id, short type, std::string nom, short HP, short vit, short att, short def)
+CWater::CWater(int id, std::string type, std::string nom, int HP, int vit, int att, int def)
 {
 	CMonster(id, type, nom, HP, vit, att, def);
 }

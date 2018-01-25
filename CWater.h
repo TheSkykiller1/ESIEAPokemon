@@ -6,13 +6,13 @@
 class CWater :public CMonster
 {
 protected:
-	std::vector<short> m_force = { 1 };
+	std::vector<std::string> m_force = { "Fire" };
 	float m_flood;
 	float m_fall;
 
 public:
 	CWater();
-	CWater(int id, short type, std::string nom, short HP, short vit, short att, short def);
+	CWater(int id, std::string type, std::string nom, int HP, int vit, int att, int def);
 	~CWater();
 
 	float getFlood();

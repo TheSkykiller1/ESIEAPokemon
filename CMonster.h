@@ -10,58 +10,58 @@ class CMonster
 {
 protected:
 	int m_id;
-	short m_type;
+	std::string m_type;
 	std::string m_nom;
-	short m_HP;
-	short m_vitesse;
-	short m_attaque;
-	short m_attaque_act;
+	int m_HP;
+	int m_vitesse;
+	int m_attaque;
+	int m_attaque_act;
 	//std::vector<CAttaque> m_attaques;
-	short m_defense;
-	short m_etat;
-	short m_etat_tours;
-	std::vector<short> m_force;
+	int m_defense;
+	int m_etat;
+	int m_etat_tours;
+	std::vector<std::string> m_force;
 	//std::vector<CAttaque*> m_CS;
 	bool m_cache;
 
 	std::vector<std::string> m_nom_attaques;
-	std::vector<short> m_nu;
-	std::vector<short> m_pAttaques;
+	std::vector<int> m_nu;
+	std::vector<int> m_pAttaques;
 	std::vector<float> m_pEchec;
 public:
 	CMonster();
-	CMonster(int id, short type, std::string nom, short HP, short vit, short att, short def);
+	CMonster(int id, std::string type, std::string nom, int HP, int vit, int att, int def);
 	~CMonster();
 
 	int getId();
-	short getType();
+	std::string getType();
 	std::string getNom();
-	short getHP();
-	short getVitesse();
-	short getAttaque();
-	short getAttaqueAct();
-	short getDefense();
-	short getEtat();
-	short getEtatTours();
-	std::vector<short> getForce();
+	int getHP();
+	int getVitesse();
+	int getAttaque();
+	int getAttaqueAct();
+	int getDefense();
+	int getEtat();
+	int getEtatTours();
+	std::vector<std::string> getForce();
 	//std::vector<CAttaque> getCS();
 	bool getCache();
 
 	void setId(int id);
-	void setType(short type);
+	void setType(std::string type);
 	void setNom(std::string nom);
-	void setHP(short HP);
-	void setVitesse(short vitesse);
-	void setAttaque(short attaque);
-	void setAttaqueAct(short attaqueAct);
-	void setDefense(short defense);
-	void setEtat(short etat);
-	void setEtatTours(short tours);
+	void setHP(int HP);
+	void setVitesse(int vitesse);
+	void setAttaque(int attaque);
+	void setAttaqueAct(int attaqueAct);
+	void setDefense(int defense);
+	void setEtat(int etat);
+	void setEtatTours(int tours);
 	void setCache(bool cache);
 	
 	short updateEtat();
-	virtual bool attaquer(short num_att, CMonster &cible);
-	short degat(short num_att, CMonster &def);
+	virtual bool attaquer(int num_att, CMonster &cible);
+	short degat(int num_att, CMonster &def);
 };
 
 #endif
