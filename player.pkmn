@@ -1,15 +1,19 @@
-level_1
+level
+	lvl	1
 	experience	0
 Endlevel_1
 
-level_2
+level
+	lvl 2
 	experience 100
-Endlevel_2
+Endlevel
 
-level_3
+level
+	lvl 3
 	experience 300
-Endlevel_3
+Endlevel
 
-level_4
+level
+	lvl 4
 	experience 500
-Endlevel_4
+Endlevel

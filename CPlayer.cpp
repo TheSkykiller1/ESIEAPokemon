@@ -1,32 +1,5 @@
 #include "CPlayer.h"
 
-void CPlayer::read_level_requirement()
-{
-	std::string row;
-	std::ifstream File("player.pkmn", std::ios::in);
-	if (File.is_open())
-	{
-		while (getline(File, row))
-		{
-			std::string delimiter = "\t";
-			std::size_t pos = 0;
-			std::string token;
-			while ((pos = row.find(delimiter)) != std::string::npos)
-			{
-				token = row.substr(0, pos);
-				std::cout << "Arguments: " << token << std::endl;
-				row.erase(0, pos + delimiter.length());
-			}
-			std::cout << row << std::endl;
-		}
-		File.close();
-	}
-	else
-	{
-		std::cout << "Impossible d’ouvrir le fichier \n";
-	}
-} //Read from config?
-
 void CPlayer::level_refresh()
 {
 
@@ -99,7 +72,7 @@ void CPlayer::add_pokemon(CMonster pokemon)
 	pokemon.setId(id_pokemon++);
 	Pokeballs.push_back(pokemon);
 }
-void CPlayer::add_pokemon(short type, std::string nom, short hpe, short vitesse, short attaque, short defense)
+void CPlayer::add_pokemon(std::string type, std::string nom, int hpe, int vitesse, int attaque, int defense)
 {
 	CMonster pokemon(id_pokemon++, type, nom, hpe, vitesse, attaque, defense);
 	Pokeballs.push_back(pokemon);
@@ -123,4 +96,68 @@ void CPlayer::delete_pokemon(int id_pokemon)
 			Pokeballs.erase(it);
 		}
 	}
+}
+
+
+std::vector<int> CPlayer::read_level_requirement()
+{
+	std::string row;;
+	std::ifstream File("player.pkmn", std::ios::in);
+	srand(time(NULL));//Init random generator
+	std::vector<int> Liste_level;
+	if (File.is_open())
+	{
+		while (getline(File, row))
+		{
+			if (row == "level")//Debut du bloc
+			{
+				while (row != "Endlevel")//Tant que l'on est dans le bloc
+				{
+					getline(File, row);
+					if (row == "Endlevel") { break; }//Si on a fini le bloc on quitte
+					std::vector<std::string> token = split(row, '\t\t');
+					std::vector<std::string> element;
+					for (int i = 0;i < token.size();i++)//On clear les elements vides
+					{
+						if (token[i] != "") { element.push_back(token[i]); }
+					}
+
+					//Analyse des resultats
+					if (element[0] == "experience") { 
+						Liste_level.push_back(stoi(element[1])); }
+				}
+			}
+		}
+		File.close();
+	}
+	else
+	{
+		std::cout << "Impossible d’ouvrir le fichier \n";
+	}
+	std::cout << "Tableau des levels \n";
+	for (int i = 0;i < Liste_level.size();i++)//On clear les elements vides
+	{
+		std::cout << "Level: " << i << " exp a avoir: " << Liste_level[i] << "\n";
+	}
+	system("pause");
+	return Liste_level;
+}
+
+//La function template pour parser les donnees
+
+template<typename Out>
+void CPlayer::split(const std::string &s, char delim, Out result) {
+	std::stringstream ss(s);
+	std::string item;
+	while (std::getline(ss, item, delim)) {
+		*(result++) = item;
+	}
+}
+
+//La fonction permetant de l'utiliser
+
+std::vector<std::string> CPlayer::split(const std::string &s, char delim) {
+	std::vector<std::string> elems;
+	split(s, delim, std::back_inserter(elems));
+	return elems;
 }
