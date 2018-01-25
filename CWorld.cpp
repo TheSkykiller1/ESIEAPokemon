@@ -2,6 +2,7 @@
 
 CWorld::CWorld()
 {
+	read_config_pokemon();
 }
 
 
@@ -9,12 +10,11 @@ CWorld::~CWorld()
 {
 }
 
-std::vector<CMonster> CWorld::read_config_pokemon()
+void CWorld::read_config_pokemon()
 {
 	std::string row;
 	std::ifstream File("monsters.pkmn", std::ios::in);
 	srand(time(NULL));//Init random generator
-	std::vector<CMonster> ListePokemon;
 	int id = 0;
 	if (File.is_open())
 	{
@@ -123,7 +123,6 @@ std::vector<CMonster> CWorld::read_config_pokemon()
 	{
 		std::cout << "Impossible d’ouvrir le fichier \n";
 	}
-	return ListePokemon;
 }
 
 //La function template pour parser les donnees
