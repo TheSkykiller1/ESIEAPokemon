@@ -5,7 +5,7 @@ CAttaque::CAttaque()
 
 }
 
-CAttaque::CAttaque(std::string nom, short type, short nu, short pa, float pe)
+CAttaque::CAttaque(std::string nom, int type, int nu, int pa, float pe)
 {
 	m_nom = nom;
 	m_type = type;
@@ -26,17 +26,17 @@ std::string CAttaque::getNom()
 	return m_nom;
 }
 
-short CAttaque::getType()
+int CAttaque::getType()
 {
 	return m_type;
 }
 
-short CAttaque::getNU()
+int CAttaque::getNU()
 {
 	return m_nu;
 }
 
-short CAttaque::getPA()
+int CAttaque::getPA()
 {
 	return m_pAttaque;
 }
@@ -58,17 +58,17 @@ void CAttaque::setNom(std::string nom)
 	m_nom = nom;
 }
 
-void CAttaque::setType(short type)
+void CAttaque::setType(int type)
 {
 	m_type = type;
 }
 
-void CAttaque::setNU(short nu)
+void CAttaque::setNU(int nu)
 {
 	m_nu = nu;
 }
 
-void CAttaque::setPA(short pa)
+void CAttaque::setPA(int pa)
 {
 	m_pAttaque = pa;
 }
