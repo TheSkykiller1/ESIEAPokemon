@@ -147,7 +147,7 @@ void CMonster::setCache(bool cache)
 
 //METHODES
 
-short CMonster::updateEtat() //todo etat a finir
+int CMonster::updateEtat() //todo etat a finir
 {
 	short etat = getEtat();
 	if (etat == 1) //pokémon brulé
@@ -189,7 +189,7 @@ bool CMonster::attaquer(int num_att, CMonster &cible)
 	return 0;
 }
 
-short CMonster::degat(int num_att, CMonster &def)
+int CMonster::degat(int num_att, CMonster &def)
 {
 	short attaque = m_attaque_act;
 	short defense = def.getDefense();

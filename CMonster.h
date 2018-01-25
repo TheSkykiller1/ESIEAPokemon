@@ -59,9 +59,9 @@ public:
 	void setEtatTours(int tours);
 	void setCache(bool cache);
 	
-	short updateEtat();
+	int updateEtat();
 	virtual bool attaquer(int num_att, CMonster &cible);
-	short degat(int num_att, CMonster &def);
+	int degat(int num_att, CMonster &def);
 };
 
 #endif
