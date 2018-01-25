@@ -5,10 +5,18 @@
 
 class CPlant :public CGrass
 {
+protected:
+	float m_heal;
 public:
 	CPlant();
-	CPlant(int id, std::string type, std::string nom, int HP, int vit, int att, int def);
+	CPlant(int id, std::string type, std::string nom, int HP, int vit, int att, int def, float heal = 0.0f);
 	~CPlant();
+
+	bool heal();
+
+	float getHeal();
+
+	void setHeal(float heal);
 };
 
 #endif
