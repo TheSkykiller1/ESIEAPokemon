@@ -6,11 +6,11 @@
 class CGrass :public CMonster
 {
 protected:
-	std::vector<short> m_force = { 3 };
+	std::vector<std::string> m_force = { "Rock" };
 
 public:
 	CGrass();
-	CGrass(int id, short type, std::string nom, short HP, short vit, short att, short def);
+	CGrass(int id, std::string type, std::string nom, int HP, int vit, int att, int def);
 	~CGrass();
 };
 

@@ -5,10 +5,10 @@ CElectric::CElectric()
 	CMonster();
 }
 
-CElectric::CElectric(int id, short type, std::string nom, short HP, short vit, short att, short def)
+CElectric::CElectric(int id, std::string type, std::string nom, int HP, int vit, int att, int def, float paralysis)
 {
 	CMonster(id, type, nom, HP, vit, att, def);
-	m_paralysis = 0;
+	m_paralysis = paralysis;
 	m_force = { 0 };
 }
 
@@ -32,7 +32,7 @@ bool CElectric::paralyze()
 	}
 }
 
-bool CElectric::attaquer(short num_att, CMonster &cible)
+bool CElectric::attaquer(int num_att, CMonster &cible)
 {
 	if (m_etat == 3) //paralysie
 	{

@@ -5,7 +5,7 @@ CMonster::CMonster()
 
 }
 
-CMonster::CMonster(int id, short type, std::string nom, short HP, short vit, short att, short def)
+CMonster::CMonster(int id, std::string type, std::string nom, int HP, int vit, int att, int def)
 {
 	m_id = id;
 	m_type = type;
@@ -33,7 +33,7 @@ int CMonster::getId()
 	return m_id;
 }
 
-short CMonster::getType()
+std::string CMonster::getType()
 {
 	return m_type;
 }
@@ -43,42 +43,42 @@ std::string CMonster::getNom()
 	return m_nom;
 }
 
-short CMonster::getHP()
+int CMonster::getHP()
 {
 	return m_HP;
 }
 
-short CMonster::getVitesse()
+int CMonster::getVitesse()
 {
 	return m_vitesse;
 }
 
-short CMonster::getAttaque()
+int CMonster::getAttaque()
 {
 	return m_attaque;
 }
 
-short CMonster::getAttaqueAct()
+int CMonster::getAttaqueAct()
 {
 	return m_attaque_act;
 }
 
-short CMonster::getDefense()
+int CMonster::getDefense()
 {
 	return m_defense;
 }
 
-short CMonster::getEtat()
+int CMonster::getEtat()
 {
 	return m_etat;
 }
 
-short CMonster::getEtatTours()
+int CMonster::getEtatTours()
 {
 	return m_etat_tours;
 }
 
-std::vector<short> CMonster::getForce()
+std::vector<std::string> CMonster::getForce()
 {
 	return m_force;
 }
@@ -95,7 +95,7 @@ void CMonster::setId(int id)
 	m_id = id;
 }
 
-void CMonster::setType(short type)
+void CMonster::setType(std::string type)
 {
 	m_type = type;
 }
@@ -105,37 +105,37 @@ void CMonster::setNom(std::string nom)
 	m_nom = nom;
 }
 
-void CMonster::setHP(short HP)
+void CMonster::setHP(int HP)
 {
 	m_HP = HP;
 }
 
-void CMonster::setVitesse(short vitesse)
+void CMonster::setVitesse(int vitesse)
 {
 	m_vitesse = vitesse;
 }
 
-void CMonster::setAttaque(short attaque)
+void CMonster::setAttaque(int attaque)
 {
 	m_attaque = attaque;
 }
 
-void CMonster::setAttaqueAct(short attaqueAct)
+void CMonster::setAttaqueAct(int attaqueAct)
 {
 	m_attaque_act = attaqueAct;
 }
 
-void CMonster::setDefense(short defense)
+void CMonster::setDefense(int defense)
 {
 	m_defense = defense;
 }
 
-void CMonster::setEtat(short etat)
+void CMonster::setEtat(int etat)
 {
 	m_etat = etat;
 }
 
-void CMonster::setEtatTours(short tours)
+void CMonster::setEtatTours(int tours)
 {
 	m_etat_tours = tours;
 }
@@ -184,19 +184,19 @@ short CMonster::updateEtat() //todo etat a finir
 	return etat;//todo a modifier temporaire
 }
 
-bool CMonster::attaquer(short num_att, CMonster &cible)
+bool CMonster::attaquer(int num_att, CMonster &cible)
 {
 	return 0;
 }
 
-short CMonster::degat(short num_att, CMonster &def)
+short CMonster::degat(int num_att, CMonster &def)
 {
-	short attaque = m_attaque_act;
+	/*short attaque = m_attaque_act;
 	short defense = def.getDefense();
 	float coeff = (float)(0.85 + (rand() % 15) / 100);
 	float avantage = 1;
-	short base_type_att = m_type;
-	short base_type_def = def.getType();
+	std::string base_type_att = m_type;
+	std::string base_type_def = def.getType();
 	if (def.getType() == 3) //si type terre
 	{
 		if (def.getCache() == 1)
@@ -211,8 +211,7 @@ short CMonster::degat(short num_att, CMonster &def)
 			avantage = 2;
 		}
 	}
-	for (std::vector<short>::iterator it = def.getForce().begin(); it != def.getForce()
-		.end(); ++it)
+	for (std::vector<short>::iterator it = def.getForce().begin(); it != def.getForce().end(); ++it)
 	{
 		if (*it == base_type_att)
 		{
@@ -221,4 +220,6 @@ short CMonster::degat(short num_att, CMonster &def)
 	}
 	short degat = ((11 * attaque*(m_pAttaques[num_att])) / (25 * defense) + 2)*avantage*coeff;
 	return degat;
+	*/
+	return 0; //DEBUG
 }

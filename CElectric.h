@@ -6,21 +6,21 @@
 class CElectric:public CMonster
 {
 protected:
-	std::vector<short> m_force = { 0 };
+	std::vector<std::string> m_force = { "Water" };
 	float m_paralysis;
 
 	bool paralyze();
 
 public:
 	CElectric();
-	CElectric(int id, short type, std::string nom, short HP, short vit, short att, short def);
+	CElectric(int id, std::string type, std::string nom, int HP, int vit, int att, int def, float paralysis=0.0f);
 	~CElectric();
 
 	float getParalysis();
 
 	void setParalysis(float paralysis);
 
-	bool attaquer(short num_att, CMonster &cible);
+	bool attaquer(int num_att, CMonster &cible);
 };
 
 #endif
