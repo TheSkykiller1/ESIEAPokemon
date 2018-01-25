@@ -26,24 +26,17 @@ protected:
 
 	int s_posx;
 	int s_posy;
-
-
-	//Utile pour split les chaines de string avec un delimiter
-	template<typename Out>
-	void split(const std::string &s, char delim, Out result);
-
-	std::vector<std::string> split(const std::string &s, char delim);
-
-
-	std::vector<int> read_level_requirement();//read level and xp needed from config
+	
 	void level_refresh(); //refresh player level
+
 public:
+	void read_level_requirement();//read level and xp needed from config
 	CPlayer();
 	CPlayer(std::string name, bool isPlayer, int posX, int posY, int fight_count = 0, int fight_win = 0, short level=0, int xp = 0);
 	CPlayer(std::string name, bool isPlayer, int posX, int posY, std::vector<CMonster> Pokeball, int fight_count = 0, int fight_win = 0,short level=0, int xp = 0);
 	~CPlayer();
 	///temp
-	std::vector<int> s_tablevel;
+	std::vector<int> Liste_level;
 	std::vector<CMonster> Pokeballs;
 	///temp
 
@@ -55,6 +48,7 @@ public:
 	int fight_count();
 	int fight_win();
 	void list_pokemon();//Affiche les pokemon et leur stats de base (base_damage, etc)
+	void tableau_level();
 
 	//setter
 	void set_pseudo(std::string pseudo);
@@ -66,6 +60,13 @@ public:
 	void add_pokemon(CMonster pokemon);
 	void delete_pokemon(int id_pokemon);//Delete directement le pokemon
 	void delete_pokemon();//Affiche les pokemon et demande lequel supprimer
+
+
+	 //Utile pour split les chaines de string avec un delimiter
+	template<typename Out>
+	void split(const std::string &s, char delim, Out result);
+
+	std::vector<std::string> split(const std::string &s, char delim);
 };
 #endif
 

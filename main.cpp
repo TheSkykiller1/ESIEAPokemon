@@ -17,7 +17,9 @@ int main()
 	Sacha.delete_pokemon();*/
 	CWorld MONDE;
 	MONDE.read_config_pokemon();
-	
+	CPlayer Sacha("Sacha", true, 0, 0);
+	Sacha.read_level_requirement();
+	Sacha.tableau_level();
 
 	system("pause");
 

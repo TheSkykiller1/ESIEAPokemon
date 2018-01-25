@@ -1,19 +1,19 @@
 level
 	lvl	1
 	experience	0
-Endlevel_1
+Endlevel
 
 level
 	lvl 2
-	experience 100
+	experience	100
 Endlevel
 
 level
 	lvl 3
-	experience 300
+	experience	300
 Endlevel
 
 level
 	lvl 4
-	experience 500
+	experience	500
 Endlevel

@@ -17,7 +17,7 @@ CPlayer::CPlayer(std::string name, bool isPlayer, int posX, int posY, std::vecto
 {
 	s_pseudo = name; isPlayable = isPlayer; s_posx = posX; s_posy = posY; Pokeballs = Pokeball; s_nb_fight = fight_count; s_nb_win = fight_win; s_level = level; s_exp = exp;
 }
-CPlayer::~CPlayer() { Pokeballs.clear(); s_tablevel.clear(); }
+CPlayer::~CPlayer() { Pokeballs.clear(); Liste_level.clear(); }
 
 //getter
 std::string CPlayer::pseudo() { return s_pseudo; }
@@ -74,8 +74,8 @@ void CPlayer::add_pokemon(CMonster pokemon)
 }
 void CPlayer::add_pokemon(std::string type, std::string nom, int hpe, int vitesse, int attaque, int defense)
 {
-	CMonster pokemon(id_pokemon++, type, nom, hpe, vitesse, attaque, defense);
-	Pokeballs.push_back(pokemon);
+/*	CMonster pokemon(id_pokemon++, type, nom, hpe, vitesse, attaque, defense);
+	Pokeballs.push_back(pokemon);*/
 }
 void CPlayer::delete_pokemon()
 {
@@ -98,13 +98,21 @@ void CPlayer::delete_pokemon(int id_pokemon)
 	}
 }
 
+void CPlayer::tableau_level()
+{
+	std::cout << "Tableau des levels \n";
+	for (int i = 0;i < Liste_level.size();i++)//On clear les elements vides
+	{
+		std::cout << "Level: " << i + 1 << " exp a avoir: " << Liste_level[i] << "\n";
+	}
+}
 
-std::vector<int> CPlayer::read_level_requirement()
+//Lit le fichier de config de player pour obtenir ses levels
+void CPlayer::read_level_requirement()
 {
 	std::string row;;
 	std::ifstream File("player.pkmn", std::ios::in);
 	srand(time(NULL));//Init random generator
-	std::vector<int> Liste_level;
 	if (File.is_open())
 	{
 		while (getline(File, row))
@@ -121,10 +129,11 @@ std::vector<int> CPlayer::read_level_requirement()
 					{
 						if (token[i] != "") { element.push_back(token[i]); }
 					}
-
 					//Analyse des resultats
 					if (element[0] == "experience") { 
-						Liste_level.push_back(stoi(element[1])); }
+						int EXPERIENCE = stoi(element[1]);
+						Liste_level.push_back(stoi(element[1]));
+					}
 				}
 			}
 		}
@@ -134,17 +143,9 @@ std::vector<int> CPlayer::read_level_requirement()
 	{
 		std::cout << "Impossible d’ouvrir le fichier \n";
 	}
-	std::cout << "Tableau des levels \n";
-	for (int i = 0;i < Liste_level.size();i++)//On clear les elements vides
-	{
-		std::cout << "Level: " << i << " exp a avoir: " << Liste_level[i] << "\n";
-	}
-	system("pause");
-	return Liste_level;
 }
 
 //La function template pour parser les donnees
-
 template<typename Out>
 void CPlayer::split(const std::string &s, char delim, Out result) {
 	std::stringstream ss(s);
@@ -155,7 +156,6 @@ void CPlayer::split(const std::string &s, char delim, Out result) {
 }
 
 //La fonction permetant de l'utiliser
-
 std::vector<std::string> CPlayer::split(const std::string &s, char delim) {
 	std::vector<std::string> elems;
 	split(s, delim, std::back_inserter(elems));
