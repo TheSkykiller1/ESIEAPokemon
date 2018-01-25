@@ -28,6 +28,8 @@ int main()
 	Sacha.delete_pokemon();*/
 	CWorld MONDE;
 	MONDE.read_config_pokemon();
+	
+
 	system("pause");
 
 }
