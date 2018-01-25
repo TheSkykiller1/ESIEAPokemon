@@ -19,7 +19,7 @@ CObject::~CObject()
 
 //GETTERS
 
-short CObject::getId()
+int CObject::getId()
 {
 	return m_id;
 }

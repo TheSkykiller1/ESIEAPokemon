@@ -14,13 +14,13 @@ public:
 	CObject();
 	CObject(int id, std::string nom, std::vector<std::string> type);
 	~CObject();
-	short getId();
+	int getId();
 	std::string getNom();
 	std::vector<std::string> getType();
 
-	void setId(short id);
+	void setId(int id);
 	void setNom(std::string nom);
-	void setType(std::vector<short> type);
+	void setType(std::vector<std::string> type);
 };
 
 #endif
