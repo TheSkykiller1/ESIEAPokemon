@@ -48,6 +48,11 @@ int CMonster::getHP()
 	return m_HP;
 }
 
+int CMonster::getHPAct()
+{
+	return m_HP_act;
+}
+
 int CMonster::getVitesse()
 {
 	return m_vitesse;
@@ -108,6 +113,11 @@ void CMonster::setNom(std::string nom)
 void CMonster::setHP(int HP)
 {
 	m_HP = HP;
+}
+
+void CMonster::setHPAct(int HP_act)
+{
+	m_HP_act = HP_act;
 }
 
 void CMonster::setVitesse(int vitesse)

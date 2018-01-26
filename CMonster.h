@@ -13,6 +13,7 @@ protected:
 	std::string m_type;
 	std::string m_nom;
 	int m_HP;
+	int m_HP_act;
 	int m_vitesse;
 	int m_attaque;
 	int m_attaque_act;
@@ -37,6 +38,7 @@ public:
 	std::string getType();
 	std::string getNom();
 	int getHP();
+	int getHPAct();
 	int getVitesse();
 	int getAttaque();
 	int getAttaqueAct();
@@ -51,6 +53,7 @@ public:
 	void setType(std::string type);
 	void setNom(std::string nom);
 	void setHP(int HP);
+	void setHPAct(int HP_act);
 	void setVitesse(int vitesse);
 	void setAttaque(int attaque);
 	void setAttaqueAct(int attaqueAct);

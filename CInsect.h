@@ -11,6 +11,7 @@ public:
 	~CInsect();
 
 	void poison(CMonster &monstre);
+	bool attaquer(int m_num, CMonster &cible);
 };
 
 #endif
