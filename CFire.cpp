@@ -15,9 +15,17 @@ CFire::~CFire()
 
 }
 
-void CFire::burn(CMonster* monstre)
+bool CFire::burn()
 {
-	monstre->setEtat(1);
+	short val = m_burn + rand() / RAND_MAX;
+	if (val)
+	{
+		return 1;
+	}
+	else
+	{
+		return 0;
+	}
 }
 
 bool CFire::attaquer(int num_att, CMonster &cible)
@@ -36,6 +44,13 @@ bool CFire::attaquer(int num_att, CMonster &cible)
 		short HP2 = HP1 - val_degat;
 		cible.setHP(HP2);
 		m_nu[num_att]--;
+		if (burn())
+		{
+			if (cible.getEtat() == 0)
+			{
+				cible.setEtat(1);
+			}
+		}
 		return 0;
 	}
 	else

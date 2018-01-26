@@ -5,12 +5,14 @@
 
 class CInsect :public CGrass
 {
+protected:
+	float m_poison;
 public:
 	CInsect();
 	CInsect(int id, std::string type, std::string nom, int HP, int vit, int att, int def);
 	~CInsect();
 
-	void poison(CMonster &monstre);
+	bool poison();
 	bool attaquer(int m_num, CMonster &cible);
 };
 
