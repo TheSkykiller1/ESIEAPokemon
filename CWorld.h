@@ -8,7 +8,6 @@
 #include <time.h>
 #include <stdio.h>
 #include <stdlib.h>
-
 #include "CPlayer.h"
 #include "CTerrain.h"
 #include "CElectric.h"
@@ -17,7 +16,6 @@
 #include "CPlant.h"
 #include "CRock.h"
 #include "CWater.h"
-
 
 class CWorld
 {
