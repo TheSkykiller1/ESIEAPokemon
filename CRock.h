@@ -12,6 +12,8 @@ public:
 	CRock();
 	CRock(int id, std::string type, std::string nom, int HP, int vit, int att, int def);
 	~CRock();
+
+	bool attaquer(int m_num, CMonster &cible);
 };
 
 #endif

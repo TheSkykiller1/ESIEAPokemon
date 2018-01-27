@@ -48,6 +48,11 @@ int CMonster::getHP()
 	return m_HP;
 }
 
+int CMonster::getHPAct()
+{
+	return m_HP_act;
+}
+
 int CMonster::getVitesse()
 {
 	return m_vitesse;
@@ -110,6 +115,11 @@ void CMonster::setHP(int HP)
 	m_HP = HP;
 }
 
+void CMonster::setHPAct(int HP_act)
+{
+	m_HP_act = HP_act;
+}
+
 void CMonster::setVitesse(int vitesse)
 {
 	m_vitesse = vitesse;
@@ -147,14 +157,14 @@ void CMonster::setCache(bool cache)
 
 //METHODES
 
-short CMonster::updateEtat() //todo etat a finir
+int CMonster::updateEtat() //todo etat a finir
 {
 	short etat = getEtat();
 	if (etat == 1) //pokémon brulé
 	{
 		if (m_etat_tours < 3)
 		{
-			m_attaque_act -= m_attaque/10;
+			m_attaque_act -= m_attaque / 10;
 			m_etat_tours += 1;
 		}
 		else
@@ -189,35 +199,43 @@ bool CMonster::attaquer(int num_att, CMonster &cible)
 	return 0;
 }
 
-short CMonster::degat(int num_att, CMonster &def)
+int CMonster::degat(int num_att, CMonster &def)
 {
 	short attaque = m_attaque_act;
 	short defense = def.getDefense();
-	float coeff = (float)(0.85 + (rand() % 15) / 100);
+	float coeff = (float)((85 + (rand() % 16)) / 100);
 	float avantage = 1;
-	std::string base_type_att = m_type;
-	std::string base_type_def = def.getType();
-	if (def.getType() == "Rock") //si type terre
+	if (num_att != -1)
 	{
-		if (def.getCache() == 1)
+
+		std::string base_type_att = m_type;
+		std::string base_type_def = def.getType();
+		if (def.getType() == "Rock") //si type terre
 		{
-			defense *= 2;
+			if (def.getCache() == 1)
+			{
+				defense *= 2;
+			}
 		}
+		for (int i = 0; i < m_force.size(); i++)
+		{
+			if (m_force[i] == base_type_def)
+			{
+				avantage = 2;
+			}
+		}
+		for (int i = 0; i < def.getForce().size(); i++)
+		{
+			if (def.getForce()[i] == base_type_att)
+			{
+				avantage = 0.5;
+			}
+		}
+		int degat = ((11 * attaque*(m_pAttaques[num_att])) / (25 * defense) + 2)*avantage*coeff;
+		return degat;
 	}
-	for (int i = 0; i < m_force.size(); i++)
+	else
 	{
-		if (m_force[i] == base_type_def)
-		{
-			avantage = 2;
-		}
+		int degat = (attaque * coeff) / defense;
 	}
-	for (int i = 0; i<def.getForce().size(); i++)
-	{
-		if (def.getForce()[i] == base_type_att)
-		{
-			avantage = 0.5;
-		}
-	}
-	short degat = ((11 * attaque*(m_pAttaques[num_att])) / (25 * defense) + 2)*avantage*coeff;
-	return degat;
 }
