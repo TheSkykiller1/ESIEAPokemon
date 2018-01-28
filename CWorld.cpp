@@ -9,6 +9,40 @@ CWorld::CWorld()
 CWorld::~CWorld()
 {
 }
+
+void CWorld::add_player(CPlayer &player)
+{
+		joueurs.push_back(player);
+}
+
+int CWorld::dimension(bool xy)
+{
+	if (xy) { return dimensionY; }
+	else { return dimensionX; }
+}
+
+int CWorld::connected_player() { return (joueurs.size() - 1); }
+
+void CWorld::list_player()
+{
+	for (int i = 0;i < joueurs.size();i++)
+	{
+		std::cout << "Joueur n°" << i << " : " << joueurs[i].pseudo() << " lvl: " << joueurs[i].level() << " xp: " << joueurs[i].xp() << "/" << joueurs[i].xp_up() << "\n";
+	}
+}
+void CWorld::detail_list_player()
+{
+	for (int i = 0;i < joueurs.size();i++)
+	{
+		std::cout << "Joueur n°" << i << " : " << joueurs[i].pseudo() << " lvl: " << joueurs[i].level() << " xp: " << joueurs[i].xp() << "/" << joueurs[i].xp_up() << \
+			"\n a comme pokemon: \n \t";
+		for (int o = 0; o < joueurs[i].Pokeballs.size();o++)
+		{
+			std::cout << joueurs[i].Pokeballs[o].getNom() << " de type " << joueurs[i].Pokeballs[o].getType() << "\n \t";
+		}
+	}
+}
+
 void CWorld::read_config_terrain()
 {
 	std::string row;
@@ -189,7 +223,6 @@ void CWorld::read_config_pokemon()
 }
 
 //La function template pour parser les donnees
-
 template<typename Out>
 void CWorld::split(const std::string &s, char delim, Out result) {
 	std::stringstream ss(s);
@@ -200,7 +233,6 @@ void CWorld::split(const std::string &s, char delim, Out result) {
 }
 
 //La fonction permetant de l'utiliser
-
 std::vector<std::string> CWorld::split(const std::string &s, char delim) {
 	std::vector<std::string> elems;
 	split(s, delim, std::back_inserter(elems));

@@ -35,7 +35,7 @@ void CPlayer::list_pokemon()
 	}
 	else
 	{
-		std::cout << "Liste des pokemons:  "<<nb_Pokeball<<" Pokemons!\n";
+		std::cout << "Liste des pokemons:  " << nb_Pokeball << " Pokemons!\n";
 		for (int pokemon = 0; pokemon < nb_Pokeball; ++pokemon)
 		{
 			std::cout << "-" << pokemon << ") ID: " << Pokeballs[pokemon].getId() << " Nom: " << Pokeballs[pokemon].getNom() << " et de type : " << Pokeballs[pokemon].getType() << "\n"\
@@ -43,6 +43,10 @@ void CPlayer::list_pokemon()
 		}
 	}
 }//Affiche les pokemon et leur stats de base (base_damage, etc)
+CPlayer* CPlayer::target() { return s_target; }
+int CPlayer::positionX() { return s_posx; }
+int CPlayer::positionY() { return s_posy; }
+CTerrain* CPlayer::terrain() { return s_cases; }
 
 //setter
 void CPlayer::set_pseudo(std::string pseudo) { s_pseudo = pseudo; }
@@ -74,8 +78,8 @@ void CPlayer::add_pokemon(CMonster pokemon)
 }
 void CPlayer::add_pokemon(std::string type, std::string nom, int hpe, int vitesse, int attaque, int defense)
 {
-/*	CMonster pokemon(id_pokemon++, type, nom, hpe, vitesse, attaque, defense);
-	Pokeballs.push_back(pokemon);*/
+	/*	CMonster pokemon(id_pokemon++, type, nom, hpe, vitesse, attaque, defense);
+		Pokeballs.push_back(pokemon);*/
 }
 void CPlayer::delete_pokemon()
 {
@@ -87,7 +91,7 @@ void CPlayer::delete_pokemon()
 	delete_pokemon(choix);
 
 }
-void CPlayer::delete_pokemon(int id_pokemon) 
+void CPlayer::delete_pokemon(int id_pokemon)
 {
 	for (std::vector<CMonster>::iterator it = Pokeballs.begin(); it != Pokeballs.end(); ++it)
 	{
@@ -97,7 +101,6 @@ void CPlayer::delete_pokemon(int id_pokemon)
 		}
 	}
 }
-
 void CPlayer::tableau_level()
 {
 	std::cout << "Tableau des levels \n";
@@ -106,7 +109,9 @@ void CPlayer::tableau_level()
 		std::cout << "Level: " << i + 1 << " exp a avoir: " << Liste_level[i] << "\n";
 	}
 }
-
+void CPlayer::set_target(CPlayer* cible) { s_target = cible; }
+void CPlayer::move(int X, int Y) { s_posx = X;s_posy = Y; }
+void CPlayer::change_cases(CTerrain* cases) { s_cases = cases; }
 //Lit le fichier de config de player pour obtenir ses levels
 void CPlayer::read_level_requirement()
 {
@@ -130,7 +135,7 @@ void CPlayer::read_level_requirement()
 						if (token[i] != "") { element.push_back(token[i]); }
 					}
 					//Analyse des resultats
-					if (element[0] == "experience") { 
+					if (element[0] == "experience") {
 						int EXPERIENCE = stoi(element[1]);
 						Liste_level.push_back(stoi(element[1]));
 					}

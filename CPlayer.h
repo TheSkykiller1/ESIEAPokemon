@@ -8,13 +8,11 @@
 #include <time.h>
 #include <stdio.h>
 #include <stdlib.h>
-
+#include "CTerrain.h"
 #include "CMonster.h"
 class CPlayer
 {
 protected:
-	static int id;
-	int self_id;
 	int id_pokemon = 0;
 	std::string s_pseudo;
 	bool isPlayable;
@@ -26,7 +24,8 @@ protected:
 
 	int s_posx;
 	int s_posy;
-	
+	CPlayer* s_target;
+	CTerrain* s_cases;
 	void level_refresh(); //refresh player level
 
 public:
@@ -49,6 +48,10 @@ public:
 	int fight_win();
 	void list_pokemon();//Affiche les pokemon et leur stats de base (base_damage, etc)
 	void tableau_level();
+	CPlayer* target();
+	CTerrain* terrain();
+	int positionX();
+	int positionY();
 
 	//setter
 	void set_pseudo(std::string pseudo);
@@ -60,7 +63,9 @@ public:
 	void add_pokemon(CMonster pokemon);
 	void delete_pokemon(int id_pokemon);//Delete directement le pokemon
 	void delete_pokemon();//Affiche les pokemon et demande lequel supprimer
-
+	void set_target(CPlayer* cible);
+	void move(int X, int Y);
+	void change_cases(CTerrain* cases);
 
 	 //Utile pour split les chaines de string avec un delimiter
 	template<typename Out>
