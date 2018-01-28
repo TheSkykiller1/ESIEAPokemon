@@ -10,12 +10,6 @@
 #include <stdlib.h>
 #include "CPlayer.h"
 #include "CTerrain.h"
-#include "CElectric.h"
-#include "CFire.h"
-#include "CInsect.h"
-#include "CPlant.h"
-#include "CRock.h"
-#include "CWater.h"
 
 class CWorld
 {
@@ -30,11 +24,17 @@ protected:
 	int dimensionX;
 	int dimensionY;
 
+	struct TypePokemon {
+		std::string type, name;
+		int id, HP_min, HP_max, VIT_min, VIT_max, ATT_min, ATT_max, DEF_min, DEF_max;
+		float flood, fall, paralysis, poison, burn, heal;
+	};
+
 public:
 	
 	std::vector<CPlayer> joueurs; //Le joueur connait sa position
 	///config
-	std::vector<CMonster> ListePokemon;
+	std::vector<TypePokemon> ListePokemon;//utiliser pour créer des pokemons pour les joueurs
 	std::vector<CTerrain> ListeTerrain;
 	///config
 
