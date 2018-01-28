@@ -201,8 +201,8 @@ bool CMonster::attaquer(int num_att, CMonster &cible)
 
 int CMonster::degat(int num_att, CMonster &def)
 {
-	short attaque = m_attaque_act;
-	short defense = def.getDefense();
+	int attaque = m_attaque_act;
+	int defense = def.getDefense();
 	float coeff = (float)((85 + (rand() % 16)) / 100);
 	float avantage = 1;
 	if (num_att != -1)
@@ -217,18 +217,21 @@ int CMonster::degat(int num_att, CMonster &def)
 				defense *= 2;
 			}
 		}
-		for (int i = 0; i < m_force.size(); i++)
+		if (m_type_attaque[num_att] != "Normal")
 		{
-			if (m_force[i] == base_type_def)
+			for (int i = 0; i < m_force.size(); i++)
 			{
-				avantage = 2;
+				if (m_force[i] == base_type_def)
+				{
+					avantage = 2;
+				}
 			}
-		}
-		for (int i = 0; i < def.getForce().size(); i++)
-		{
-			if (def.getForce()[i] == base_type_att)
+			for (int i = 0; i < def.getForce().size(); i++)
 			{
-				avantage = 0.5;
+				if (def.getForce()[i] == base_type_att)
+				{
+					avantage = 0.5;
+				}
 			}
 		}
 		int degat = ((11 * attaque*(m_pAttaques[num_att])) / (25 * defense) + 2)*avantage*coeff;
@@ -237,5 +240,18 @@ int CMonster::degat(int num_att, CMonster &def)
 	else
 	{
 		int degat = (attaque * coeff) / defense;
+	}
+}
+
+bool CMonster::echec(int num_att)
+{
+	short val = m_pEchec[num_att]+rand()/RAND_MAX;
+	if (val)
+	{
+		return 1;
+	}
+	else
+	{
+		return 0;
 	}
 }

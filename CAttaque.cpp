@@ -5,7 +5,7 @@ CAttaque::CAttaque()
 
 }
 
-CAttaque::CAttaque(std::string nom, int type, int nu, int pa, float pe)
+CAttaque::CAttaque(std::string nom, std::string type, int nu, int pa, float pe)
 {
 	m_nom = nom;
 	m_type = type;
@@ -26,7 +26,7 @@ std::string CAttaque::getNom()
 	return m_nom;
 }
 
-int CAttaque::getType()
+std::string CAttaque::getType()
 {
 	return m_type;
 }
@@ -58,7 +58,7 @@ void CAttaque::setNom(std::string nom)
 	m_nom = nom;
 }
 
-void CAttaque::setType(int type)
+void CAttaque::setType(std::string type)
 {
 	m_type = type;
 }

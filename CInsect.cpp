@@ -39,14 +39,14 @@ bool CInsect::attaquer(int num_att, CMonster &cible)
 			return 1;
 		}
 	}
-	if (m_nu[num_att] > 0)
+	if (echec(num_att) == 0 && m_nu[num_att] > 0)
 	{
 		short val_degat = degat(num_att, cible);
 		short HP1 = cible.getHPAct();
 		short HP2 = HP1 - val_degat;
 		cible.setHP(HP2);
 		m_nu[num_att]--;
-		if (poison())
+		if (poison() && m_type_attaque[num_att] != "Normal")
 		{
 			if (cible.getEtat() == 0)
 			{

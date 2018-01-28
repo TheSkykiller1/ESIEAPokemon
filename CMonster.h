@@ -25,7 +25,8 @@ protected:
 	//std::vector<CAttaque*> m_CS;
 	bool m_cache;
 
-	std::vector<std::string> m_nom_attaques;
+	std::vector<std::string> m_nom_attaque;
+	std::vector<std::string> m_type_attaque;
 	std::vector<int> m_nu;
 	std::vector<int> m_pAttaques;
 	std::vector<float> m_pEchec;
@@ -65,6 +66,7 @@ public:
 	int updateEtat();
 	virtual bool attaquer(int num_att, CMonster &cible);
 	int degat(int num_att, CMonster &def);
+	bool echec(int num_att);
 };
 
 #endif
