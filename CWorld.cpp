@@ -2,13 +2,21 @@
 
 CWorld::CWorld()
 {
-	read_config_pokemon();
+	
 }
 
 
 CWorld::~CWorld()
 {
 }
+
+
+void CWorld::set_dimension(int x, int y)
+{
+	dimensionX = x;
+	dimensionY = y;
+}
+
 
 void CWorld::add_player(CPlayer &player)
 {
@@ -107,6 +115,8 @@ void CWorld::read_config_terrain()
 		std::cout << "Impossible d’ouvrir le fichier \n";
 	}
 }
+
+/*
 void CWorld::read_config_pokemon()
 {
 	std::string row;
@@ -221,7 +231,7 @@ void CWorld::read_config_pokemon()
 		std::cout << "Impossible d’ouvrir le fichier \n";
 	}
 }
-
+*/
 //La function template pour parser les donnees
 template<typename Out>
 void CWorld::split(const std::string &s, char delim, Out result) {

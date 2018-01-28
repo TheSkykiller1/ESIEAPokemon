@@ -44,7 +44,7 @@ public:
 	
 	//setter
 	void add_player(CPlayer &player);//On ajoute le joeuur au monde et on lui donne les pointeurs du monde (pour acceder au config et aux autres joueurs) //todo ameliorer cela
-
+	void set_dimension(int x, int y);
 	//getter
 	std::vector<CPlayer> Player(int posX, int posY); //Donne la liste des joueurs sur cette case, si > 2 alors un match est déclaré.
 	int dimension(bool xy);//false=x, y=true;
