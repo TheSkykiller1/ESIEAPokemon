@@ -6,6 +6,7 @@
 int main()
 {
 	CWorld Monde;
+	system("pause");/*
 	std::cout << "\t\t\t Bienvenue dans PokeLeague \n\
 Que voulez-vous faire : \n\
 \t 1) Lancer une partie \n\

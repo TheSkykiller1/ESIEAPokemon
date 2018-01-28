@@ -20,6 +20,9 @@ protected:
 	std::vector<std::string> split(const std::string &s, char delim);
 	void read_config_pokemon();
 	void read_config_terrain();
+	void debug_afficher_pokemon();
+	void debug_afficher_terrain();
+
 	int nb_joueur;
 	int dimensionX;
 	int dimensionY;

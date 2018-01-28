@@ -2,11 +2,37 @@
 
 CWorld::CWorld()
 {
+	read_config_pokemon();
+	read_config_terrain();
+	debug_afficher_pokemon();
+	debug_afficher_terrain();
 }
 
 CWorld::~CWorld()
 {
 }
+
+void CWorld::debug_afficher_pokemon()
+{
+	std::cout << "Tous les pokemons lu dans la config: \n";
+	for (int i = 0;i < ListePokemon.size();i++)
+	{
+		TypePokemon pokedex = ListePokemon[i]; //optimisation memoire d'appel
+		std::cout << " \t Pokemon : " << pokedex.id << " nom: " << pokedex.name << " type: " << pokedex.type \
+			<<"\n";
+	}
+}
+
+void CWorld::debug_afficher_terrain()
+{
+	std::cout << "Tous les terrains lu dans la config: \n";
+	for (int i = 0;i < ListeTerrain.size();i++)
+	{
+		CTerrain terrain = ListeTerrain[i]; //optimisation memoire d'appel
+		std::cout << " \t Terrain : " << terrain.id() << " nom: " << terrain.Title() << " type: "<< "\n";
+	}
+}
+
 
 void CWorld::set_dimension(int x, int y)
 {
@@ -111,9 +137,6 @@ void CWorld::read_config_terrain()
 		std::cout << "Impossible d’ouvrir le fichier \n";
 	}
 }
-
-
-
 void CWorld::read_config_pokemon()
 {
 	std::string row;
