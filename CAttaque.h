@@ -12,7 +12,6 @@ protected:
 	int m_nu; //nombre d'utilisation de l'attaque
 	int m_pAttaque; //puissance d'attaque
 	float m_pEchec; //probabilité d'échec
-	bool m_cs;//s'agit t'il d'une capacité spéciale ?
 
 public:
 	CAttaque();
@@ -24,14 +23,12 @@ public:
 	int getNU();
 	int getPA();
 	float getPE();
-	bool getCS();
 
 	void setNom(std::string nom);
 	void setType(std::string type);
 	void setNU(int nu);
 	void setPA(int pa);
 	void setPE(float pe);
-	void setCS(bool cs);
 };
 
 #endif
