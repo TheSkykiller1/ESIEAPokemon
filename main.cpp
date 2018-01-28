@@ -6,7 +6,6 @@
 int main()
 {
 	CWorld Monde;
-	system("pause");/*
 	std::cout << "\t\t\t Bienvenue dans PokeLeague \n\
 Que voulez-vous faire : \n\
 \t 1) Lancer une partie \n\
@@ -22,6 +21,10 @@ Que voulez-vous faire : \n\
 		std::cin >> tailleX;
 		std::cin >> tailleY;
 		std::cout << "Taille choisie: X: " << tailleX << " Y: " << tailleY << "\n";
+		Monde.set_dimension(tailleX, tailleY);
+		Monde.generate_terrain();
+		Monde.map_view_terrain();
+
 		break;
 	case 2:
 		// Code

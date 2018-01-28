@@ -8,6 +8,7 @@
 #include <time.h>
 #include <stdio.h>
 #include <stdlib.h>
+
 #include "CPlayer.h"
 #include "CTerrain.h"
 
@@ -24,8 +25,8 @@ protected:
 	void debug_afficher_terrain();
 
 	int nb_joueur;
-	int dimensionX;
-	int dimensionY;
+	size_t dimensionX;
+	size_t dimensionY;
 
 	struct TypePokemon {
 		std::string type, name;
@@ -34,26 +35,26 @@ protected:
 	};
 
 public:
-	
 	std::vector<CPlayer> joueurs; //Le joueur connait sa position
-	///config
+	std::vector <std::vector <CTerrain> > cases; //our vector of cases
+	//config
 	std::vector<TypePokemon> ListePokemon;//utiliser pour créer des pokemons pour les joueurs
 	std::vector<CTerrain> ListeTerrain;
-	///config
 
 	CWorld();
-	CWorld(int X, int Y);
 	~CWorld();
 	
 	//setter
 	void add_player(CPlayer &player);//On ajoute le joeuur au monde et on lui donne les pointeurs du monde (pour acceder au config et aux autres joueurs) //todo ameliorer cela
-	void set_dimension(int x, int y);
+	void set_dimension(size_t x, size_t y);
+	void generate_terrain();
 	//getter
 	std::vector<CPlayer> Player(int posX, int posY); //Donne la liste des joueurs sur cette case, si > 2 alors un match est déclaré.
 	int dimension(bool xy);//false=x, y=true;
 	int connected_player();
 	void list_player();
 	void detail_list_player();
+	void map_view_terrain();
 	//void print_map();
 	//CTerrain terrain(int posX, int posY);
 	

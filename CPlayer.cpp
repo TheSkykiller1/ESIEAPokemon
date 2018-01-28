@@ -7,15 +7,15 @@ void CPlayer::level_refresh()
 
 CPlayer::CPlayer()
 {
-	//NO USE!
+	s_pseudo = "NoName"; s_posx = 0; s_posy = 0; s_nb_fight = 0; s_nb_win = 0; s_level = 0; s_exp = 0;
 }
-CPlayer::CPlayer(std::string name, bool isPlayer, int posX, int posY, int fight_count, int fight_win, short level, int exp)
+CPlayer::CPlayer(std::string name, int posX, int posY, int fight_count, int fight_win, short level, int exp)
 {
-	s_pseudo = name; isPlayable = isPlayer; s_posx = posX; s_posy = posY; s_nb_fight = fight_count; s_nb_win = fight_win; s_level = level; s_exp = exp;
+	s_pseudo = name; s_posx = posX; s_posy = posY; s_nb_fight = fight_count; s_nb_win = fight_win; s_level = level; s_exp = exp;
 }
-CPlayer::CPlayer(std::string name, bool isPlayer, int posX, int posY, std::vector<CMonster> Pokeball, int fight_count, int fight_win, short level, int exp)
+CPlayer::CPlayer(std::string name, int posX, int posY, std::vector<CMonster> Pokeball, int fight_count, int fight_win, short level, int exp)
 {
-	s_pseudo = name; isPlayable = isPlayer; s_posx = posX; s_posy = posY; Pokeballs = Pokeball; s_nb_fight = fight_count; s_nb_win = fight_win; s_level = level; s_exp = exp;
+	s_pseudo = name;  s_posx = posX; s_posy = posY; Pokeballs = Pokeball; s_nb_fight = fight_count; s_nb_win = fight_win; s_level = level; s_exp = exp;
 }
 CPlayer::~CPlayer() { Pokeballs.clear(); Liste_level.clear(); }
 
@@ -46,7 +46,7 @@ void CPlayer::list_pokemon()
 CPlayer* CPlayer::target() { return s_target; }
 int CPlayer::positionX() { return s_posx; }
 int CPlayer::positionY() { return s_posy; }
-CTerrain* CPlayer::terrain() { return s_cases; }
+CTerrain* CPlayer::type_terrain() { return s_cases; }
 
 //setter
 void CPlayer::set_pseudo(std::string pseudo) { s_pseudo = pseudo; }
@@ -109,9 +109,11 @@ void CPlayer::tableau_level()
 		std::cout << "Level: " << i + 1 << " exp a avoir: " << Liste_level[i] << "\n";
 	}
 }
+void CPlayer::move(int X, int Y ,CTerrain* terrain) { s_posx = X;s_posy = Y; s_cases = terrain; }
 void CPlayer::set_target(CPlayer* cible) { s_target = cible; }
-void CPlayer::move(int X, int Y) { s_posx = X;s_posy = Y; }
-void CPlayer::change_cases(CTerrain* cases) { s_cases = cases; }
+void CPlayer::set_terrain(CTerrain* terrain) { s_cases = terrain; }
+//void CPlayer::set_world(CWorld* world) { s_world = world; }
+
 //Lit le fichier de config de player pour obtenir ses levels
 void CPlayer::read_level_requirement()
 {
@@ -146,7 +148,7 @@ void CPlayer::read_level_requirement()
 	}
 	else
 	{
-		std::cout << "Impossible d’ouvrir le fichier \n";
+		std::cout << "Impossible d’ouvrir le fichier player \n";
 	}
 }
 

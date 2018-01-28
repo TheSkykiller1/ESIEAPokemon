@@ -17,6 +17,7 @@ public:
 	float water_bonus();
 	float rock_bonus();
 	float grass_bonus();
+	void set_title(std::string debugtitle);
 
 protected:
 	std::string s_name_terrain;

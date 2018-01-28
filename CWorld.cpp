@@ -34,10 +34,26 @@ void CWorld::debug_afficher_terrain()
 }
 
 
-void CWorld::set_dimension(int x, int y)
+void CWorld::set_dimension(size_t x, size_t y)
 {
 	dimensionX = x;
 	dimensionY = y;
+}
+
+void CWorld::generate_terrain()
+{
+	srand(time(NULL));//Init random generator
+	size_t row = 3, col = 3; //debug dimension
+	for (int x = 0; x < row; x++) //generate grid and terrain for each cases
+	{
+		for (int y = 0; y < col; y++)
+		{
+			std::vector<CTerrain> colVector;
+			cases.push_back(colVector);
+			int choix_terrain = rand() % ListeTerrain.size();//random choice of terrain
+			cases.at(x).push_back(ListeTerrain[choix_terrain]);
+		}
+	}
 }
 
 void CWorld::add_player(CPlayer &player)
@@ -72,6 +88,24 @@ void CWorld::detail_list_player()
 		}
 	}
 }
+
+void CWorld::map_view_terrain()
+{
+	std::cout << "\t\t\t Map: \n\n";
+	//cases.at(2).at(1).set_title("debugname");     //cases.at(columns).at(rows) = value
+
+	for (int x = 0; x < dimensionX; x++)
+	{
+		std::cout << "\t";
+		for (int y = 0; y < dimensionY; y++)
+		{
+			std::cout << cases[x][y].Title() << " | ";
+		}
+		std::cout << std::endl;
+	}
+	std::cout << "\n\n";
+}
+
 
 void CWorld::read_config_terrain()
 {
