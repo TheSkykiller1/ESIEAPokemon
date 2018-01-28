@@ -21,7 +21,7 @@ protected:
 	int s_exp_up; //exp necessaire pour level up
 	int s_nb_fight;
 	int s_nb_win;
-
+	int maxpokeballs = 3;
 	int s_posx;
 	int s_posy;
 	CPlayer* s_target; //Pointer of the target player (Given by GameManager)
@@ -60,14 +60,14 @@ public:
 	void set_exp(int exp);
 	void give_exp(int exp);
 	void match_fini(bool win,int exp=0); //add 1 match to the counter, and 1 to win if match is won, exp gain are handled by this function
-	void add_pokemon(std::string type, std::string nom, int hpe, int vitesse, int attaque, int defense);
-	void add_pokemon(CMonster pokemon);
+	bool add_pokemon(std::string type, std::string nom, int hpe, int vitesse, int attaque, int defense);
+	bool add_pokemon(CMonster pokemon);
 	void delete_pokemon(int id_pokemon);//Delete directement le pokemon
 	void delete_pokemon();//Affiche les pokemon et demande lequel supprimer
-	void set_target(CPlayer* cible);
-	void set_terrain(CTerrain* terrain);
+	void set_target(CPlayer* cible); //debug only
+	void set_terrain(CTerrain* terrain); //debug only
 	//void set_world(CWorld* world);//Use one time only but necessary
-	void move(int X, int Y, CTerrain* terrain);
+	void move(int X, int Y, CTerrain* terrain, CPlayer* cible); //cible = NULL if no enemy on same cases
 
 	 //Utile pour split les chaines de string avec un delimiter
 	template<typename Out>

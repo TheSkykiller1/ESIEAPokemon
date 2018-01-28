@@ -71,15 +71,27 @@ void CPlayer::match_fini(bool win, int exp)//add 1 match to the counter, and 1 t
 		level_refresh();
 	}
 }
-void CPlayer::add_pokemon(CMonster pokemon)
+bool CPlayer::add_pokemon(CMonster pokemon)
 {
-	pokemon.setId(id_pokemon++);
-	Pokeballs.push_back(pokemon);
+	if (Pokeballs.size() < maxpokeballs)//max 3
+	{
+		pokemon.setId(id_pokemon++);
+		Pokeballs.push_back(pokemon);
+		return true;
+	}
+	return false;
 }
-void CPlayer::add_pokemon(std::string type, std::string nom, int hpe, int vitesse, int attaque, int defense)
+bool CPlayer::add_pokemon(std::string type, std::string nom, int hpe, int vitesse, int attaque, int defense)
 {
-	/*	CMonster pokemon(id_pokemon++, type, nom, hpe, vitesse, attaque, defense);
-		Pokeballs.push_back(pokemon);*/
+	if (Pokeballs.size() < maxpokeballs)//max 3
+	{
+		CMonster pokemon(id_pokemon++, type, nom, hpe, vitesse, attaque, defense);
+		pokemon.setId(id_pokemon++);
+		Pokeballs.push_back(pokemon);
+		return true;
+	}
+	return false;
+
 }
 void CPlayer::delete_pokemon()
 {
@@ -109,7 +121,8 @@ void CPlayer::tableau_level()
 		std::cout << "Level: " << i + 1 << " exp a avoir: " << Liste_level[i] << "\n";
 	}
 }
-void CPlayer::move(int X, int Y ,CTerrain* terrain) { s_posx = X;s_posy = Y; s_cases = terrain; }
+void CPlayer::move(int X, int Y, CTerrain* terrain, CPlayer* cible) {
+	s_posx = X;s_posy = Y; s_cases = terrain; s_target = cible;}
 void CPlayer::set_target(CPlayer* cible) { s_target = cible; }
 void CPlayer::set_terrain(CTerrain* terrain) { s_cases = terrain; }
 //void CPlayer::set_world(CWorld* world) { s_world = world; }

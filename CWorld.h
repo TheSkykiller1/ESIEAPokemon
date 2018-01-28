@@ -25,8 +25,8 @@ protected:
 	void debug_afficher_terrain();
 
 	int nb_joueur;
-	size_t dimensionX;
-	size_t dimensionY;
+	int dimensionX;
+	int dimensionY;
 
 	struct TypePokemon {
 		std::string type, name;
@@ -45,9 +45,10 @@ public:
 	~CWorld();
 	
 	//setter
-	void add_player(CPlayer &player);//On ajoute le joeuur au monde et on lui donne les pointeurs du monde (pour acceder au config et aux autres joueurs) //todo ameliorer cela
-	void set_dimension(size_t x, size_t y);
+	void add_player(CPlayer player);//On ajoute le joueur au monde et on lui donne les pointeurs du monde (pour acceder au config et aux autres joueurs) //todo ameliorer cela
+	void set_dimension(int x, int y);
 	void generate_terrain();
+	void move_player(int id, int x, int y);
 	//getter
 	std::vector<CPlayer> Player(int posX, int posY); //Donne la liste des joueurs sur cette case, si > 2 alors un match est déclaré.
 	int dimension(bool xy);//false=x, y=true;

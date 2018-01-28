@@ -22,7 +22,6 @@ void CWorld::debug_afficher_pokemon()
 			<<"\n";
 	}
 }
-
 void CWorld::debug_afficher_terrain()
 {
 	std::cout << "Tous les terrains lu dans la config: \n";
@@ -33,20 +32,17 @@ void CWorld::debug_afficher_terrain()
 	}
 }
 
-
-void CWorld::set_dimension(size_t x, size_t y)
+void CWorld::set_dimension(int x, int y)
 {
 	dimensionX = x;
 	dimensionY = y;
 }
-
 void CWorld::generate_terrain()
 {
 	srand(time(NULL));//Init random generator
-	size_t row = 3, col = 3; //debug dimension
-	for (int x = 0; x < row; x++) //generate grid and terrain for each cases
+	for (int x = 0; x < dimensionX; x++) //generate grid and terrain for each cases
 	{
-		for (int y = 0; y < col; y++)
+		for (int y = 0; y < dimensionY; y++)
 		{
 			std::vector<CTerrain> colVector;
 			cases.push_back(colVector);
@@ -55,18 +51,20 @@ void CWorld::generate_terrain()
 		}
 	}
 }
-
-void CWorld::add_player(CPlayer &player)
-{
-		joueurs.push_back(player);
-}
-
 int CWorld::dimension(bool xy)
 {
 	if (xy) { return dimensionY; }
 	else { return dimensionX; }
 }
 
+void CWorld::add_player(CPlayer player)
+{
+		joueurs.push_back(player);
+}
+void CWorld::move_player(int id, int x, int y)
+{
+
+}
 int CWorld::connected_player() { return (joueurs.size() - 1); }
 
 void CWorld::list_player()
