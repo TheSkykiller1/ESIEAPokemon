@@ -164,6 +164,7 @@ void CPlayer::attaquer()
 	}
 	else if(choix==2)
 	{
+
 	}
 }
 

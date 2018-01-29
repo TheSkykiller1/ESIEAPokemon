@@ -1,11 +1,10 @@
 #ifndef _CMONSTER_H_
 #define _CMONSTER_H_
+#include <iostream>
+#include <vector>
 
 #include "CAttaque.h"
 #include "CObject.h"
-
-#include <iostream>
-#include <vector>
 
 class CMonster
 {
@@ -81,7 +80,7 @@ public:
 	bool echec(int num_att);
 	bool init_combat(CMonster &monstre1, CMonster &monstre2);
 	bool analyse_speed(CMonster &monstre1, CMonster &monster2);
-	bool tour(CMonster &monstre/*, CObject &objet1, CObject &objet2*//*, CWorld &terrain*/);
+	bool tour(CMonster* monstre/*, CObject &objet1, CObject &objet2*//*, CWorld &terrain*/);
 	void useObject(CObject &objet);
 };
 

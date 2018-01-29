@@ -324,32 +324,32 @@ bool CMonster::analyse_speed(CMonster &monstre1, CMonster &monstre2)
 	}
 }
 
-bool CMonster::tour(CMonster &monstre/*, CObject &objet1, CObject &objet2*//*, CWorld &terrain*/)
+bool CMonster::tour(CMonster* monstre/*, CObject &objet1, CObject &objet2*//*, CWorld &terrain*/)
 {
-	std::cout << m_nom, " :\n";
+	std::cout << m_nom << " :\n";
 	std::cout << "Choix de l'attaque :\n";
 	std::cout << "0) Coup de griffes\n";
-	std::cout << "1) ",m_nom_attaque[0],"\n";
-	std::cout << "2) ",m_nom_attaque[1],"\n";
-	std::cout << "3) ",m_nom_attaque[2],"\n";
-	std::cout << "4) ",m_nom_attaque[3],"\n";
+	std::cout << "1) " << m_nom_attaque[0] << "\n";
+	std::cout << "2) " << m_nom_attaque[1] << "\n";
+	std::cout << "3) " << m_nom_attaque[2] << "\n";
+	std::cout << "4) " << m_nom_attaque[3] << "\n";
 	int num_att1;
 	std::cin >> num_att1;
 
-	std::cout << monstre.getNom(), " :\n";
+	/*std::cout << monstre->getNom()<< " :\n"; //J'ai modif ça aussi ^^'
 	std::cout << "Choix de l'attaque :\n";
 	std::cout << "0) Coup de griffes\n";
-	std::cout << "1) ", monstre.getNAttaques[0], "\n";
-	std::cout << "2) ", monstre.getNAttaques[1], "\n";
-	std::cout << "3) ", monstre.getNAttaques[2], "\n";
-	std::cout << "4) ", monstre.getNAttaques[3], "\n";
+	std::cout << "1) "<< monstre->getNAttaques[0]<< "\n";
+	std::cout << "2) "<< monstre->getNAttaques[1]<< "\n";
+	std::cout << "3) "<< monstre->getNAttaques[2]<< "\n";
+	std::cout << "4) "<< monstre->getNAttaques[3]<< "\n";
 	int num_att2;
 	std::cin >> num_att2;
 	if (init_combat(*this, monstre))
 	{
 		//TOUR IMPOSSIBLE, plus de HP sur l'un des monstres
 		return 1;
-	}
+	}*/
 
 	/*
 	if (&objet1 != NULL)
