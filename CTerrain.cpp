@@ -35,3 +35,5 @@ float CTerrain::electric_bonus() { return s_electric; }
 float CTerrain::water_bonus() { return s_water; }
 float CTerrain::rock_bonus() { return s_rock; }
 float CTerrain::grass_bonus() { return s_grass; }
+bool CTerrain::isflooded() { return s_flooded; }
+void CTerrain::isflooded(bool status) { s_flooded = status; }
