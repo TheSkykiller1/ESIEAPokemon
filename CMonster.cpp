@@ -324,7 +324,7 @@ bool CMonster::analyse_speed(CMonster &monstre1, CMonster &monstre2)
 	}
 }
 
-bool CMonster::tour(CMonster &monstre, CObject &objet1, CObject &objet2, CWorld &terrain)
+bool CMonster::tour(CMonster &monstre, CObject &objet1, CObject &objet2/*, CWorld &terrain*/)
 {
 	std::cout << m_nom << " :\n";
 	std::cout << "Choix de l'attaque :\n";
