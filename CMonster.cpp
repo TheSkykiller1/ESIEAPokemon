@@ -275,3 +275,69 @@ bool CMonster::echec(int num_att)
 		return 0;
 	}
 }
+
+bool CMonster::init_combat(CMonster &monstre1, CMonster &monstre2)
+{
+	int HP1 = monstre1.getHPAct();
+	int HP2 = monstre2.getHPAct();
+	if (HP1*HP2 == 0)
+	{
+		return 1;
+	}
+	return 0;
+}
+
+bool CMonster::analyse_speed(CMonster &monstre1, CMonster &monstre2)
+{
+	if (monstre1.getVitesseAct() < monstre2.getVitesseAct())
+	{
+		return 1;
+	}
+	else
+	{
+		return 0;
+	}
+}
+
+bool CMonster::tour(CMonster &monstre1, CMonster &monstre2, int num_att1, int num_att2, CObject &objet1, CObject &objet2, CWorld &world)
+{
+	if (init_combat(monstre1, monstre2))
+	{
+		//TOUR IMPOSSIBLE, plus de HP sur l'un des monstres
+		return 1;
+	}
+	if (&objet1 != NULL)
+	{
+		monstre1.setAttaqueAct(monstre1.getAttaqueAct() + objet1.getAtt());
+		monstre1.setDefenseAct(monstre1.getDefenseAct() + objet1.getDef());
+		monstre1.setHPAct(monstre1.getHPAct() + objet1.getHP());
+		monstre1.setVitesseAct(monstre1.getVitesseAct() + objet1.getVit());
+		monstre1.setEtat(objet1.getEtat());
+	}
+	if (&objet2 != NULL)
+	{
+		monstre2.setAttaqueAct(monstre2.getAttaqueAct() + objet2.getAtt());
+		monstre2.setDefenseAct(monstre2.getDefenseAct() + objet2.getDef());
+		monstre2.setHPAct(monstre2.getHPAct() + objet2.getHP());
+		monstre2.setVitesseAct(monstre2.getVitesseAct() + objet2.getVit());
+		monstre2.setEtat(objet2.getEtat());
+	}
+	if (analyse_speed(monstre1, monstre2))
+	{
+		//monstre2 commence
+		monstre2.attaquer(num_att2, monstre1);
+		if (monstre1.getHPAct() != 0)
+		{
+			monstre1.attaquer(num_att1, monstre2);
+		}
+	}
+	else
+	{
+		//monstre1 commence
+		monstre1.attaquer(num_att1, monstre2);
+		if (monstre2.getHPAct() != 0)
+		{
+			monstre2.attaquer(num_att2, monstre1);
+		}
+	}
+}
