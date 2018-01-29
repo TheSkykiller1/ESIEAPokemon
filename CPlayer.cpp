@@ -148,6 +148,13 @@ int CPlayer::id_pokemon_actif() { return id_actif; }
 void CPlayer::use_object()
 {
 	std::cout << "Quel objet voulez-vous utiliser ? \n";
+	for (int i = 0; i < objects.size();i++)
+	{
+		if (nb_objects[i] > 0)
+		{
+			std::cout << "\t -" << objects[i].getNom() << " utilisation: " << objects[i].getType() << "\n";
+		}
+	}
 }
 
 void CPlayer::attaquer() 
@@ -164,7 +171,7 @@ void CPlayer::attaquer()
 	}
 	else if(choix==2)
 	{
-
+		Pokeballs[id_actif].tour(&s_target->Pokeballs[s_target->id_pokemon_actif()], s_cases);
 	}
 }
 
