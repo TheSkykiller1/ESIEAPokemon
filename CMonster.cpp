@@ -324,7 +324,7 @@ bool CMonster::analyse_speed(CMonster &monstre1, CMonster &monstre2)
 	}
 }
 
-bool CMonster::tour(CMonster &monstre, CObject &objet1, CObject &objet2/*, CWorld &terrain*/)
+bool CMonster::tour(CMonster &monstre,/* CObject &objet1, CObject &objet2*//*, CWorld &terrain*/)
 {
 	std::cout << m_nom, " :\n";
 	std::cout << "Choix de l'attaque :\n";
@@ -333,13 +333,25 @@ bool CMonster::tour(CMonster &monstre, CObject &objet1, CObject &objet2/*, CWorl
 	std::cout << "2) ",m_nom_attaque[1],"\n";
 	std::cout << "3) ",m_nom_attaque[2],"\n";
 	std::cout << "4) ",m_nom_attaque[3],"\n";
-	int num_att1 = 0;
-	int num_att2 = 1;
+	int num_att1;
+	std::cin >> num_att1;
+
+	std::cout << monstre.getNom(), " :\n";
+	std::cout << "Choix de l'attaque :\n";
+	std::cout << "0) Coup de griffe\n";
+	std::cout << "1) ", monstre.getNAttaques[0], "\n";
+	std::cout << "2) ", monstre.getNAttaques[1], "\n";
+	std::cout << "3) ", monstre.getNAttaques[2], "\n";
+	std::cout << "4) ", monstre.getNAttaques[3], "\n";
+	int num_att2;
+	std::cin >> num_att2;
 	if (init_combat(*this, monstre))
 	{
 		//TOUR IMPOSSIBLE, plus de HP sur l'un des monstres
 		return 1;
 	}
+
+	/*
 	if (&objet1 != NULL)
 	{
 		this->setAttaqueAct(this->getAttaqueAct() + objet1.getAtt());
@@ -356,6 +368,8 @@ bool CMonster::tour(CMonster &monstre, CObject &objet1, CObject &objet2/*, CWorl
 		monstre.setVitesseAct(monstre.getVitesseAct() + objet2.getVit());
 		monstre.setEtat(objet2.getEtat());
 	}
+	*/
+
 	if (analyse_speed(*this, monstre))
 	{
 		//monstre2 commence
@@ -375,4 +389,13 @@ bool CMonster::tour(CMonster &monstre, CObject &objet1, CObject &objet2/*, CWorl
 		}
 	}
 	return 0;
+}
+
+void CMonster::useObject(CObject &objet)
+{
+	this->setAttaqueAct(this->getAttaqueAct() + objet.getAtt());
+	this->setDefenseAct(this->getDefenseAct() + objet.getDef());
+	this->setHPAct(this->getHPAct() + objet.getHP());
+	this->setVitesseAct(this->getVitesseAct() + objet.getVit());
+	this->setEtat(objet.getEtat());
 }
