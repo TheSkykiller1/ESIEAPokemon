@@ -17,6 +17,8 @@ public:
 	float water_bonus();
 	float rock_bonus();
 	float grass_bonus();
+	bool isflooded();
+	void isflooded(bool status);
 	void set_title(std::string debugtitle);
 
 protected:
@@ -27,7 +29,7 @@ protected:
 	float s_water;
 	float s_rock;
 	float s_grass;
-	
+	bool s_flooded;
 };
 #endif
 
