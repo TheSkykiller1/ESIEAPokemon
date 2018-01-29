@@ -58,6 +58,11 @@ int CMonster::getVitesse()
 	return m_vitesse;
 }
 
+int CMonster::getVitesseAct()
+{
+	return m_vitesse_act;
+}
+
 int CMonster::getAttaque()
 {
 	return m_attaque;
@@ -71,6 +76,11 @@ int CMonster::getAttaqueAct()
 int CMonster::getDefense()
 {
 	return m_defense;
+}
+
+int CMonster::getDefenseAct()
+{
+	return m_defense_act;
 }
 
 int CMonster::getEtat()
@@ -125,19 +135,29 @@ void CMonster::setVitesse(int vitesse)
 	m_vitesse = vitesse;
 }
 
+void CMonster::setVitesseAct(int vitesse_act)
+{
+	m_vitesse_act = vitesse_act;
+}
+
 void CMonster::setAttaque(int attaque)
 {
 	m_attaque = attaque;
 }
 
-void CMonster::setAttaqueAct(int attaqueAct)
+void CMonster::setAttaqueAct(int attaque_act)
 {
-	m_attaque_act = attaqueAct;
+	m_attaque_act = attaque_act;
 }
 
 void CMonster::setDefense(int defense)
 {
 	m_defense = defense;
+}
+
+void CMonster::setDefenseAct(int defense_act)
+{
+	m_defense_act = defense_act;
 }
 
 void CMonster::setEtat(int etat)

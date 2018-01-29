@@ -34,6 +34,31 @@ std::vector<std::string> CObject::getType()
 	return m_type;
 }
 
+int CObject::getVit()
+{
+	return 0;
+}
+
+int CObject::getAtt()
+{
+	return 0;
+}
+
+int CObject::getDef()
+{
+	return 0;
+}
+
+int CObject::getHP()
+{
+	return 0;
+}
+
+int CObject::getEtat()
+{
+	return 0;
+}
+
 //SETTERS
 
 void CObject::setId(int id)

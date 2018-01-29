@@ -15,10 +15,12 @@ protected:
 	int m_HP;
 	int m_HP_act;
 	int m_vitesse;
+	int m_vitesse_act;
 	int m_attaque;
 	int m_attaque_act;
 	//std::vector<CAttaque> m_attaques;
 	int m_defense;
+	int m_defense_act;
 	int m_etat;
 	int m_etat_tours;
 	std::vector<std::string> m_force;
@@ -41,9 +43,11 @@ public:
 	int getHP();
 	int getHPAct();
 	int getVitesse();
+	int getVitesseAct();
 	int getAttaque();
 	int getAttaqueAct();
 	int getDefense();
+	int getDefenseAct();
 	int getEtat();
 	int getEtatTours();
 	std::vector<std::string> getForce();
@@ -56,9 +60,11 @@ public:
 	void setHP(int HP);
 	void setHPAct(int HP_act);
 	void setVitesse(int vitesse);
+	void setVitesseAct(int vitesse_act);
 	void setAttaque(int attaque);
-	void setAttaqueAct(int attaqueAct);
+	void setAttaqueAct(int attaque_act);
 	void setDefense(int defense);
+	void setDefenseAct(int defense_act);
 	void setEtat(int etat);
 	void setEtatTours(int tours);
 	void setCache(bool cache);
