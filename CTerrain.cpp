@@ -24,7 +24,10 @@ CTerrain::CTerrain(std::string name,int id, float fire, float electric, float wa
 CTerrain::~CTerrain()
 {
 }
-
+void CTerrain::set_title(std::string debugtitle)
+{
+	s_name_terrain = debugtitle;
+}
 std::string CTerrain::Title() { return s_name_terrain; }
 int CTerrain::id() { return s_id_terrain; }
 float CTerrain::fire_bonus() { return s_fire; }

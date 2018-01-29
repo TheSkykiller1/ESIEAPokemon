@@ -21,6 +21,30 @@ Que voulez-vous faire : \n\
 		std::cin >> tailleX;
 		std::cin >> tailleY;
 		std::cout << "Taille choisie: X: " << tailleX << " Y: " << tailleY << "\n";
+		Monde.set_dimension(tailleX, tailleY);
+		Monde.generate_terrain();
+		Monde.map_view_terrain();
+
+		std::cout << "\t\t\t Creation des personnages \n\
+\t Choisir le nombre de personnages: \n";
+		int nb;
+		std::cin >> nb;
+		std::cout << "\t Veuillez renseigner les différents champs: \n";
+		for (int i = 0;i < nb;i++)
+		{
+			std::string name; int posX, posY;
+			std::cout << "Joueur " << i << " Nom: ";
+			std::cin >> name;
+			std::cout << "Joueur " << i << " " << name << " X: ";
+			std::cin >> posX;
+			std::cout << "Joueur " << i << " " << name << " Y: ";
+			std::cin >> posY;
+			CPlayer joueur(name, posX, posY);
+			Monde.add_player(joueur);
+			std::cout << "Joueur " << i << " " << name << " position X: " << posX << " Y:" << posY << "\n";
+		}
+		Monde.list_player();
+
 		break;
 	case 2:
 		// Code

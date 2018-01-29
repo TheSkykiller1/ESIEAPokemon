@@ -2,33 +2,69 @@
 
 CWorld::CWorld()
 {
-	
+	read_config_pokemon();
+	read_config_terrain();
+	debug_afficher_pokemon();
+	debug_afficher_terrain();
 }
-
 
 CWorld::~CWorld()
 {
 }
 
+void CWorld::debug_afficher_pokemon()
+{
+	std::cout << "Tous les pokemons lu dans la config: \n";
+	for (int i = 0;i < ListePokemon.size();i++)
+	{
+		TypePokemon pokedex = ListePokemon[i]; //optimisation memoire d'appel
+		std::cout << " \t Pokemon : " << pokedex.id << " nom: " << pokedex.name << " type: " << pokedex.type \
+			<<"\n";
+	}
+}
+void CWorld::debug_afficher_terrain()
+{
+	std::cout << "Tous les terrains lu dans la config: \n";
+	for (int i = 0;i < ListeTerrain.size();i++)
+	{
+		CTerrain terrain = ListeTerrain[i]; //optimisation memoire d'appel
+		std::cout << " \t Terrain : " << terrain.id() << " nom: " << terrain.Title() << " type: "<< "\n";
+	}
+}
 
 void CWorld::set_dimension(int x, int y)
 {
 	dimensionX = x;
 	dimensionY = y;
 }
-
-
-void CWorld::add_player(CPlayer &player)
+void CWorld::generate_terrain()
 {
-		joueurs.push_back(player);
+	srand(time(NULL));//Init random generator
+	for (int x = 0; x < dimensionX; x++) //generate grid and terrain for each cases
+	{
+		for (int y = 0; y < dimensionY; y++)
+		{
+			std::vector<CTerrain> colVector;
+			cases.push_back(colVector);
+			int choix_terrain = rand() % ListeTerrain.size();//random choice of terrain
+			cases.at(x).push_back(ListeTerrain[choix_terrain]);
+		}
+	}
 }
-
 int CWorld::dimension(bool xy)
 {
 	if (xy) { return dimensionY; }
 	else { return dimensionX; }
 }
 
+void CWorld::add_player(CPlayer player)
+{
+		joueurs.push_back(player);
+}
+void CWorld::move_player(int id, int x, int y)
+{
+
+}
 int CWorld::connected_player() { return (joueurs.size() - 1); }
 
 void CWorld::list_player()
@@ -50,6 +86,24 @@ void CWorld::detail_list_player()
 		}
 	}
 }
+
+void CWorld::map_view_terrain()
+{
+	std::cout << "\t\t\t Map: \n\n";
+	//cases.at(2).at(1).set_title("debugname");     //cases.at(columns).at(rows) = value
+
+	for (int x = 0; x < dimensionX; x++)
+	{
+		std::cout << "\t";
+		for (int y = 0; y < dimensionY; y++)
+		{
+			std::cout << cases[x][y].Title() << " | ";
+		}
+		std::cout << std::endl;
+	}
+	std::cout << "\n\n";
+}
+
 
 void CWorld::read_config_terrain()
 {
@@ -115,8 +169,6 @@ void CWorld::read_config_terrain()
 		std::cout << "Impossible d’ouvrir le fichier \n";
 	}
 }
-
-/*
 void CWorld::read_config_pokemon()
 {
 	std::string row;
@@ -128,11 +180,9 @@ void CWorld::read_config_pokemon()
 		while (getline(File, row))
 		{
 			if (row == "Monster")//Debut du bloc
-			{	//Value only!
-				std::string name, type;
-				int hp, speed, attack, defense;
-				float paralyze, poison, fall, flood, burn;
-
+			{
+				TypePokemon pokemon;
+				pokemon.id = id++;
 				while (row!="EndMonster")//Tant que l'on est dans le bloc
 				{	
 					getline(File, row);
@@ -145,83 +195,54 @@ void CWorld::read_config_pokemon()
 					}
 
 					//Analyse des resultats
-					if (element[0] == "Name") { name = element[1]; }
-					else if (element[0] == "Type") { type = element[1]; }
+					if (element[0] == "Name") { pokemon.name = element[1]; }
+					else if (element[0] == "Type") { pokemon.type = element[1]; }
 					else if (element[0] == "HP")
 					{
-						int min = std::stoi(element[1]);
-						int max = std::stoi(element[2]);
-						hp = rand() % (max - min) + min;
+						pokemon.HP_min = std::stoi(element[1]);
+						pokemon.HP_max = std::stoi(element[2]);
 					}
 					else if (element[0] == "Speed")
 					{
-						int min = std::stoi(element[1]);
-						int max = std::stoi(element[2]);
-						speed = rand() % (max - min) + min;
+						pokemon.VIT_min = std::stoi(element[1]);
+						pokemon.VIT_max = std::stoi(element[2]);
 					}
 					else if (element[0] == "Attack")
 					{
-						int min = std::stoi(element[1]);
-						int max = std::stoi(element[2]);
-						attack = rand() % (max - min) + min;
+						pokemon.ATT_min = std::stoi(element[1]);
+						pokemon.ATT_max = std::stoi(element[2]);
 					}
 					else if (element[0] == "Defense")
 					{
-						int min = std::stoi(element[1]);
-						int max = std::stoi(element[2]);
-						defense = rand() % (max - min) + min;
+						pokemon.DEF_min = std::stoi(element[1]);
+						pokemon.DEF_max = std::stoi(element[2]);
 					}
 					else if (element[0] == "Paralysis")
 					{
-						paralyze=stof(element[1]);
+						pokemon.paralysis=stof(element[1]);
 					}
 					else if (element[0] == "Flood")
 					{
-						flood=stof(element[1]);
+						pokemon.flood=stof(element[1]);
 					}
 					else if (element[0] == "Fall")
 					{
-						fall = stof(element[1]);
+						pokemon.fall = stof(element[1]);
 					}
 					else if (element[0] == "Poison")
 					{
-						poison = stof(element[1]);
+						pokemon.poison = stof(element[1]);
 					}
 					else if (element[0] == "Burn")
 					{
-						burn = stof(element[1]);
+						pokemon.burn = stof(element[1]);
+					}
+					else if (element[0] == "Heal")
+					{
+						pokemon.heal = stof(element[1]);
 					}
 				}
-				if (type == "Electric")
-				{
-					CElectric pokemon(id++, type, name, hp, speed, attack, defense);
-					ListePokemon.push_back(pokemon);
-				}
-				else if (type == "Fire")
-				{
-					CFire pokemon(id++, type, name, hp, speed, attack, defense);
-					ListePokemon.push_back(pokemon);
-				}
-				else if (type == "Rock")
-				{
-					CRock pokemon(id++, type, name, hp, speed, attack, defense);
-					ListePokemon.push_back(pokemon);
-				}
-				else if (type == "Plant")
-				{
-					CPlant pokemon(id++, type, name, hp, speed, attack, defense);
-					ListePokemon.push_back(pokemon);
-				}
-				else if (type == "Insect")
-				{
-					CInsect pokemon(id++, type, name, hp, speed, attack, defense);
-					ListePokemon.push_back(pokemon);
-				}
-				else if (type == "Water")
-				{
-					CWater pokemon(id++, type, name, hp, speed, attack, defense);
-					ListePokemon.push_back(pokemon);
-				}
+				ListePokemon.push_back(pokemon);
 			}
 		}
 		File.close();
@@ -231,7 +252,7 @@ void CWorld::read_config_pokemon()
 		std::cout << "Impossible d’ouvrir le fichier \n";
 	}
 }
-*/
+
 //La function template pour parser les donnees
 template<typename Out>
 void CWorld::split(const std::string &s, char delim, Out result) {
