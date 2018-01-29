@@ -22,7 +22,7 @@ public:
 	void setFall(float fall);
 
 	bool flood();
-	bool attaquer(int num_att, CMonster &cible);
+	bool attaquer(int num_att, CMonster* cible);
 };
 
 #endif

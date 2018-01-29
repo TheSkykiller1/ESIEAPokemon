@@ -18,7 +18,7 @@ public:
 
 	void setHeal(float heal);
 
-	bool attaquer(int m_num, CMonster & cible);
+	bool attaquer(int m_num, CMonster* cible);
 };
 
 #endif

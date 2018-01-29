@@ -6,6 +6,7 @@
 
 #include "CAttaque.h"
 #include "CObject.h"
+#include "CTerrain.h"
 
 class CMonster
 {
@@ -76,12 +77,12 @@ public:
 	void setCache(bool cache);
 	
 	int updateEtat();
-	virtual bool attaquer(int num_att, CMonster &cible);
-	int degat(int num_att, CMonster &def);
+	virtual bool attaquer(int num_att, CMonster* cible);
+	int degat(int num_att, CMonster* def);
 	bool echec(int num_att);
 	bool init_combat(CMonster &monstre1, CMonster &monstre2);
 	bool analyse_speed(CMonster &monstre1, CMonster &monster2);
-	bool tour(CMonster* monstre/*, CObject &objet1, CObject &objet2*//*, CWorld &terrain*/);
+	bool tour(CMonster* monstre, CTerrain* terrain);
 	void useObject(CObject &objet);
 };
 

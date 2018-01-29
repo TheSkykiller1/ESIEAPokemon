@@ -13,7 +13,7 @@ public:
 	~CInsect();
 
 	bool poison();
-	bool attaquer(int m_num, CMonster &cible);
+	bool attaquer(int m_num, CMonster* cible);
 };
 
 #endif

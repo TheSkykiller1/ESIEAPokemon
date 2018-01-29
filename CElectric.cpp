@@ -32,7 +32,7 @@ bool CElectric::paralyze()
 	}
 }
 
-bool CElectric::attaquer(int num_att, CMonster &cible)
+bool CElectric::attaquer(int num_att, CMonster* cible)
 {
 	if (m_etat == 3) //paralysie
 	{
@@ -44,15 +44,15 @@ bool CElectric::attaquer(int num_att, CMonster &cible)
 	if (echec(num_att)==0 && m_nu[num_att] > 0)
 	{
 		short val_degat = degat(num_att, cible);
-		short HP1 = cible.getHPAct();
+		short HP1 = cible->getHPAct();
 		short HP2 = HP1 - val_degat;
-		cible.setHP(HP2);
+		cible->setHP(HP2);
 		m_nu[num_att]--;
 		if (paralyze() && m_type_attaque[num_att]!="Normal") //si l'ennemi doit être paralysé
 		{
-			if (cible.getEtat() == 0) //si l'ennemi est dans un etat normal
+			if (cible->getEtat() == 0) //si l'ennemi est dans un etat normal
 			{
-				cible.setEtat(3); //paralysie
+				cible->setEtat(3); //paralysie
 			}
 		}
 		return 0;

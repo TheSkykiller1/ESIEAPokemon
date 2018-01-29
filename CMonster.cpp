@@ -239,25 +239,25 @@ int CMonster::updateEtat() //todo etat a finir
 	return etat;//todo a modifier temporaire
 }
 
-bool CMonster::attaquer(int num_att, CMonster &cible)
+bool CMonster::attaquer(int num_att, CMonster* cible)
 {
 	return 0;
 }
 
-int CMonster::degat(int num_att, CMonster &def)
+int CMonster::degat(int num_att, CMonster* def)
 {
 	int attaque = m_attaque_act;
-	int defense = def.getDefense();
+	int defense = def->getDefense();
 	float coeff = (float)((85 + (rand() % 16)) / 100);
 	float avantage = 1;
 	if (num_att != -1)
 	{
 
 		std::string base_type_att = m_type;
-		std::string base_type_def = def.getType();
-		if (def.getType() == "Rock") //si type terre
+		std::string base_type_def = def->getType();
+		if (def->getType() == "Rock") //si type terre
 		{
-			if (def.getCache() == 1)
+			if (def->getCache() == 1)
 			{
 				defense *= 2;
 			}
@@ -271,9 +271,9 @@ int CMonster::degat(int num_att, CMonster &def)
 					avantage = 2;
 				}
 			}
-			for (int i = 0; i < def.getForce().size(); i++)
+			for (int i = 0; i < def->getForce().size(); i++)
 			{
-				if (def.getForce()[i] == base_type_att)
+				if (def->getForce()[i] == base_type_att)
 				{
 					avantage = 0.5;
 				}
@@ -324,7 +324,7 @@ bool CMonster::analyse_speed(CMonster &monstre1, CMonster &monstre2)
 	}
 }
 
-bool CMonster::tour(CMonster* monstre)/*, CObject &objet1, CObject &objet2*//*, CWorld &terrain*/
+bool CMonster::tour(CMonster* monstre, CTerrain* terrain)
 {
 	std::cout << m_nom << " :\n";
 	std::cout << "Choix de l'attaque :\n";
@@ -333,9 +333,9 @@ bool CMonster::tour(CMonster* monstre)/*, CObject &objet1, CObject &objet2*//*, 
 	std::cout << "2) " << m_nom_attaque[1] << "\n";
 	std::cout << "3) " << m_nom_attaque[2] << "\n";
 	std::cout << "4) " << m_nom_attaque[3] << "\n";
-	int num_att1;
-	std::cin >> num_att1;
-
+	int num_att;
+	std::cin >> num_att;
+	this->attaquer(num_att, monstre);
 	/*std::cout << monstre->getNom()<< " :\n"; //J'ai modif ça aussi ^^'
 	std::cout << "Choix de l'attaque :\n";
 	std::cout << "0) Coup de griffes\n";

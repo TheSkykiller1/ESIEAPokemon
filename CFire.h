@@ -15,7 +15,7 @@ public:
 	~CFire();
 	
 	bool burn();
-	bool attaquer(int m_num, CMonster &cible);
+	bool attaquer(int m_num, CMonster* cible);
 };
 
 #endif
