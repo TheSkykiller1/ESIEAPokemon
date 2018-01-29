@@ -71,7 +71,22 @@ void CPlayer::match_fini(bool win, int exp)//add 1 match to the counter, and 1 t
 		level_refresh();
 	}
 }
-bool CPlayer::add_pokemon(CMonster pokemon)
+
+void CPlayer::set_object(std::vector<CObject> listeobject)
+{
+	objects = listeobject;
+	for (int i = 0;i < listeobject.size();i++)//init nb of object
+	{
+		nb_objects.push_back(0);
+	}
+}
+void CPlayer::set_nb_oject(int id, int nb)
+{
+	nb_objects_base[id] = nb;
+	nb_objects = nb_objects_base;
+}
+
+bool CPlayer::add_pokemon(CMonster pokemon)//todo add pokemon
 {
 	if (Pokeballs.size() < maxpokeballs)//max 3
 	{
@@ -92,7 +107,7 @@ bool CPlayer::add_pokemon(std::string type, std::string nom, int hpe, int vitess
 	}
 	return false;
 
-}
+}//todo add pokemon2
 void CPlayer::delete_pokemon()
 {
 	if (Pokeballs.size() < 1) { std::cout << "Vous n'avez pas de pokemon donc vous ne pouvez pas en relacher!\n"; return; }
@@ -113,6 +128,7 @@ void CPlayer::delete_pokemon(int id_pokemon)
 		}
 	}
 }
+
 void CPlayer::tableau_level()
 {
 	std::cout << "Tableau des levels \n";
@@ -123,9 +139,47 @@ void CPlayer::tableau_level()
 }
 void CPlayer::move(int X, int Y, CTerrain* terrain, CPlayer* cible) {
 	s_posx = X;s_posy = Y; s_cases = terrain; s_target = cible;}
+
 void CPlayer::set_target(CPlayer* cible) { s_target = cible; }
 void CPlayer::set_terrain(CTerrain* terrain) { s_cases = terrain; }
-//void CPlayer::set_world(CWorld* world) { s_world = world; }
+
+int CPlayer::id_pokemon_actif() { return id_actif; }
+
+void CPlayer::use_object()
+{
+	std::cout << "Quel objet voulez-vous utiliser ? \n";
+}
+
+void CPlayer::attaquer() 
+{
+	system("CLS");
+	std::cout << "Joueur " << s_pseudo << " , c'est votre tour! Que voulez-vous faire ? \n\
+\t 1) Utiliser un object \n\
+\t 2) Attaquer le pokemon adverse " << s_target->Pokeballs[s_target->id_pokemon_actif()].getNom()<<" de type: "<< s_target->Pokeballs[s_target->id_pokemon_actif()].getType() << "\n";
+	int choix;
+	std::cin >> choix;
+	if (choix == 1)
+	{
+		use_object();
+	}
+	else if(choix==2)
+	{
+	}
+}
+
+bool CPlayer::check()
+{
+	bool etat = false;
+	for (int i = 0;i < Pokeballs.size();i++)
+	{
+		if (Pokeballs[i].getHPAct() > 0)
+		{
+			etat= true;//toujours au moins 1 pokemon en vie
+		}
+	}
+	return etat;
+}
+
 
 //Lit le fichier de config de player pour obtenir ses levels
 void CPlayer::read_level_requirement()
