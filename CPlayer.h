@@ -10,6 +10,12 @@
 #include <vector>
 #include "CTerrain.h"
 #include "CMonster.h"
+#include "CFire.h"
+#include "CRock.h"
+#include "CWater.h"
+#include "CElectric.h"
+#include "CPlant.h"
+#include "CInsect.h"
 //#include "CObject.h"
 class CPlayer
 {
