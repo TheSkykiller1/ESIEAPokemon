@@ -103,6 +103,31 @@ bool CMonster::getCache()
 	return m_cache;
 }
 
+std::vector<std::string> CMonster::getNAttaques()
+{
+	return m_nom_attaque;
+}
+
+std::vector<std::string> CMonster::getTAttaques()
+{
+	return m_type_attaque;
+}
+
+std::vector<int> CMonster::getNU()
+{
+	return m_nu;
+}
+
+std::vector<int> CMonster::getPAtt()
+{
+	return m_pAttaques;
+}
+
+std::vector<float> CMonster::getPEchec()
+{
+	return m_pEchec;
+}
+
 //SETTERS
 
 void CMonster::setId(int id)
@@ -299,45 +324,55 @@ bool CMonster::analyse_speed(CMonster &monstre1, CMonster &monstre2)
 	}
 }
 
-bool CMonster::tour(CMonster &monstre1, CMonster &monstre2, int num_att1, int num_att2, CObject &objet1, CObject &objet2, CWorld &world)
+bool CMonster::tour(CMonster &monstre, CObject &objet1, CObject &objet2, CWorld &terrain)
 {
-	if (init_combat(monstre1, monstre2))
+	std::cout << m_nom << " :\n";
+	std::cout << "Choix de l'attaque :\n";
+	std::cout << "0) Coup de griffe\n";
+	std::cout << "1) " << m_nom_attaque[0] << "\n";
+	std::cout << "2) " << m_nom_attaque[1] << "\n";
+	std::cout << "3) " << m_nom_attaque[2] << "\n";
+	std::cout << "4) " << m_nom_attaque[3] << "\n";
+	int num_att1 = 0;
+	int num_att2 = 1;
+	if (init_combat(*this, monstre))
 	{
 		//TOUR IMPOSSIBLE, plus de HP sur l'un des monstres
 		return 1;
 	}
 	if (&objet1 != NULL)
 	{
-		monstre1.setAttaqueAct(monstre1.getAttaqueAct() + objet1.getAtt());
-		monstre1.setDefenseAct(monstre1.getDefenseAct() + objet1.getDef());
-		monstre1.setHPAct(monstre1.getHPAct() + objet1.getHP());
-		monstre1.setVitesseAct(monstre1.getVitesseAct() + objet1.getVit());
-		monstre1.setEtat(objet1.getEtat());
+		this->setAttaqueAct(this->getAttaqueAct() + objet1.getAtt());
+		this->setDefenseAct(this->getDefenseAct() + objet1.getDef());
+		this->setHPAct(this->getHPAct() + objet1.getHP());
+		this->setVitesseAct(this->getVitesseAct() + objet1.getVit());
+		this->setEtat(objet1.getEtat());
 	}
 	if (&objet2 != NULL)
 	{
-		monstre2.setAttaqueAct(monstre2.getAttaqueAct() + objet2.getAtt());
-		monstre2.setDefenseAct(monstre2.getDefenseAct() + objet2.getDef());
-		monstre2.setHPAct(monstre2.getHPAct() + objet2.getHP());
-		monstre2.setVitesseAct(monstre2.getVitesseAct() + objet2.getVit());
-		monstre2.setEtat(objet2.getEtat());
+		monstre.setAttaqueAct(monstre.getAttaqueAct() + objet2.getAtt());
+		monstre.setDefenseAct(monstre.getDefenseAct() + objet2.getDef());
+		monstre.setHPAct(monstre.getHPAct() + objet2.getHP());
+		monstre.setVitesseAct(monstre.getVitesseAct() + objet2.getVit());
+		monstre.setEtat(objet2.getEtat());
 	}
-	if (analyse_speed(monstre1, monstre2))
+	if (analyse_speed(*this, monstre))
 	{
 		//monstre2 commence
-		monstre2.attaquer(num_att2, monstre1);
-		if (monstre1.getHPAct() != 0)
+		monstre.attaquer(num_att2, monstre);
+		if (this->getHPAct() != 0)
 		{
-			monstre1.attaquer(num_att1, monstre2);
+			this->attaquer(num_att1, monstre);
 		}
 	}
 	else
 	{
 		//monstre1 commence
-		monstre1.attaquer(num_att1, monstre2);
-		if (monstre2.getHPAct() != 0)
+		this->attaquer(num_att1, monstre);
+		if (monstre.getHPAct() != 0)
 		{
-			monstre2.attaquer(num_att2, monstre1);
+			monstre.attaquer(num_att2, *this);
 		}
 	}
+	return 0;
 }

@@ -55,6 +55,11 @@ public:
 	std::vector<std::string> getForce();
 	//std::vector<CAttaque> getCS();
 	bool getCache();
+	std::vector<std::string> getNAttaques();
+	std::vector<std::string> getTAttaques();
+	std::vector<int> getNU();
+	std::vector<int> getPAtt();
+	std::vector<float> getPEchec();
 
 	void setId(int id);
 	void setType(std::string type);
@@ -77,7 +82,7 @@ public:
 	bool echec(int num_att);
 	bool init_combat(CMonster &monstre1, CMonster &monstre2);
 	bool analyse_speed(CMonster &monstre1, CMonster &monster2);
-	bool tour(CMonster &monstre1, CMonster &monstre2, int num_att1, int num_att2, CObject &objet1, CObject &objet2, CWorld &terrain);
+	bool tour(CMonster &monstre, CObject &objet1, CObject &objet2, CWorld &terrain);
 };
 
 #endif
