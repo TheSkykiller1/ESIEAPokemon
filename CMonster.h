@@ -11,29 +11,27 @@
 class CMonster
 {
 protected:
-	int m_id;
-	std::string m_type;
-	std::string m_nom;
-	int m_HP;
-	int m_HP_act;
-	int m_vitesse;
-	int m_vitesse_act;
-	int m_attaque;
-	int m_attaque_act;
-	//std::vector<CAttaque> m_attaques;
-	int m_defense;
-	int m_defense_act;
-	int m_etat;
-	int m_etat_tours;
-	std::vector<std::string> m_force;
-	//std::vector<CAttaque*> m_CS;
-	bool m_cache;
+	int m_id; //id du monstre
+	std::string m_type; //type du monstre
+	std::string m_nom; //nom du monstre
+	int m_HP; //points de vie totaux du monstre
+	int m_HP_act; //points de vie actuels du monstre
+	int m_vitesse; //vitesse total du monstre
+	int m_vitesse_act; //vitesse actuelle du monstre
+	int m_attaque; //attaque du monstre
+	int m_attaque_act; //attaque actuelle du monstre
+	int m_defense; //defense totale du monstre
+	int m_defense_act; //defense actuelle du monstre
+	int m_etat; //etat ddu monstre
+	int m_etat_tours; //nombre de tours dans un état non normal
+	std::vector<std::string> m_force; //liste des types de monstres étant des cibles plus faciles
+	bool m_cache; //etat du cachage des monstres Rock
 
-	std::vector<std::string> m_nom_attaque;
-	std::vector<std::string> m_type_attaque;
-	std::vector<int> m_nu;
-	std::vector<int> m_pAttaques;
-	std::vector<float> m_pEchec;
+	std::vector<std::string> m_nom_attaque; //vecteur des noms d'attaque
+	std::vector<std::string> m_type_attaque; //vecteur des types d'attaque
+	std::vector<int> m_nu; //vecteur des nombres d'utilisations restantes
+	std::vector<int> m_pAttaques; //vecteur des puissances d'attaques
+	std::vector<float> m_pEchec; //vecteur des probabilités d'echecs
 public:
 	CMonster();
 	CMonster(int id, std::string type, std::string nom, int HP, int vit, int att, int def);
@@ -53,7 +51,6 @@ public:
 	int getEtat();
 	int getEtatTours();
 	std::vector<std::string> getForce();
-	//std::vector<CAttaque> getCS();
 	bool getCache();
 	std::vector<std::string> getNAttaques();
 	std::vector<std::string> getTAttaques();
@@ -76,15 +73,15 @@ public:
 	void setEtatTours(int tours);
 	void setCache(bool cache);
 	
-	int updateEtat();
-	virtual bool attaquer(int num_att, CMonster* cible);
-	int degat(int num_att, CMonster* def);
-	bool echec(int num_att);
-	bool init_combat(CMonster &monstre1, CMonster &monstre2);
-	bool analyse_speed(CMonster &monstre1, CMonster &monster2);
-	bool tour(CMonster* monstre, CTerrain* terrain);
-	void useObject(CObject* objet);
-	void recevoirDegat(int degat);
+	int updateEtat(); //mise à jour des états des monstres (à chaque tour)
+	virtual bool attaquer(int num_att, CMonster* cible); //attaque d'un monstre vers un autre avec une attaque determinée
+	int degat(int num_att, CMonster* def); //calcul des dégâts d'une attaque
+	bool echec(int num_att); //booléen de test de l'echec de l'attaque
+	bool init_combat(CMonster &monstre1, CMonster &monstre2); //vérification de l'état initial des monstres
+	bool analyse_speed(CMonster &monstre1, CMonster &monster2); //détermination de l'ordre d'attaque
+	bool tour(CMonster* monstre, CTerrain* terrain); //demande de l'attaque et exécution de cette dernière
+	void useObject(CObject* objet); //utilisation des objets
+	void recevoirDegat(int degat); //reception des dégâts
 };
 
 #endif

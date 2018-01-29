@@ -7,9 +7,9 @@
 class CObject
 {
 protected:
-	int m_id;
-	std::string m_nom;
-	std::string m_type;
+	int m_id; //id de l'objet
+	std::string m_nom; //nom de l'objet
+	std::string m_type; //type de monstre autorisé
 public:
 	CObject();
 	CObject(int id, std::string nom, std::string type);

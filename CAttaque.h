@@ -7,8 +7,8 @@
 class CAttaque
 {
 protected:
-	std::string m_nom;
-	std::string m_type;
+	std::string m_nom; //nom de l'attaque
+	std::string m_type; //type de l'attaque
 	int m_nu; //nombre d'utilisation de l'attaque
 	int m_pAttaque; //puissance d'attaque
 	float m_pEchec; //probabilité d'échec

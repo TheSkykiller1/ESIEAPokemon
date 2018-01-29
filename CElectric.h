@@ -6,10 +6,10 @@
 class CElectric:public CMonster
 {
 protected:
-	std::vector<std::string> m_force = { "Water" };
-	float m_paralysis;
+	std::vector<std::string> m_force = { "Water" }; //vecteur des types de victimes à privilégier
+	float m_paralysis; //probabilité de se faire paralyser
 
-	bool paralyze();
+	bool paralyze(); //booléen de test paralysie
 
 public:
 	CElectric();
