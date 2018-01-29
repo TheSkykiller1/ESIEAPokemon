@@ -5,7 +5,7 @@ CPotion::CPotion()
 	CObject();
 }
 
-CPotion::CPotion(int id, std::string nom, std::vector<std::string> type, int vit, int att, int def, int HP)
+CPotion::CPotion(int id, std::string nom, std::string type, int vit, int att, int def, int HP)
 {
 	CObject(id, nom, type);
 	m_vit = vit;

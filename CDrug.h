@@ -9,7 +9,7 @@ protected:
 	int m_etat;
 public:
 	CDrug();
-	CDrug(int id, std::string nom, std::vector<std::string> type,int etat);
+	CDrug(int id, std::string nom, std::string type,int etat);
 	~CDrug();
 
 	int getEtat();

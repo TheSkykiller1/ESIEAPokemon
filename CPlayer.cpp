@@ -152,9 +152,12 @@ void CPlayer::use_object()
 	{
 		if (nb_objects[i] > 0)
 		{
-			std::cout << "\t -" << objects[i].getNom() << " utilisation: " << objects[i].getType() << "\n";
+			std::cout << "\t -"<<i<<") " << objects[i].getNom() << " utilisation: " << objects[i].getType() << "\n";
 		}
 	}
+	int choix;
+	std::cin >> choix;
+	
 }
 
 void CPlayer::attaquer() 
@@ -171,7 +174,37 @@ void CPlayer::attaquer()
 	}
 	else if(choix==2)
 	{
-		Pokeballs[id_actif].tour(&s_target->Pokeballs[s_target->id_pokemon_actif()], s_cases);
+		std::string type = Pokeballs[id_actif].getType();
+		if (type == "Fire")
+		{
+			CFire& mob = dynamic_cast<CFire&>(Pokeballs[id_actif]);
+			mob.tour(&s_target->Pokeballs[s_target->id_pokemon_actif()], s_cases);
+		}
+		else if (type == "Rock")
+		{
+			CRock& mob = dynamic_cast<CRock&>(Pokeballs[id_actif]);
+			mob.tour(&s_target->Pokeballs[s_target->id_pokemon_actif()], s_cases);
+		}
+		else if (type == "Water") 
+		{
+			CWater& mob = dynamic_cast<CWater&>(Pokeballs[id_actif]);
+			mob.tour(&s_target->Pokeballs[s_target->id_pokemon_actif()], s_cases);
+		}
+		else if (type == "Plant")
+		{
+			CPlant& mob = dynamic_cast<CPlant&>(Pokeballs[id_actif]);
+			mob.tour(&s_target->Pokeballs[s_target->id_pokemon_actif()], s_cases);
+		}
+		else if (type == "Insect")
+		{
+			CInsect& mob = dynamic_cast<CInsect&>(Pokeballs[id_actif]);
+			mob.tour(&s_target->Pokeballs[s_target->id_pokemon_actif()], s_cases);
+		}
+		else if (type == "Electric")
+		{
+			CElectric& mob = dynamic_cast<CElectric&>(Pokeballs[id_actif]);
+			mob.tour(&s_target->Pokeballs[s_target->id_pokemon_actif()], s_cases);
+		}
 	}
 }
 
