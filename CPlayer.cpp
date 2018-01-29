@@ -152,9 +152,12 @@ void CPlayer::use_object()
 	{
 		if (nb_objects[i] > 0)
 		{
-			std::cout << "\t -" << objects[i].getNom() << " utilisation: " << objects[i].getType() << "\n";
+			std::cout << "\t -"<<i<<") " << objects[i].getNom() << " utilisation: " << objects[i].getType() << "\n";
 		}
 	}
+	int choix;
+	std::cin >> choix;
+	
 }
 
 void CPlayer::attaquer() 
