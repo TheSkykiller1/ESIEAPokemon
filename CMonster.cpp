@@ -391,11 +391,16 @@ bool CMonster::tour(CMonster* monstre, CTerrain* terrain)
 	return 0;
 }
 
-void CMonster::useObject(CObject &objet)
+void CMonster::useObject(CObject* objet)
 {
-	this->setAttaqueAct(this->getAttaqueAct() + objet.getAtt());
-	this->setDefenseAct(this->getDefenseAct() + objet.getDef());
-	this->setHPAct(this->getHPAct() + objet.getHP());
-	this->setVitesseAct(this->getVitesseAct() + objet.getVit());
-	this->setEtat(objet.getEtat());
+	this->setAttaqueAct(this->getAttaqueAct() + objet->getAtt());
+	this->setDefenseAct(this->getDefenseAct() + objet->getDef());
+	this->setHPAct(this->getHPAct() + objet->getHP());
+	this->setVitesseAct(this->getVitesseAct() + objet->getVit());
+	this->setEtat(objet->getEtat());
+}
+
+void CMonster::recevoirDegat(int degat)
+{
+	this->setHPAct(this->getHPAct() - degat);
 }

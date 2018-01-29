@@ -83,7 +83,8 @@ public:
 	bool init_combat(CMonster &monstre1, CMonster &monstre2);
 	bool analyse_speed(CMonster &monstre1, CMonster &monster2);
 	bool tour(CMonster* monstre, CTerrain* terrain);
-	void useObject(CObject &objet);
+	void useObject(CObject* objet);
+	void recevoirDegat(int degat);
 };
 
 #endif
