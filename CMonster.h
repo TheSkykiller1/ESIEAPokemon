@@ -2,6 +2,7 @@
 #define _CMONSTER_H_
 #include <iostream>
 #include <vector>
+#include <string>
 
 #include "CAttaque.h"
 #include "CObject.h"
