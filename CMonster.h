@@ -2,6 +2,8 @@
 #define _CMONSTER_H_
 
 #include "CAttaque.h"
+#include "CObject.h"
+#include "CWorld.h"
 
 #include <iostream>
 #include <vector>
@@ -73,6 +75,9 @@ public:
 	virtual bool attaquer(int num_att, CMonster &cible);
 	int degat(int num_att, CMonster &def);
 	bool echec(int num_att);
+	bool init_combat(CMonster &monstre1, CMonster &monstre2);
+	bool analyse_speed(CMonster &monstre1, CMonster &monster2);
+	bool tour(CMonster &monstre1, CMonster &monstre2, int num_att1, int num_att2, CObject &objet1, CObject &objet2, CWorld &terrain);
 };
 
 #endif
