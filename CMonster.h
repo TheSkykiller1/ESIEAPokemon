@@ -3,7 +3,6 @@
 
 #include "CAttaque.h"
 #include "CObject.h"
-#include "CWorld.h"
 
 #include <iostream>
 #include <vector>

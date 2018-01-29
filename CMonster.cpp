@@ -326,13 +326,13 @@ bool CMonster::analyse_speed(CMonster &monstre1, CMonster &monstre2)
 
 bool CMonster::tour(CMonster &monstre, CObject &objet1, CObject &objet2/*, CWorld &terrain*/)
 {
-	std::cout << m_nom << " :\n";
+	std::cout << m_nom, " :\n";
 	std::cout << "Choix de l'attaque :\n";
 	std::cout << "0) Coup de griffe\n";
-	std::cout << "1) " << m_nom_attaque[0] << "\n";
-	std::cout << "2) " << m_nom_attaque[1] << "\n";
-	std::cout << "3) " << m_nom_attaque[2] << "\n";
-	std::cout << "4) " << m_nom_attaque[3] << "\n";
+	std::cout << "1) ",m_nom_attaque[0],"\n";
+	std::cout << "2) ",m_nom_attaque[1],"\n";
+	std::cout << "3) ",m_nom_attaque[2],"\n";
+	std::cout << "4) ",m_nom_attaque[3],"\n";
 	int num_att1 = 0;
 	int num_att2 = 1;
 	if (init_combat(*this, monstre))
