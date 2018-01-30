@@ -64,14 +64,28 @@ void jeux()
 			system("CLS");
 			std::cout << "\t\tChoix des pokemons pour le joueur " << i + 1 << " " << name << " position X: " << posX << " Y:" << posY << "\n\n\n";
 			//Affichage de toutes les statistiques de chaque pokemon
-
+			int s_max = 0;
+			for (int i = 0; i < Monde.ListeTerrain.size(); i++)
+			{
+				if (Monde.ListeTerrain[i].Title().size() > s_max)
+				{
+					s_max = Monde.ListeTerrain[i].Title().size();
+				}
+			}
 			for (int i2 = 0; i2 < Monde.ListePokemon.size(); i2++)
 			{
 				int att = rand() % (Monde.ListePokemon[i2].ATT_max - Monde.ListePokemon[i2].ATT_min) + Monde.ListePokemon[i2].ATT_min;
 				int def = rand() % (Monde.ListePokemon[i2].DEF_max - Monde.ListePokemon[i2].DEF_min) + Monde.ListePokemon[i2].DEF_min;
 				int vit = rand() % (Monde.ListePokemon[i2].VIT_max - Monde.ListePokemon[i2].VIT_min) + Monde.ListePokemon[i2].VIT_min;
 				int HP = rand() % (Monde.ListePokemon[i2].HP_max - Monde.ListePokemon[i2].HP_min) + Monde.ListePokemon[i2].HP_min;
-				std::cout << "\t -" << i2 << ")" << Monde.ListePokemon[i2].name << " \t\t| Att: " << att << " \t| Def: " << def << " \t| Vit : " << vit << " \t| HP  :" << HP << "\n";
+				std::cout << "\t -" << i2 << ")" << Monde.ListePokemon[i2].name;
+				int i = Monde.ListePokemon[i2].name.size();
+				while (i < s_max)
+				{
+					std::cout << " ";
+					i++;
+				}
+				std::cout << " \t\t| Att: " << att << " \t| Def: " << def << " \t| Vit : " << vit << " \t| HP  :" << HP << "\n";
 			}
 			std::cout << "\nChoix des monstres : " << nb << "/3\n";
 			std::cout << "Sélectionner le nom du monstre voulu : \t";
