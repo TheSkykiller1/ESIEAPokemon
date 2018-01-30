@@ -18,7 +18,7 @@ object
 	Name	Potion d'attaque
 	Id	3
 	Genre	Potion
-	Speed	25
+	Attack	25
 	Type	Fire	Rock	Electric	Water	Plant	Insect
 Endobject
 
@@ -35,6 +35,6 @@ object
 	Name	Saut d'eau (reveil)
 	Id	5
 	Genre	Drug
-	State	paralysis 0
+	State	Normal
 	Type	Electric	Fire	Water
 Endobject

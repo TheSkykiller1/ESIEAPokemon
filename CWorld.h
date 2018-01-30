@@ -41,7 +41,7 @@ public:
 	//config
 	std::vector<TypePokemon> ListePokemon;//utiliser pour créer des pokemons pour les joueurs
 	std::vector<CTerrain> ListeTerrain;
-
+	std::vector<CObject> ListeObject;
 	CWorld();
 	~CWorld();
 	

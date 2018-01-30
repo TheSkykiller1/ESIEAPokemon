@@ -16,11 +16,15 @@
 #include "CElectric.h"
 #include "CPlant.h"
 #include "CInsect.h"
-//#include "CObject.h"
+#include "CObject.h"
+#include "CPotion.h"
+#include "CDrug.h"
+
 class CPlayer
 {
 protected:
 	int id_pokemon = 0;
+	static int s_id;
 	std::string s_pseudo;
 	short s_level;
 	int s_exp;//exp du level
@@ -31,13 +35,14 @@ protected:
 	int maxobjects = 5;
 	int s_posx;
 	int s_posy;
-	int id_actif = 0;
+	
 	CPlayer* s_target; //Pointer of the target player (Given by GameManager)
 	CTerrain* s_cases; //Pointer of the cases where is the player (Given by CWorld)
 	//CWorld* s_world; // Pointer of the world (Given by CWorld) Warning Only for view data (Can destroy itself with it ! recurvise targeter)
 	void level_refresh(); //refresh player level
 
 public:
+	int id();
 	void read_level_requirement();//read level and xp needed from config
 	CPlayer();
 	CPlayer(std::string name, int posX, int posY, int fight_count = 0, int fight_win = 0, short level=0, int xp = 0);
@@ -52,7 +57,9 @@ public:
 	///temp
 
 	void use_object();
-
+	int winreward = 50;
+	int loosereward = 25;
+	int id_actif = 0;
 
 	//getter
 	std::string pseudo();
@@ -89,10 +96,10 @@ public:
 	void attaquer();
 	bool check();//false: perdu, true: encore des pokemon en vie;
 	
+	void match_reset();
 
 
-
-
+	void move(int X, int Y);
 	void move(int X, int Y, CTerrain* terrain, CPlayer* cible); //cible = NULL if no enemy on same cases
 
 	 //Utile pour split les chaines de string avec un delimiter

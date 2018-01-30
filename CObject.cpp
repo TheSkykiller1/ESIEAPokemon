@@ -5,10 +5,11 @@ CObject::CObject()
 
 }
 
-CObject::CObject(int id, std::string nom, std::vector<std::string> type)
+CObject::CObject(int id,std::string genre, std::string nom, std::vector<std::string> type)
 {
 	m_id = id;
 	m_nom = nom;
+	m_genre = genre;
 	m_type = type;
 }
 
@@ -27,6 +28,10 @@ int CObject::getId()
 std::string CObject::getNom()
 {
 	return m_nom;
+}
+std::string CObject::getGenre()
+{
+	return m_genre;
 }
 
 std::vector<std::string> CObject::getType()
@@ -54,9 +59,9 @@ int CObject::getHP()
 	return 0;
 }
 
-int CObject::getEtat()
+std::string CObject::getEtat()
 {
-	return 0;
+	return "";
 }
 
 //SETTERS
@@ -69,6 +74,10 @@ void CObject::setId(int id)
 void CObject::setNom(std::string nom)
 {
 	m_nom = nom;
+}
+void CObject::setGenre(std::string genre)
+{
+	m_genre = genre;
 }
 
 void CObject::setType(std::vector<std::string> type)

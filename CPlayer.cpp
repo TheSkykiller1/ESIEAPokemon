@@ -8,18 +8,22 @@ void CPlayer::level_refresh()
 CPlayer::CPlayer()
 {
 	s_pseudo = "NoName"; s_posx = 0; s_posy = 0; s_nb_fight = 0; s_nb_win = 0; s_level = 0; s_exp = 0;
+	s_id++;
 }
 CPlayer::CPlayer(std::string name, int posX, int posY, int fight_count, int fight_win, short level, int exp)
 {
 	s_pseudo = name; s_posx = posX; s_posy = posY; s_nb_fight = fight_count; s_nb_win = fight_win; s_level = level; s_exp = exp;
+	s_id++;	
 }
 CPlayer::CPlayer(std::string name, int posX, int posY, std::vector<CMonster> Pokeball, int fight_count, int fight_win, short level, int exp)
 {
 	s_pseudo = name;  s_posx = posX; s_posy = posY; Pokeballs = Pokeball; s_nb_fight = fight_count; s_nb_win = fight_win; s_level = level; s_exp = exp;
+	s_id++;
 }
 CPlayer::~CPlayer() { Pokeballs.clear(); Liste_level.clear(); }
 
 //getter
+int CPlayer::id() { return s_id; }
 std::string CPlayer::pseudo() { return s_pseudo; }
 short CPlayer::level() { return s_level; }
 int CPlayer::xp() { return s_exp; }
@@ -139,7 +143,18 @@ void CPlayer::tableau_level()
 }
 void CPlayer::move(int X, int Y, CTerrain* terrain, CPlayer* cible) {
 	s_posx = X;s_posy = Y; s_cases = terrain; s_target = cible;}
+void CPlayer::move(int X, int Y) {
+	s_posx = X;s_posy = Y;
+}
 
+void CPlayer::match_reset()
+{
+	nb_objects = nb_objects_base;
+	for (int o = 0;o < Pokeballs.size();o++)
+	{
+		//Pokeballs[o].reset();
+	}
+}
 void CPlayer::set_target(CPlayer* cible) { s_target = cible; }
 void CPlayer::set_terrain(CTerrain* terrain) { s_cases = terrain; }
 
@@ -153,7 +168,20 @@ void CPlayer::use_object()
 		if (nb_objects[i] > 0)
 		{
 			std::cout << "\t -"<<i<<") " << objects[i].getNom() << " peut etre utiliser sur votre pokemon \n \t";
-			std::cout << "Statistiques: ";
+			std::cout << "Genre: ";
+			if (objects[i].getGenre() == "Potion") 
+			{ 
+				CPotion boisson = dynamic_cast<CPotion&>(objects[i]);
+				std::cout << boisson.getGenre() << "\n \t";
+				std::cout << "Statistiques: " << boisson.getAtt() << " Attack " << boisson.getDef() << " Def " << boisson.getHP() << " HP " << boisson.getVit() << " Speed \n";
+			}
+			if (objects[i].getGenre() == "Drug")
+			{
+				CDrug cailloux = dynamic_cast<CDrug&>(objects[i]);
+				std::cout << cailloux.getGenre() << "\n \t";
+				std::cout << "Statistiques: " << cailloux.getEtat() << " etat \n";
+			}
+	
 		}
 	}
 	int choix;

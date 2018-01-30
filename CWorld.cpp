@@ -63,7 +63,35 @@ void CWorld::add_player(CPlayer player)
 }
 void CWorld::move_player(int id, int x, int y)
 {
+	for (int i = 0;i < joueurs.size();i++)
+	{
+		if (((joueurs[i].positionX() == x) && (joueurs[i].positionY() == y)) && joueurs[i].id != joueurs[id].id)
+		{
+			joueurs[id].move(x, y, &cases[x][y],&joueurs[i]);
+			joueurs[id].match_reset();
+			joueurs[i].match_reset();
+			while ((joueurs[id].check() != false) || (joueurs[i].check() != false))
+			{
 
+			}
+			if (joueurs[id].check() == false) 
+			{ 
+				joueurs[i].match_fini(true, joueurs[i].winreward);
+				joueurs[id].match_fini(false, joueurs[id].loosereward); 
+			}
+
+			if (joueurs[i].check() == false) 
+			{ 
+				joueurs[id].match_fini(true, joueurs[id].winreward); 
+				joueurs[i].match_fini(false, joueurs[i].loosereward); 
+			}
+			break;
+		}
+		else
+		{
+			joueurs[id].move(x, y);
+		}
+	}
 }
 int CWorld::connected_player() { return (joueurs.size() - 1); }
 
@@ -115,9 +143,10 @@ void CWorld::read_config_object()
 		{
 			if (row == "object")//Debut du bloc
 			{	//Value only!
-				std::string name;
+				std::string name,genre,etat;
 				int id;
-				float water, rock, electric, fire, grass;
+				int attack, defense, hp, speed;
+				std::vector<std::string> type;
 
 				while (row != "Endobject")//Tant que l'on est dans le bloc
 				{
@@ -136,29 +165,47 @@ void CWorld::read_config_object()
 					{
 						id = stoi(element[1]);
 					}
-					else if (element[0] == "Water")
+					else if (element[0] == "Genre")
 					{
-						water = stof(element[1]);
+						genre = element[1];
 					}
-					else if (element[0] == "Rock")
+					else if (element[0] == "Type")
 					{
-						rock = stof(element[1]);
+						for (int b = 1;b < element.size();b++)
+						{
+							type.push_back(element[b]);
+						}
 					}
-					else if (element[0] == "Electric")
+					else if (element[0] == "Heal")
 					{
-						electric = stof(element[1]);
+						hp = stoi(element[1]);
 					}
-					else if (element[0] == "Fire")
+					else if (element[0] == "Speed")
 					{
-						fire = stof(element[1]);
+						speed = stoi(element[1]);
 					}
-					else if (element[0] == "Grass")
+					else if (element[0] == "Attack")
 					{
-						grass = stof(element[1]);
+						attack = stoi(element[1]);
+					}
+					else if (element[0] == "Defense")
+					{
+						defense = stoi(element[1]);
+					}
+					else if (element[0] == "State")
+					{
+						etat = element[1];
 					}
 				}
-				CTerrain terrain(name, id, fire, electric, water, rock, grass);
-				ListeTerrain.push_back(terrain);
+				if (genre == "Potion")
+				{
+					CPotion potion(id, genre, name, type, speed, attack, defense, hp);
+					ListeObject.push_back(potion);
+				}
+				if (genre == "Drug")
+				{
+					CDrug drug(id, genre, name, type, etat);
+				}
 			}
 		}
 		File.close();

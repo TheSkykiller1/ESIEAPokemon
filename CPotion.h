@@ -14,7 +14,7 @@ protected:
 	//
 public:
 	CPotion();
-	CPotion(int id, std::string nom, std::vector<std::string> type, int vit, int att, int def, int HP);
+	CPotion(int id,std::string genre, std::string nom, std::vector<std::string> type, int vit, int att, int def, int HP);
 	~CPotion();
 
 	int getVit();
