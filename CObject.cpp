@@ -5,7 +5,7 @@ CObject::CObject()
 
 }
 
-CObject::CObject(int id, std::string nom, std::string type)
+CObject::CObject(int id, std::string nom, std::vector<std::string> type)
 {
 	m_id = id;
 	m_nom = nom;
@@ -29,7 +29,7 @@ std::string CObject::getNom()
 	return m_nom;
 }
 
-std::string CObject::getType()
+std::vector<std::string> CObject::getType()
 {
 	return m_type;
 }
@@ -71,7 +71,7 @@ void CObject::setNom(std::string nom)
 	m_nom = nom;
 }
 
-void CObject::setType(std::string type)
+void CObject::setType(std::vector<std::string> type)
 {
 	m_type = type;
 }

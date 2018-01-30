@@ -1,0 +1,35 @@
+object
+	Name	Potion de soin
+	Id	1
+	Heal	100
+	Type	Fire	Rock	Electric	Water	Plant	Insect
+Endobject
+
+object
+	Name	Potion de vitesse
+	Id	1
+	Speed	25
+	Type	Fire	Electric	Water	Insect
+Endobject
+
+object
+	Name	Potion d'attaque
+	Id	1
+	Speed	25
+	Type	Fire	Rock	Electric	Water	Plant	Insect
+Endobject
+
+object
+	Name	Potion de protection
+	Id	1
+	Speed	25
+	Type	Plant	Insect
+Endobject
+
+
+object
+	Name	Saut d'eau (reveil)
+	Id	1
+	State	paralysis 0
+	Type	Electric	Fire	Water
+Endobject

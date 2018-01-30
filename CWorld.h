@@ -21,6 +21,7 @@ protected:
 	std::vector<std::string> split(const std::string &s, char delim);
 	void read_config_pokemon();
 	void read_config_terrain();
+	void read_config_object();
 	void debug_afficher_pokemon();
 	void debug_afficher_terrain();
 

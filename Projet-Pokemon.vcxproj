@@ -117,6 +117,7 @@
   <ItemGroup>
     <None Include="attacks.pkmn" />
     <None Include="monsters.pkmn" />
+    <None Include="object.pkmn" />
     <None Include="player.pkmn" />
     <None Include="terrain.pkmn" />
   </ItemGroup>
