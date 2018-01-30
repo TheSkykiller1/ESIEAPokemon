@@ -77,8 +77,8 @@ public:
 	virtual bool attaquer(int num_att, CMonster* cible); //attaque d'un monstre vers un autre avec une attaque determinée
 	int degat(int num_att, CMonster* def); //calcul des dégâts d'une attaque
 	bool echec(int num_att); //booléen de test de l'echec de l'attaque
-	bool init_combat(CMonster &monstre1, CMonster &monstre2); //vérification de l'état initial des monstres
-	bool analyse_speed(CMonster &monstre1, CMonster &monster2); //détermination de l'ordre d'attaque
+	bool init_combat(CMonster* monstre); //vérification de l'état initial des monstres
+	bool analyse_speed(CMonster* monster); //détermination de l'ordre d'attaque
 	bool tour(CMonster* monstre, CTerrain* terrain); //demande de l'attaque et exécution de cette dernière
 	void useObject(CObject* objet); //utilisation des objets
 	void recevoirDegat(int degat); //reception des dégâts

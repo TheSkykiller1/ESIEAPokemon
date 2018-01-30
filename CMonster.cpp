@@ -301,10 +301,10 @@ bool CMonster::echec(int num_att)
 	}
 }
 
-bool CMonster::init_combat(CMonster &monstre1, CMonster &monstre2)
+bool CMonster::init_combat(CMonster* monstre)
 {
-	int HP1 = monstre1.getHPAct();
-	int HP2 = monstre2.getHPAct();
+	int HP1 = this->getHPAct();
+	int HP2 = monstre->getHPAct();
 	if (HP1*HP2 == 0)
 	{
 		return 1;
@@ -312,9 +312,9 @@ bool CMonster::init_combat(CMonster &monstre1, CMonster &monstre2)
 	return 0;
 }
 
-bool CMonster::analyse_speed(CMonster &monstre1, CMonster &monstre2)
+bool CMonster::analyse_speed(CMonster* monstre)
 {
-	if (monstre1.getVitesseAct() < monstre2.getVitesseAct())
+	if (this->getVitesseAct() < monstre->getVitesseAct())
 	{
 		return 1;
 	}

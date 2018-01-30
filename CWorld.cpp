@@ -195,7 +195,10 @@ void CWorld::read_config_terrain()
 					}
 
 					//Analyse des resultats
-					if (element[0] == "Name") { name = element[1]; }
+					if (element[0] == "Name")
+					{
+						name = element[1];
+					}
 					else if (element[0] == "Id")
 					{
 						id = stoi(element[1]);
