@@ -1,5 +1,5 @@
 terrain
-	Name	Arene
+	Name	Arene 1
 	Id	1
 	Water	0.0
 	Rock	0.0
@@ -29,7 +29,7 @@ terrain
 Endterrain
 
 terrain
-	Name	Arene 3
+	Name	Arene 2
 	Id	4
 	Water	1.0
 	Rock	1.0
