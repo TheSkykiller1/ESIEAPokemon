@@ -152,7 +152,8 @@ void CPlayer::use_object()
 	{
 		if (nb_objects[i] > 0)
 		{
-			std::cout << "\t -"<<i<<") " << objects[i].getNom() << "\n";
+			std::cout << "\t -"<<i<<") " << objects[i].getNom() << " peut etre utiliser sur votre pokemon \n \t";
+			std::cout << "Statistiques: ";
 		}
 	}
 	int choix;
