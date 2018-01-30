@@ -74,6 +74,7 @@ public:
 	void setEtat(std::string etat);
 	void setEtatTours(int tours);
 	void setCache(bool cache);
+	void reset();
 	
 	std::string updateEtat(); //mise à jour des états des monstres (à chaque tour)
 	virtual bool attaquer(int num_att, CMonster* cible); //attaque d'un monstre vers un autre avec une attaque determinée

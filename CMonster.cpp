@@ -199,6 +199,17 @@ void CMonster::setCache(bool cache)
 	m_cache = cache;
 }
 
+void CMonster::reset()
+{
+	m_HP_act = m_HP;
+	m_vitesse_act = m_vitesse;
+	m_attaque_act = m_attaque;
+	m_defense_act = m_defense;
+	m_etat = "Normal";
+	m_etat_tours = 0;
+	m_cache = false;
+}
+
 //METHODES
 
 std::string CMonster::updateEtat() //todo etat a finir

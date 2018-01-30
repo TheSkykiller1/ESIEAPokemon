@@ -152,7 +152,7 @@ void CPlayer::match_reset()
 	nb_objects = nb_objects_base;
 	for (int o = 0;o < Pokeballs.size();o++)
 	{
-		//Pokeballs[o].reset();
+		Pokeballs[o].reset();
 	}
 }
 void CPlayer::set_target(CPlayer* cible) { s_target = cible; }
