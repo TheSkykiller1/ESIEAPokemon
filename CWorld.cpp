@@ -292,7 +292,7 @@
 		for (int i = 0;i < ListeTerrain.size();i++)
 		{
 			CTerrain terrain = ListeTerrain[i];
-			std::cout << " \t Terrain : " << terrain.id() << " nom: " << terrain.Title() << " type: " << "\n";
+			std::cout << " \t Terrain : " << terrain.id() << " nom: " << terrain.Title() << "\n";
 		}
 	}
 	void CWorld::afficher_objets()
@@ -301,7 +301,14 @@
 		for (int i = 0;i < ListeObject.size();i++)
 		{
 			CObject objets = ListeObject[i];
-			std::cout << " \t Terrain : " << objets.getId() << " nom: " << objets.getNom() << " type: " << objets.getGenre() << "\n";
+
+			std::cout << "\t -" << ListeObject[i].getId() << ") Nom : \"" << ListeObject[i].getNom() << "\"\t | Genre : \"" <<\
+				ListeObject[i].getGenre() << "\"\t | Attack : " << ListeObject[i].getAtt() << "\t | Defense : " <<\
+				ListeObject[i].getDef() << "\t | Vitesse : " << ListeObject[i].getVit() << "\t | HP : " <<\
+				ListeObject[i].getHP() << "\t | etat : " << ListeObject[i].getEtat() << "\n";
+
+
+			//std::cout << " \t Objet id: " << objets.getId() << " nom: \"" << objets.getNom() << "\" type: " << objets.getGenre() << "\n";
 		}
 	}
 	//---------Methodes--------------------------
