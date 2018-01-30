@@ -25,7 +25,6 @@
 
 	void CWorld::read_config_object()
 	{
-		int attack, defense, speed, hp;
 		std::string row;
 		std::ifstream File("object.pkmn", std::ios::in);
 		if (File.is_open())
@@ -50,12 +49,6 @@
 							if (token[i] != "") { element.push_back(token[i]); }
 						}
 
-						//Analyse des resultats
-						id = 0;
-						attack = 0;
-						defense = 0;
-						speed = 0;
-						hp = 0;
 						if (element[0] == "Name") { name = element[1]; }
 						else if (element[0] == "Id")
 						{
