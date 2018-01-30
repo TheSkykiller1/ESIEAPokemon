@@ -23,8 +23,8 @@
 class CPlayer
 {
 protected:
+	int id_player;
 	int id_pokemon = 0;
-	static int s_id;
 	std::string s_pseudo;
 	short s_level;
 	int s_exp;//exp du level
@@ -42,11 +42,11 @@ protected:
 	void level_refresh(); //refresh player level
 
 public:
-	int id();
+	int id_actif = 0;
 	void read_level_requirement();//read level and xp needed from config
 	CPlayer();
-	CPlayer(std::string name, int posX, int posY, int fight_count = 0, int fight_win = 0, short level=0, int xp = 0);
-	CPlayer(std::string name, int posX, int posY, std::vector<CMonster> Pokeball, int fight_count = 0, int fight_win = 0,short level=0, int xp = 0);
+	CPlayer(int id, std::string name, int posX, int posY, int fight_count = 0, int fight_win = 0, short level=0, int xp = 0);
+	CPlayer(int id, std::string name, int posX, int posY, std::vector<CMonster> Pokeball, int fight_count = 0, int fight_win = 0,short level=0, int xp = 0);
 	~CPlayer();
 	///temp
 	std::vector<int> Liste_level;
@@ -56,12 +56,9 @@ public:
 	std::vector<int> nb_objects;//utiliser pendant les combats pour savoir combien il reste d'utilisation des objets
 	///temp
 
-	void use_object();
-	int winreward = 50;
-	int loosereward = 25;
-	int id_actif = 0;
-
 	//getter
+	int get_id();
+	int id_pokemon_actif();
 	std::string pseudo();
 	short level();
 	int xp();
@@ -74,7 +71,7 @@ public:
 	CTerrain* type_terrain();
 	int positionX();
 	int positionY();
-	int id_pokemon_actif();
+	void use_object();
 
 	//setter
 	void set_pseudo(std::string pseudo);

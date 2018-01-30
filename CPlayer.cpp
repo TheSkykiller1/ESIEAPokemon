@@ -5,25 +5,23 @@ void CPlayer::level_refresh()
 
 }//Refresh stats of the player if level change
 
-CPlayer::CPlayer()
+CPlayer::CPlayer() //Ne pas utiliser!
 {
-	s_pseudo = "NoName"; s_posx = 0; s_posy = 0; s_nb_fight = 0; s_nb_win = 0; s_level = 0; s_exp = 0;
-	s_id++;
 }
-CPlayer::CPlayer(std::string name, int posX, int posY, int fight_count, int fight_win, short level, int exp)
+CPlayer::CPlayer(int id, std::string name, int posX, int posY, int fight_count, int fight_win, short level, int exp)
 {
 	s_pseudo = name; s_posx = posX; s_posy = posY; s_nb_fight = fight_count; s_nb_win = fight_win; s_level = level; s_exp = exp;
-	s_id++;	
+	id_player = id;
 }
-CPlayer::CPlayer(std::string name, int posX, int posY, std::vector<CMonster> Pokeball, int fight_count, int fight_win, short level, int exp)
+CPlayer::CPlayer(int id, std::string name, int posX, int posY, std::vector<CMonster> Pokeball, int fight_count, int fight_win, short level, int exp)
 {
 	s_pseudo = name;  s_posx = posX; s_posy = posY; Pokeballs = Pokeball; s_nb_fight = fight_count; s_nb_win = fight_win; s_level = level; s_exp = exp;
-	s_id++;
+	id_player = id;
 }
 CPlayer::~CPlayer() { Pokeballs.clear(); Liste_level.clear(); }
 
 //getter
-int CPlayer::id() { return s_id; }
+int CPlayer::get_id() { return id_player; }
 std::string CPlayer::pseudo() { return s_pseudo; }
 short CPlayer::level() { return s_level; }
 int CPlayer::xp() { return s_exp; }

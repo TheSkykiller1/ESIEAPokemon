@@ -65,27 +65,29 @@ void CWorld::move_player(int id, int x, int y)
 {
 	for (int i = 0;i < joueurs.size();i++)
 	{
-		if (((joueurs[i].positionX() == x) && (joueurs[i].positionY() == y)) && joueurs[i].id() != joueurs[id].id())
+		if (((joueurs[i].positionX() == x) && (joueurs[i].positionY() == y)) && joueurs[i].get_id() != joueurs[id].get_id())
 		{
 			joueurs[id].move(x, y, &cases[x][y],&joueurs[i]);
 			joueurs[id].match_reset();
 			joueurs[i].match_reset();
-			while ((joueurs[id].check() != false) || (joueurs[i].check() != false))
+			bool player_win = 0;
+			while (true)
 			{
-
+				joueurs[id].attaquer();//Joueur 1
+				if (joueurs[i].check() == false) //Si joueur 2 perd
+				{
+					joueurs[id].match_fini(true, 50);
+					joueurs[i].match_fini(false, 10);
+					break;
+				}
+				joueurs[i].attaquer(); //Joueur 2
+				if (joueurs[id].check() == false)//Si joueur 1 perd
+				{
+					joueurs[i].match_fini(true, 50);
+					joueurs[id].match_fini(false, 10);
+					break;
+				}
 			}
-			if (joueurs[id].check() == false) 
-			{ 
-				joueurs[i].match_fini(true, joueurs[i].winreward);
-				joueurs[id].match_fini(false, joueurs[id].loosereward); 
-			}
-
-			if (joueurs[i].check() == false) 
-			{ 
-				joueurs[id].match_fini(true, joueurs[id].winreward); 
-				joueurs[i].match_fini(false, joueurs[i].loosereward); 
-			}
-			break;
 		}
 		else
 		{
@@ -136,7 +138,6 @@ void CWorld::read_config_object()
 {
 	std::string row;
 	std::ifstream File("object.pkmn", std::ios::in);
-	srand(time(NULL));//Init random generator
 	if (File.is_open())
 	{
 		while (getline(File, row))
@@ -219,7 +220,6 @@ void CWorld::read_config_terrain()
 {
 	std::string row;
 	std::ifstream File("terrain.pkmn", std::ios::in);
-	srand(time(NULL));//Init random generator
 	if (File.is_open())
 	{
 		while (getline(File, row))
@@ -286,7 +286,6 @@ void CWorld::read_config_pokemon()
 {
 	std::string row;
 	std::ifstream File("monsters.pkmn", std::ios::in);
-	srand(time(NULL));//Init random generator
 	int id = 0;
 	if (File.is_open())
 	{

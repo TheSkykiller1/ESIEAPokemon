@@ -5,6 +5,7 @@
 
 int main()
 {
+	int id = 0;
 	CWorld Monde;
 	std::cout << "\t\t\t Bienvenue dans PokeLeague \n\
 Que voulez-vous faire : \n\
@@ -46,7 +47,7 @@ Que voulez-vous faire : \n\
 			std::cin >> posX;
 			std::cout << "Joueur " << i+1 << " " << name << " Y: ";
 			std::cin >> posY;
-			CPlayer joueur(name, posX, posY);
+			CPlayer joueur(id++,name, posX, posY);
 			Monde.add_player(joueur);
 			while (i1 <= 3)
 			{
