@@ -65,7 +65,7 @@ void CWorld::move_player(int id, int x, int y)
 {
 	for (int i = 0;i < joueurs.size();i++)
 	{
-		if (((joueurs[i].positionX() == x) && (joueurs[i].positionY() == y)) && joueurs[i].id != joueurs[id].id)
+		if (((joueurs[i].positionX() == x) && (joueurs[i].positionY() == y)) && joueurs[i].id() != joueurs[id].id())
 		{
 			joueurs[id].move(x, y, &cases[x][y],&joueurs[i]);
 			joueurs[id].match_reset();
