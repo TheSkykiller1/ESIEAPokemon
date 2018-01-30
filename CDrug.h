@@ -3,18 +3,20 @@
 
 #include "CObject.h"
 
+#include <iostream>
+
 class CDrug :public CObject
 {
 protected:
-	int m_etat;
+	std::string m_etat;
 public:
 	CDrug();
 	CDrug(int id, std::string nom, std::vector<std::string> type, int etat);
 	~CDrug();
 
-	int getEtat();
+	std::string getEtat();
 
-	void setEtat(int etat);
+	void setEtat(std::string etat);
 };
 
 #endif

@@ -22,7 +22,7 @@ public:
 	virtual int getAtt();
 	virtual int getDef();
 	virtual int getHP();
-	virtual int getEtat();
+	virtual std::string getEtat();
 
 	void setId(int id);
 	void setNom(std::string nom);

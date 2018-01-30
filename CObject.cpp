@@ -54,9 +54,9 @@ int CObject::getHP()
 	return 0;
 }
 
-int CObject::getEtat()
+std::string CObject::getEtat()
 {
-	return 0;
+	return "";
 }
 
 //SETTERS

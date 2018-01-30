@@ -16,12 +16,12 @@ CDrug::~CDrug()
 
 }
 
-int CDrug::getEtat()
+std::string CDrug::getEtat()
 {
 	return m_etat;
 }
 
-void CDrug::setEtat(int etat)
+void CDrug::setEtat(std::string etat)
 {
 	m_etat = etat;
 }

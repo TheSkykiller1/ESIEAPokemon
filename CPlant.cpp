@@ -47,7 +47,7 @@ bool CPlant::heal()
 
 bool CPlant::attaquer(int num_att, CMonster* cible)
 {
-	if (m_etat == 3) //paralysie
+	if (m_etat == "Paralyzed") //paralysie
 	{
 		if (rand() % 4 == 0) //proba de 25% de ne pas pouvoir attaquer
 		{
