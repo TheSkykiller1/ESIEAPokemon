@@ -1,6 +1,6 @@
 #include "CObject.h"
 
-CObject::CObject(){}
+CObject::CObject() { m_id = 88; }
 CObject::CObject(int id,std::string genre, std::string nom, std::vector<std::string> type)
 {
 	m_id = id;
