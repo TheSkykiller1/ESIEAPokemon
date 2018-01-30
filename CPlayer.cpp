@@ -112,7 +112,7 @@ void CPlayer::tableau_level()
 int CPlayer::id_pokemon_actif() { return id_actif; }
 void CPlayer::list_pokemon()
 {
-	int nb_Pokeball = Pokeballs.size();
+	size_t nb_Pokeball = Pokeballs.size();
 	if (nb_Pokeball < 1)
 	{
 		std::cout << "Vous n'avez pas de pokemon!\n";
@@ -315,7 +315,9 @@ bool CPlayer::check()
 {
 	if (Pokeballs[id_actif].getHPAct() <= 0)
 	{
-		id_actif++;if (id_actif == maxpokeballs) { id_actif--; return false; }
+		id_actif++;
+		if(id_actif == maxpokeballs) { id_actif=0; return false; }
+		else { return true; }
 	}
 	else
 	{
