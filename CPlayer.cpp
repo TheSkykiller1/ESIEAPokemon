@@ -157,7 +157,8 @@ void CPlayer::use_object()
 	}
 	int choix;
 	std::cin >> choix;
-	
+	Pokeballs[id_actif].useObject(&objects[choix]);
+	nb_objects[choix]--;
 }
 
 void CPlayer::attaquer() 
@@ -210,15 +211,14 @@ void CPlayer::attaquer()
 
 bool CPlayer::check()
 {
-	bool etat = false;
-	for (int i = 0;i < Pokeballs.size();i++)
+	if (Pokeballs[id_actif].getHPAct() <= 0)
 	{
-		if (Pokeballs[i].getHPAct() > 0)
-		{
-			etat= true;//toujours au moins 1 pokemon en vie
-		}
+		id_actif++;if (id_actif == maxpokeballs) { id_actif--; return false; }
 	}
-	return etat;
+	else
+	{
+		return true;//toujours au moins 1 pokemon en vie
+	}
 }
 
 
