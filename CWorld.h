@@ -65,8 +65,8 @@ public:
 
 	//---------Methodes discretes----
 
-	void debug_afficher_pokemon();
-	void debug_afficher_terrain();
+	void afficher_pokemon();
+	void afficher_terrain();
 
 	//---------Methodes--------------------------
 
@@ -80,12 +80,11 @@ public:
 
 	//---------Setters-----
 
-	void add_player(CPlayer player);//On ajoute le joueur au monde et on lui donne les pointeurs du monde (pour acceder au config et aux autres joueurs) //todo ameliorer cela
 	void set_dimension(int x, int y);
 	void generate_terrain();
-	void move_player(int id, int x, int y);
 
-	
+	void add_player(CPlayer player);
+	void move_player(int id, int x, int y);
 
 	///========================================================================
 };
