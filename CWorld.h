@@ -67,6 +67,7 @@ public:
 
 	void afficher_pokemon();
 	void afficher_terrain();
+	void afficher_objets();
 
 	//---------Methodes--------------------------
 

@@ -34,7 +34,7 @@
 				{	//Value only!
 					std::string name, genre, etat;
 					int id;
-					int attack, defense, hp, speed;
+					int attack=0, defense=0, hp=0, speed=0;
 					std::vector<std::string> type;
 
 					while (row != "Endobject")//Tant que l'on est dans le bloc
@@ -68,7 +68,9 @@
 							for (int b = 1;b < element.size();b++)
 							{
 								type.push_back(element[b]);
+								//std::cout << "TYPE : " << element[b] << " -" << b << ") \t";
 							}
+							std::cout << "\n";
 						}
 						else if (element[0] == "Heal")
 						{
@@ -91,14 +93,17 @@
 							etat = element[1];
 						}
 					}
+					//std::cout << "Info id: " << id << " genre:" << genre << " name:" << name << " speed:" << speed << " attack:" << attack << " defense:" << defense << " hp:" << hp << "\n";
 					if (genre == "Potion")
 					{
 						CPotion potion(id, genre, name, type, speed, attack, defense, hp);
+						//std::cout << "Potion id: " << potion.getId() << " genre:" << potion.getGenre() << " name:" << potion.getNom() << " speed:" << potion.getVit() << " attack:" << potion.getAtt() << " defense:" << potion.getDef() << " hp:" << potion.getHP() << "\n\n";
 						ListeObject.push_back(potion);
 					}
 					if (genre == "Drug")
 					{
 						CDrug drug(id, genre, name, type, etat);
+						ListeObject.push_back(drug);
 					}
 				}
 			}
@@ -268,7 +273,6 @@
 	{
 		read_config_pokemon();
 		read_config_terrain();
-		read_config_object();
 		afficher_pokemon();
 		afficher_terrain();
 	}
@@ -294,7 +298,15 @@
 			std::cout << " \t Terrain : " << terrain.id() << " nom: " << terrain.Title() << " type: " << "\n";
 		}
 	}
-
+	void CWorld::afficher_objets()
+	{
+		std::cout << "Tous les objets lu dans la config: \n";
+		for (int i = 0;i < ListeObject.size();i++)
+		{
+			CObject objets = ListeObject[i];
+			std::cout << " \t Terrain : " << objets.getId() << " nom: " << objets.getNom() << " type: " << objets.getGenre() << "\n";
+		}
+	}
 	//---------Methodes--------------------------
 
 	//---------Getters-----

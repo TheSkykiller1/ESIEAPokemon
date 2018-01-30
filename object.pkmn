@@ -26,7 +26,7 @@ object
 	Name	Potion de protection
 	Id	4
 	Genre	Potion
-	Speed	25
+	Defense	25
 	Type	Plant	Insect
 Endobject
 
