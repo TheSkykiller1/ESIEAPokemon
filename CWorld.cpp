@@ -273,10 +273,12 @@
 
 	CWorld::CWorld()//todo affichage par le menu non pas à la creation
 	{
+		read_config_object();
 		read_config_pokemon();
 		read_config_terrain();
 		afficher_pokemon();
 		afficher_terrain();
+		afficher_objets();
 	}
 	CWorld::~CWorld(){}
 
