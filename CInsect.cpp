@@ -32,7 +32,7 @@ bool CInsect::poison()
 
 bool CInsect::attaquer(int num_att, CMonster* cible)
 {
-	if (m_etat == 3) //paralysie
+	if (m_etat == "Paralyzed") //paralysie
 	{
 		if (rand() % 4 == 0) //proba de 25% de ne pas pouvoir attaquer
 		{
@@ -46,9 +46,9 @@ bool CInsect::attaquer(int num_att, CMonster* cible)
 		m_nu[num_att]--;
 		if (poison() && m_type_attaque[num_att] != "Normal")
 		{
-			if (cible->getEtat() == 0)
+			if (cible->getEtat() == "Normal")
 			{
-				cible->setEtat(2);
+				cible->setEtat("Poisonned");
 			}
 		}
 		return 0;

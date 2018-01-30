@@ -14,9 +14,8 @@ CMonster::CMonster(int id, std::string type, std::string nom, int HP, int vit, i
 	m_vitesse = vit;
 	m_attaque = att;
 	m_attaque_act = att;
-	//m_attaques = attaques;
 	m_defense = def;
-	m_etat = 0;
+	m_etat = "Normal";
 	m_etat_tours = 0;
 	m_cache = 0;
 }
@@ -83,7 +82,7 @@ int CMonster::getDefenseAct()
 	return m_defense_act;
 }
 
-int CMonster::getEtat()
+std::string CMonster::getEtat()
 {
 	return m_etat;
 }
@@ -185,7 +184,7 @@ void CMonster::setDefenseAct(int defense_act)
 	m_defense_act = defense_act;
 }
 
-void CMonster::setEtat(int etat)
+void CMonster::setEtat(std::string etat)
 {
 	m_etat = etat;
 }
@@ -202,10 +201,10 @@ void CMonster::setCache(bool cache)
 
 //METHODES
 
-int CMonster::updateEtat() //todo etat a finir
+std::string CMonster::updateEtat() //todo etat a finir
 {
-	short etat = getEtat();
-	if (etat == 1) //pokémon brulé
+	std::string etat = getEtat();
+	if (etat == "Burnt") //pokémon brulé
 	{
 		if (m_etat_tours < 3)
 		{
@@ -214,11 +213,11 @@ int CMonster::updateEtat() //todo etat a finir
 		}
 		else
 		{
-			etat = 0; //état normal
+			etat = "Normal"; //état normal
 			m_attaque_act = m_attaque;
 		}
 	}
-	if (etat == 2) //pokémon empoisonné
+	if (etat == "Poisonned") //pokémon empoisonné
 	{
 		if (m_etat_tours < 3)
 		{
@@ -226,14 +225,14 @@ int CMonster::updateEtat() //todo etat a finir
 		}
 		else
 		{
-			etat = 0;
+			etat = "Normal";
 		}
 	}
-	if (etat == 3) //pokémon paralysé
+	if (etat == "Paralyzed") //pokémon paralysé
 	{
 		if (rand() % 6 <= m_etat_tours)
 		{
-			etat = 0;
+			etat = "Normal";
 		}
 	}
 	return etat;//todo a modifier temporaire
@@ -301,10 +300,10 @@ bool CMonster::echec(int num_att)
 	}
 }
 
-bool CMonster::init_combat(CMonster &monstre1, CMonster &monstre2)
+bool CMonster::init_combat(CMonster* monstre)
 {
-	int HP1 = monstre1.getHPAct();
-	int HP2 = monstre2.getHPAct();
+	int HP1 = this->getHPAct();
+	int HP2 = monstre->getHPAct();
 	if (HP1*HP2 == 0)
 	{
 		return 1;
@@ -312,9 +311,9 @@ bool CMonster::init_combat(CMonster &monstre1, CMonster &monstre2)
 	return 0;
 }
 
-bool CMonster::analyse_speed(CMonster &monstre1, CMonster &monstre2)
+bool CMonster::analyse_speed(CMonster* monstre)
 {
-	if (monstre1.getVitesseAct() < monstre2.getVitesseAct())
+	if (this->getVitesseAct() < monstre->getVitesseAct())
 	{
 		return 1;
 	}

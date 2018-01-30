@@ -8,6 +8,8 @@
 #include "CObject.h"
 #include "CTerrain.h"
 
+#include <iostream>
+
 class CMonster
 {
 protected:
@@ -22,7 +24,7 @@ protected:
 	int m_attaque_act; //attaque actuelle du monstre
 	int m_defense; //defense totale du monstre
 	int m_defense_act; //defense actuelle du monstre
-	int m_etat; //etat ddu monstre
+	std::string m_etat; //etat du monstre
 	int m_etat_tours; //nombre de tours dans un état non normal
 	std::vector<std::string> m_force; //liste des types de monstres étant des cibles plus faciles
 	bool m_cache; //etat du cachage des monstres Rock
@@ -48,7 +50,7 @@ public:
 	int getAttaqueAct();
 	int getDefense();
 	int getDefenseAct();
-	int getEtat();
+	std::string getEtat();
 	int getEtatTours();
 	std::vector<std::string> getForce();
 	bool getCache();
@@ -69,16 +71,16 @@ public:
 	void setAttaqueAct(int attaque_act);
 	void setDefense(int defense);
 	void setDefenseAct(int defense_act);
-	void setEtat(int etat);
+	void setEtat(std::string etat);
 	void setEtatTours(int tours);
 	void setCache(bool cache);
 	
-	int updateEtat(); //mise à jour des états des monstres (à chaque tour)
+	std::string updateEtat(); //mise à jour des états des monstres (à chaque tour)
 	virtual bool attaquer(int num_att, CMonster* cible); //attaque d'un monstre vers un autre avec une attaque determinée
 	int degat(int num_att, CMonster* def); //calcul des dégâts d'une attaque
 	bool echec(int num_att); //booléen de test de l'echec de l'attaque
-	bool init_combat(CMonster &monstre1, CMonster &monstre2); //vérification de l'état initial des monstres
-	bool analyse_speed(CMonster &monstre1, CMonster &monster2); //détermination de l'ordre d'attaque
+	bool init_combat(CMonster* monstre); //vérification de l'état initial des monstres
+	bool analyse_speed(CMonster* monster); //détermination de l'ordre d'attaque
 	bool tour(CMonster* monstre, CTerrain* terrain); //demande de l'attaque et exécution de cette dernière
 	void useObject(CObject* objet); //utilisation des objets
 	void recevoirDegat(int degat); //reception des dégâts

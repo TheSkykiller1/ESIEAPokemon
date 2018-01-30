@@ -11,15 +11,20 @@ Que voulez-vous faire : \n\
 \t 1) Lancer une partie \n\
 \t 2) Quitter\n";
 	int choix = 0;
+	int tailleX = -1, tailleY = -1;
+	int i = 1;
+	CMonster pokemon;
 	std::cin >> choix;
 	switch (choix) {
 	case 1:
 		system("CLS");
 		std::cout << "\t\t\t Creation du monde \n\
 \t Choisir la taille du monde: format:\"x y\" :\n";
-		int tailleX, tailleY;
-		std::cin >> tailleX;
-		std::cin >> tailleY;
+		while ((tailleX > 20) || (tailleX < 0) || (tailleY > 20) || (tailleY < 0))
+		{
+			std::cin >> tailleX;
+			std::cin >> tailleY;
+		}
 		std::cout << "Taille choisie: X: " << tailleX << " Y: " << tailleY << "\n";
 		Monde.set_dimension(tailleX, tailleY);
 		Monde.generate_terrain();
@@ -42,6 +47,28 @@ Que voulez-vous faire : \n\
 			CPlayer joueur(name, posX, posY);
 			Monde.add_player(joueur);
 			std::cout << "Joueur " << i << " " << name << " position X: " << posX << " Y:" << posY << "\n";
+			while (i <= 3)
+			{
+				std::cout << "Choix des monstres : " << i << "/3\n";
+				std::cout << "Sélectionner le nom du monstre voulu :\n";
+				std::string nom;
+				bool test = 0;
+				std::cin >> nom;
+				for (int j=0; j < Monde.ListePokemon.size(); j++)
+				{
+					if (Monde.ListePokemon[j].name == nom && test==0)
+					{
+						joueur.add_pokemon(pokemon);
+						test = 1;
+						i++;
+					}
+				}
+				if (test == 0)
+				{
+					std::cout << "Nom introuvable\n";
+				}
+				test = 0;
+			}
 		}
 		Monde.list_player();
 

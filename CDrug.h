@@ -3,6 +3,8 @@
 
 #include "CObject.h"
 
+#include <iostream>
+
 class CDrug :public CObject
 {
 protected:

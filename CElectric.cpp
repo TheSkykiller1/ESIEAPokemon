@@ -34,7 +34,7 @@ bool CElectric::paralyze()
 
 bool CElectric::attaquer(int num_att, CMonster* cible)
 {
-	if (m_etat == 3) //paralysie
+	if (m_etat == "Paralyzed") //paralysie
 	{
 		if (rand() % 4 == 0) //proba de 25% de ne pas pouvoir attaquer
 		{
@@ -48,9 +48,9 @@ bool CElectric::attaquer(int num_att, CMonster* cible)
 		m_nu[num_att]--;
 		if (paralyze() && m_type_attaque[num_att]!="Normal") //si l'ennemi doit être paralysé
 		{
-			if (cible->getEtat() == 0) //si l'ennemi est dans un etat normal
+			if (cible->getEtat() == "Normal") //si l'ennemi est dans un etat normal
 			{
-				cible->setEtat(3); //paralysie
+				cible->setEtat("Paralyzed"); //paralysie
 			}
 		}
 		return 0;
