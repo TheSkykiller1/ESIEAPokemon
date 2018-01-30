@@ -306,12 +306,27 @@
 	void CWorld::map_view_terrain()
 	{
 		std::cout << "\t\t\t Map: \n\n";
+		int s_max = 0;
+		for (int i = 0; i < this->ListeTerrain.size(); i++)
+		{
+			if (this->ListeTerrain[i].Title().size() > s_max)
+			{
+				s_max = this->ListeTerrain[i].Title().size();
+			}
+		}
 		for (int x = 0; x < dimensionX; x++)
 		{
-			std::cout << "\t";
+			std::cout << "\t|";
 			for (int y = 0; y < dimensionY; y++)
 			{
-				std::cout << cases[x][y].Title() << " | ";
+				std::cout << cases[x][y].Title();
+				int i = cases[x][y].Title().size();
+				while (i < s_max)
+				{
+					std::cout << " ";
+					i++;
+				}
+				std::cout << "|";
 			}
 			std::cout << std::endl;
 		}
