@@ -14,7 +14,6 @@ struct TypePokemon {
 };
 
 int nb_joueurs = 0;
-std::vector<CPlayer> Joueurs;
 
 std::vector<CMonster*> ListePokemon;
 std::vector<TypePokemon> ListeTypePokemon;
@@ -223,20 +222,51 @@ void afficher_objets()
 			objets->getHP() << "\t | etat : " << objets->getEtat() << "\n";
 	}
 }
-
+void afficher_objets_joueur(int id)
+{
+	std::cout << "Vos objets: \n";
+	for (int idn = 1;idn < Monde.Joueurs[id].nb_objects_base.size() + 1;idn++)
+	{
+		std::cout << "\tNom: " << Monde.Joueurs[id].objects_player[idn - 1]->getNom() << " Quantite: " << Monde.Joueurs[id].nb_objects_base[idn - 1] << "\n";
+	}
+}
 
 void jouer()
 {
 	system("cls");
-	std::cout << "Creation de deux joueurs:\n";
+	int dimX=-1, dimY=-1;
+	while ((dimX < 0) || (dimX > 20) || (dimY < 0) || (dimY > 20))
+	{
+		std::cout << "\t\t\tCreation du monde: ";
+		std::cout << "\tChoisir les dimensions: \nX:";
+		std::cin >> dimX;
+		std::cout << "Y:";
+		std::cin >> dimY;
+	}
+	Monde.set_dimension(dimX, dimY);
+	Monde.generate_terrain();
+	Monde.map_view_terrain();
+
+	std::cout << "\t\t\tCreation de deux joueurs:\n";
 	for (int i = 0; i < 2; i++)
 	{
 		std::cout << "Pseudo joueur " << i + 1 << ": ";
 		std::string pseudo;
 		std::cin >> pseudo;
-		CPlayer joueur(nb_joueurs++, pseudo);
+		int x = -1, y = -1;
+		while ((x < 0) || (x > dimX-1) || (y < 0) || (y > dimY-1))
+		{
+			std::cout << "\t Position du joueur: (A partir du haut a gauche [case 0/0] :\n";
+			std::cout << "X:";
+			std::cin >> x;
+			std::cout << "Y:";
+			std::cin >> y;
+		}
+		
+		CPlayer joueur(nb_joueurs++, pseudo,x,y);
 		joueur.set_object(ListeObject);
-		Joueurs.push_back(joueur);
+		Monde.Joueurs.push_back(joueur);
+		Monde.set_terrain_player(i, x, y); // pour donner le type de terrain au joueur (init seulement après par la commande move)
 	}
 	for (int i = 0; i < 2; i++)
 	{
@@ -277,7 +307,7 @@ void jouer()
 						poke = new CElectric(pokemon_choisi.id, pokemon_choisi.type, pokemon_choisi.name, hp, vit, att, def, pokemon_choisi.paralysis);
 						ListePokemon.push_back(poke);
 						int pos = std::find(ListePokemon.begin(), ListePokemon.end(), poke) - ListePokemon.begin();
-						Joueurs[i].add_pokemon(ListePokemon[pos]);
+						Monde.Joueurs[i].add_pokemon(ListePokemon[pos]);
 						std::cout << "Ajout d'un pokemon " << pokemon_choisi.type << "\n";
 					}
 					else if (pokemon_choisi.type == "Water")
@@ -286,7 +316,7 @@ void jouer()
 						poke = new CWater(pokemon_choisi.id, pokemon_choisi.type, pokemon_choisi.name, hp, vit, att, def);
 						ListePokemon.push_back(poke);
 						int pos = std::find(ListePokemon.begin(), ListePokemon.end(), poke) - ListePokemon.begin();
-						Joueurs[i].add_pokemon(ListePokemon[pos]);
+						Monde.Joueurs[i].add_pokemon(ListePokemon[pos]);
 						std::cout << "Ajout d'un pokemon " << pokemon_choisi.type << "\n";
 					}
 					else if (pokemon_choisi.type == "Rock")
@@ -295,7 +325,7 @@ void jouer()
 						poke = new CRock(pokemon_choisi.id, pokemon_choisi.type, pokemon_choisi.name, hp, vit, att, def);
 						ListePokemon.push_back(poke);
 						int pos = std::find(ListePokemon.begin(), ListePokemon.end(), poke) - ListePokemon.begin();
-						Joueurs[i].add_pokemon(ListePokemon[pos]);
+						Monde.Joueurs[i].add_pokemon(ListePokemon[pos]);
 						std::cout << "Ajout d'un pokemon " << pokemon_choisi.type << "\n";
 					}
 					else if (pokemon_choisi.type == "Fire")
@@ -304,7 +334,7 @@ void jouer()
 						poke = new CFire(pokemon_choisi.id, pokemon_choisi.type, pokemon_choisi.name, hp, vit, att, def);
 						ListePokemon.push_back(poke);
 						int pos = std::find(ListePokemon.begin(), ListePokemon.end(), poke) - ListePokemon.begin();
-						Joueurs[i].add_pokemon(ListePokemon[pos]);
+						Monde.Joueurs[i].add_pokemon(ListePokemon[pos]);
 						std::cout << "Ajout d'un pokemon " << pokemon_choisi.type << "\n";
 					}
 					else if (pokemon_choisi.type == "Insect")
@@ -313,7 +343,7 @@ void jouer()
 						poke = new CInsect(pokemon_choisi.id, pokemon_choisi.type, pokemon_choisi.name, hp, vit, att, def);
 						ListePokemon.push_back(poke);
 						int pos = std::find(ListePokemon.begin(), ListePokemon.end(), poke) - ListePokemon.begin();
-						Joueurs[i].add_pokemon(ListePokemon[pos]);
+						Monde.Joueurs[i].add_pokemon(ListePokemon[pos]);
 						std::cout << "Ajout d'un pokemon " << pokemon_choisi.type << "\n";
 					}
 					else if (pokemon_choisi.type == "Plant")
@@ -322,7 +352,7 @@ void jouer()
 						poke = new CPlant(pokemon_choisi.id, pokemon_choisi.type, pokemon_choisi.name, hp, vit, att, def);
 						ListePokemon.push_back(poke);
 						int pos = std::find(ListePokemon.begin(), ListePokemon.end(), poke) - ListePokemon.begin();
-						Joueurs[i].add_pokemon(ListePokemon[pos]);
+						Monde.Joueurs[i].add_pokemon(ListePokemon[pos]);
 					}
 					nbchoix++;
 					break;
@@ -330,7 +360,7 @@ void jouer()
 			}
 		}
 		std::cout << "Votre joueur possede : ";
-		Joueurs[i].list_pokemon();
+		Monde.Joueurs[i].list_pokemon();
 		system("pause");
 
 
@@ -343,180 +373,22 @@ void jouer()
 			std::cout << "Choix " << nbchoix + 1 << "/5 \n";
 			int choix;
 			std::cin >> choix;
-			Joueurs[i].set_nb_oject(choix, Joueurs[i].nb_objects_base[choix]++);
-			for (int u = 0;u < ListeObject.size();u++) //on recherche l'id
-			std::cout << "Ajout d'un objet " << Joueurs[i].objects_player[choix]->getNom() << " Quantite: " << Joueurs[i].nb_objects_base[choix] << "\n";
-			nbchoix++;
+			if (choix-1 < Monde.Joueurs[i].nb_objects_base.size())
+			{
+				int value = Monde.Joueurs[i].nb_objects_base[choix - 1];
+				Monde.Joueurs[i].set_nb_oject(choix - 1, ++value);
+				std::cout << "Ojet choisi : " << Monde.Joueurs[i].objects_player[choix - 1]->getNom() << " et la quantite: " << Monde.Joueurs[i].nb_objects_base[choix - 1] << "\n";
+				nbchoix++;
+			}
 		}
-
-		/*CObject* objet_choisi = ListeObject[u];
-					ListeObject.push_back(objet_choisi);
-					int pos = std::find(ListeObject.begin(), ListeObject.end(), objet_choisi) - ListeObject.begin();
-					Joueurs[i].objects_player.push_back(objet_choisi);*/
-
-		system("pause");
+		afficher_objets_joueur(i);
 		Monde.list_player();
 		system("pause");
 		//float flood, fall, paralysis, poison, burn, heal;
 	}
 
 }
-
-
-/*Fonction regroupant tout le jeu*/
-
-/*
-void jeux()
-{
-	//====================Etape 1: Creation du monde==========================
-
-	int tailleX, tailleY;
-	bool invalid = true;
-	while (invalid)
-	{
-		system("CLS");
-		std::cout << "\t\t\t Creation du monde \n\
-\t Choisir la taille du monde (max 20*20):\n X:";
-		std::cin >> tailleX;
-		std::cout << "Y:";
-		std::cin >> tailleY;
-		if ((tailleX > 0) && (tailleX <= 20) && (tailleY > 0) && (tailleY <= 20)) { invalid = false; }
-	}
-	std::cout << "Taille choisie: X: " << tailleX << " Y: " << tailleY << "\n";
-	CWorld Monde;
-	Monde.set_dimension(tailleX, tailleY);
-	Monde.generate_terrain();
-	Monde.map_view_terrain();
-
-	//====================Etape 2: Creation des joueurs==========================
-
-	int id = 0;
-	int nb_player = 0;
-	int nb = 0;
-	while (true)
-	{
-		std::cout << "\t\t\t Creation des personnages \n\
-\t Choisir le nombre de personnages (max:2) :";
-		std::cin >> nb_player;
-		if ((nb_player > 0) && (nb_player < 3)) { break; }
-	}
-
-	std::cout << "\n \t Veuillez renseigner les différents champs: \n";
-	for (int i = 0;i < nb_player;i++)
-	{
-		std::string name; int posX, posY;
-		std::cout << "Joueur " << i + 1 << " Nom: ";
-		std::cin >> name;
-		std::cout << "Joueur " << i + 1 << " " << name << " X: ";
-		std::cin >> posX;
-		std::cout << "Joueur " << i + 1 << " " << name << " Y: ";
-		std::cin >> posY;
-
-		CPlayer joueur(id++, name, posX, posY);
-		Monde.add_player(joueur);//On l'ajoute au monde
-		Monde.joueurs[i].set_terrain(&Monde.cases[posX][posY]);//On assigne le terrain de la case au joueur
-		std::cout << "Joueur " << i + 1 << " " << name << " X: " << posX << " Y: " << posY << " est sur le terrain: " << Monde.cases[posX][posY].Title() << "\n";
-		system("pause");
-
-		//====================Etape 3: Assignation de pokemon pour les joueurs==========================
-		while (nb < 3)
-		{
-			system("CLS");
-			std::cout << "\t\tChoix des pokemons pour le joueur " << i + 1 << " " << name << " position X: " << posX << " Y:" << posY << "\n\n\n";
-			//Affichage de toutes les statistiques de chaque pokemon
-			int s_max = 0;
-			for (int i = 0; i < Monde.ListeTerrain.size(); i++)
-			{
-				if (Monde.ListeTerrain[i].Title().size() > s_max)
-				{
-					s_max = Monde.ListeTerrain[i].Title().size();
-				}
-			}
-			for (int i2 = 0; i2 < Monde.ListePokemon.size(); i2++)
-			{
-				int att = rand() % (Monde.ListePokemon[i2].ATT_max - Monde.ListePokemon[i2].ATT_min) + Monde.ListePokemon[i2].ATT_min;
-				int def = rand() % (Monde.ListePokemon[i2].DEF_max - Monde.ListePokemon[i2].DEF_min) + Monde.ListePokemon[i2].DEF_min;
-				int vit = rand() % (Monde.ListePokemon[i2].VIT_max - Monde.ListePokemon[i2].VIT_min) + Monde.ListePokemon[i2].VIT_min;
-				int HP = rand() % (Monde.ListePokemon[i2].HP_max - Monde.ListePokemon[i2].HP_min) + Monde.ListePokemon[i2].HP_min;
-				std::cout << "\t -" << i2 << ")" << Monde.ListePokemon[i2].name;
-				int i = Monde.ListePokemon[i2].name.size();
-				while (i < s_max)
-				{
-					std::cout << " ";
-					i++;
-				}
-				std::cout << " \t\t| Att: " << att << " \t| Def: " << def << " \t| Vit : " << vit << " \t| HP  :" << HP << "\n";
-			}
-			std::cout << "\nChoix des monstres : " << nb+1 << "/3\n";
-			std::cout << "Sélectionner le nom du monstre voulu : \t";
-			std::string nom;
-			bool test = 0;
-			std::cin >> nom;
-			for (int j = 0; j < Monde.ListePokemon.size(); j++)
-			{
-				if (Monde.ListePokemon[j].name == nom && test == 0)
-				{
-					CMonster pokemon;
-					Monde.joueurs[i].add_pokemon(pokemon);
-					test = 1;
-					nb++;
-				}
-			}
-			if (test == 0)
-			{
-				std::cout << "Nom introuvable\n";
-				system("pause");
-			}
-			test = 0;
-		}
-		nb = 0;
-
-		//====================Etape 4: Assignation des objets pour les joueurs==========================
-
-		int object_nb = 0;
-		Monde.joueurs[i].set_object(Monde.ListeObject);//On donne au joueur la liste des objets
-		while (object_nb < 5)
-		{
-			system("cls");
-			std::cout << "Choix des objets :\n";
-			for (int i2 = 0; i2 < Monde.ListeObject.size(); i2++)
-			{
-				std::cout << "\t -" << Monde.ListeObject[i2].getId() << ") Nom : \"" << Monde.ListeObject[i2].getNom() << "\"\t | Genre : \"" << Monde.ListeObject[i2].getGenre() << "\"\t | Attack : " << Monde.ListeObject[i2].getAtt() << "\t | Defense : " << Monde.ListeObject[i2].getDef() << "\t | Vitesse : " << Monde.ListeObject[i2].getVit() << "\t | HP : " << Monde.ListeObject[i2].getHP() << "\n";
-			}
-			std::cout << "\nChoix des objets : " << object_nb << "/5\n";
-			std::cout << "Valeur du tableau des objets dans joueurs: " << Monde.joueurs[i].objects.size() << "\n";
-			std::cout << "Sélectionner l'id de l'objet voulu : \n";
-			int choix_id;
-			bool test = 0;
-			std::cin >> choix_id;
-			for (int j = 0; j < Monde.joueurs[i].objects.size();j++)
-			{
-				if ((Monde.joueurs[i].objects[j].getId() == choix_id) && (test == 0))
-				{
-					std::cout << "Monde objet id: " << Monde.joueurs[i].objects[j].getId() << " et l'id choisi est: " << choix_id << " Objet: " << object_nb << "\n";
-					test = 1;
-					object_nb++;
-					system("pause");
-				}
-				/*if ((Monde.joueurs[i].objects[j].getId() == choix_id) && (test == 0))
-				{
-				test = 1;
-				int obj = Monde.joueurs[i].nb_objects_base[j];
-				Monde.joueurs[i].set_nb_oject(j, obj++);
-				std::cout<<"Vous avez ajouter: "<< Monde.joueurs[i].objects[j].getNom()<<", le total de cet objet est de: "<< Monde.joueurs[i].nb_objects_base[j]<<"\n";
-				object_nb++;
-				system("pause");
-				}
-			}
-			if (test == 0)
-			{
-				std::cout << "Nom introuvable\n";
-				system("pause");
-			}
-			test = 0;
-		}
-	}
-}*/
+		
 
 int main()
 {
