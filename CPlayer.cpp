@@ -60,7 +60,7 @@ void CPlayer::match_reset()
 
 void CPlayer::set_object(std::vector<CObject*> listeobject)
 {
-	objects = listeobject;
+	objects_player = listeobject;
 	for (int i = 0;i < listeobject.size();i++)//init nb of object
 	{
 		nb_objects.push_back(0);
@@ -106,27 +106,28 @@ void CPlayer::attaquer()
 void CPlayer::use_object()
 {
 	std::cout << "Quel objet voulez-vous utiliser ? \n";
-	for (int i = 0; i < objects.size();i++)
+	for (int i = 0; i < objects_player.size();i++)
 	{
 		if (nb_objects[i] > 0)
 		{
-			std::cout << "\t -" << i << ") " << objects[i]->getNom() << " peut etre utiliser sur votre pokemon \n \t";
+			std::cout << "\t -" << i << ") " << objects_player[i]->getNom() << " peut etre utiliser sur votre pokemon \n \t";
 			std::cout << "Genre: ";
-			if (objects[i]->getGenre() == "Potion")
+			if (objects_player[i]->getGenre() == "Potion")
 			{
-				std::cout << objects[i]->getGenre() << "\n \t";
-				std::cout << "Statistiques: " << objects[i]->getAtt() << " Attack " << objects[i]->getDef() << " Def " << objects[i]->getHP() << " HP " << objects[i]->getVit() << " Speed \n";
+				std::cout << objects_player[i]->getGenre() << "\n \t";
+				std::cout << "Statistiques: " << objects_player[i]->getAtt() << " Attack " << objects_player[i]->getDef() <<\
+					" Def " << objects_player[i]->getHP() << " HP " << objects_player[i]->getVit() << " Speed \n";
 			}
-			if (objects[i]->getGenre() == "Drug")
+			if (objects_player[i]->getGenre() == "Drug")
 			{
-				std::cout << objects[i]->getGenre() << "\n \t";
-				std::cout << "Statistiques: " << objects[i]->getEtat() << " etat \n";
+				std::cout << objects_player[i]->getGenre() << "\n \t";
+				std::cout << "Statistiques: " << objects_player[i]->getEtat() << " etat \n";
 			}
 		}
 	}
 	int choix;
 	std::cin >> choix;
-	Pokeballs[id_actif]->useObject(objects[choix]);
+	Pokeballs[id_actif]->useObject(objects_player[choix]);
 	nb_objects[choix]--;
 }
 bool CPlayer::check()

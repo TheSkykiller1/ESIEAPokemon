@@ -192,8 +192,6 @@ void read_config_object()
 					CPotion *potion;
 					potion = new CPotion(id, genre, name, type, speed, attack, defense, hp);
 					ListeObject.push_back(potion);
-					int pos = std::find(ListeObject.begin(), ListeObject.end(), potion) - ListeObject.begin();
-					Monde.ListeObjets.push_back(ListeObject[pos]);
 					//std::cout << "Potion id: " << potion.getId() << " genre:" << potion.getGenre() << " name:" << potion.getNom() << " speed:" << potion.getVit() << " attack:" << potion.getAtt() << " defense:" << potion.getDef() << " hp:" << potion.getHP() << "\n\n";
 				}
 				if (genre == "Drug")
@@ -201,8 +199,6 @@ void read_config_object()
 					CDrug *drug;
 					drug = new CDrug(id, genre, name, type, etat);
 					ListeObject.push_back(drug);
-					int pos = std::find(ListeObject.begin(), ListeObject.end(), drug) - ListeObject.begin();
-					Monde.ListeObjets.push_back(ListeObject[pos]);
 				}
 			}
 		}
@@ -235,25 +231,29 @@ void jouer()
 	std::cout << "Creation de deux joueurs:\n";
 	for (int i = 0; i < 2; i++)
 	{
-		std::cout << "Speudo joueur " << i + 1 << ": ";
+		std::cout << "Pseudo joueur " << i + 1 << ": ";
 		std::string pseudo;
 		std::cin >> pseudo;
 		CPlayer joueur(nb_joueurs++, pseudo);
+		joueur.set_object(ListeObject);
 		Joueurs.push_back(joueur);
 	}
 	for (int i = 0; i < 2; i++)
 	{
 		system("cls");
-		std::cout << "Creation des pokemons pour chaque joueurs:\n";
+		std::cout << "\n\t\t\tCreation des pokemons pour chaque joueurs:\n";
 		for (int u = 0;u < ListeTypePokemon.size();u++)
 		{
 			TypePokemon pk = ListeTypePokemon[u];
-			std::cout << "\t-" << pk.id << ") " << pk.name << " type: " << pk.type << \
-				" HP (min/max): " << pk.HP_min << "/" << pk.HP_max << " Attack (min/max): " << pk.ATT_min << "/" << pk.ATT_max << \
-				" Defense (min/max): " << pk.DEF_min << "/" << pk.DEF_max << " Speed (min/max): " << pk.VIT_min << "/" << pk.VIT_max << \
-				"\n";
+			std::cout << "\n\n";
+			std::cout << "-" << pk.id << ") " << pk.name << " type: " << pk.type << std::endl;
+			std::cout << "\t\t| HP (min/max): " << pk.HP_min << "/" << pk.HP_max;
+			std::cout << "\t| Attack (min/max): " << pk.ATT_min << "/" << pk.ATT_max;
+			std::cout << "\t| Defense (min/max): " << pk.DEF_min << "/" << pk.DEF_max;
+			std::cout << "\t| Speed(min / max) : " << pk.VIT_min << " / " << pk.VIT_max;
+			std::cout << std::flush;
 		}
-		std::cout << "Choisir 3 pokemons (ID) \n";
+		std::cout << "\n Choisir 3 pokemons (ID) \n";
 		int nbchoix = 0;
 		while (nbchoix < 3)
 		{
@@ -331,9 +331,28 @@ void jouer()
 		}
 		std::cout << "Votre joueur possede : ";
 		Joueurs[i].list_pokemon();
-		std::cout << "Choisir vos objets: MAIN\n";
-		afficher_objets();
+		system("pause");
 
+
+		system("cls");
+		std::cout << "Choisir 5 objets (ID) \n";
+		afficher_objets();
+		nbchoix = 0;
+		while (nbchoix < 5)
+		{
+			std::cout << "Choix " << nbchoix + 1 << "/5 \n";
+			int choix;
+			std::cin >> choix;
+			Joueurs[i].set_nb_oject(choix, Joueurs[i].nb_objects_base[choix]++);
+			for (int u = 0;u < ListeObject.size();u++) //on recherche l'id
+			std::cout << "Ajout d'un objet " << Joueurs[i].objects_player[choix]->getNom() << " Quantite: " << Joueurs[i].nb_objects_base[choix] << "\n";
+			nbchoix++;
+		}
+
+		/*CObject* objet_choisi = ListeObject[u];
+					ListeObject.push_back(objet_choisi);
+					int pos = std::find(ListeObject.begin(), ListeObject.end(), objet_choisi) - ListeObject.begin();
+					Joueurs[i].objects_player.push_back(objet_choisi);*/
 
 		system("pause");
 		Monde.list_player();
@@ -503,8 +522,6 @@ int main()
 {
 	read_config_object();
 	read_config_pokemon();
-
-	Monde.set_liste_objet(ListeObject);
 
 	jouer();
 	system("pause");

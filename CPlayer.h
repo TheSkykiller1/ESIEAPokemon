@@ -58,7 +58,7 @@ public:
 
 	std::vector<CMonster*> Pokeballs;
 
-	std::vector<CObject*> objects;
+	std::vector<CObject*> objects_player;
 	std::vector<int> nb_objects_base;		//combien on a selectionner chaque objets
 	std::vector<int> nb_objects;			//combien il reste d'utilisation des objets
 

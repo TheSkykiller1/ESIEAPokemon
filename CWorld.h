@@ -41,8 +41,6 @@ public:
 
 	std::vector<CPlayer> Joueurs;
 
-	std::vector<CObject*> ListeObjets;
-
 	std::vector <std::vector <CTerrain> > cases;
 
 
@@ -57,8 +55,6 @@ public:
 	~CWorld();
 
 	//---------Methodes discretes----
-
-	void set_liste_objet(std::vector<CObject*> obj);
 
 	void afficher_terrain();
 

@@ -102,12 +102,6 @@
 		afficher_terrain();
 	}
 	CWorld::~CWorld(){}
-
-	//---------Methodes discretes----
-	void CWorld::set_liste_objet(std::vector<CObject*> obj)
-	{
-		ListeObjets = obj;
-	}
 	
 	//---------Methodes--------------------------
 
