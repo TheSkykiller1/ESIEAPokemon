@@ -1,10 +1,7 @@
-//COMMENTAIRE DE TEST
-
 #include <iostream>
 #include "CMonster.h"
 #include "CPlayer.h"
 #include "CWorld.h"
-
 /*Fonction regroupant tout le jeu*/
 void jeux()
 {
