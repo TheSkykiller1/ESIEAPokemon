@@ -90,6 +90,9 @@ public:
 	void recevoirDegat(int degat); //reception des dégâts
 	virtual void checkHP(CTerrain* terrain); //vérification des HP du monstre, pour exécution d'actions spécifiques
 	virtual bool verifTerrain(int num_att, CMonster* monstre, CTerrain* terrain); //vérification de l'état du terrain
+	void print(std::string type);
+	void printAttack(std::string type);
+	void printAllAttack();
 };
 
 #endif
