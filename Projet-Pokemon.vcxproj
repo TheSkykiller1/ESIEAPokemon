@@ -139,6 +139,7 @@
     <ClCompile Include="CWater.cpp" />
     <ClCompile Include="CWorld.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Source1.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CAttaque.h" />
