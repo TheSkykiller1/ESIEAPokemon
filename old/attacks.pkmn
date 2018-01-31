@@ -1,0 +1,175 @@
+Attack
+	Name	Eclair
+	Type	Electric
+	Power	40
+	NbUse	30
+	Fail	0.05
+EndAttack
+
+Attack
+	Name	Pistolet-a-O
+	Type	Water
+	Power	40
+	NbUse	30
+	Fail	0.05
+EndAttack
+
+Attack
+	Name	Flammeche
+	Type	Fire
+	Power	40
+	NbUse	25
+	Fail	0.05
+EndAttack
+
+Attack
+	Name	Jet-pierre
+	Type	Rock
+	Power	50
+	NbUse	15
+	Fail	0.10
+EndAttack
+
+Attack
+	Name	Fouet-lianes
+	Type	Grass
+	Power	45
+	NbUse	25
+	Fail	0.05
+EndAttack
+
+Attack
+	Name	Tonnerre
+	Type	Electric
+	Power	90
+	NbUse	15
+	Fail	0.15
+EndAttack
+
+Attack
+	Name	Fatal-Foudre
+	Type	Electric
+	Power	110
+	NbUse	10
+	Fail	0.30
+EndAttack
+
+Attack
+	Name	Lance-Flamme
+	Type	Fire
+	Power	90
+	NbUse	15
+	Fail	0.15
+EndAttack
+
+Attack
+	Name	Deflagration
+	Type	Fire
+	Power	110
+	NbUse	5
+	Fail	0.25
+EndAttack
+
+Attack
+	Name	Cascade
+	Type	Water
+	Power	80
+	NbUse	15
+	Fail	0.15
+EndAttack
+
+Attack
+	Name	Hydrocanon
+	Type	Water
+	Power	120
+	NbUse	5
+	Fail	0.20
+EndAttack
+
+Attack
+	Name	Tranch'herbe
+	Type	Grass
+	Power	75
+	NbUse	20
+	Fail	0.15
+EndAttack
+
+Attack
+	Name	LanceSoleil
+	Type	Grass
+	Power	120
+	NbUse	5
+	Fail	0.25
+EndAttack
+
+Attack
+	Name	Eboulement
+	Type	Rock
+	Power	75
+	NbUse	15
+	Fail	0.14
+EndAttack
+
+Attack
+	Name	Seisme
+	Type	Rock
+	Power	100
+	NbUse	10
+	Fail	0.18
+EndAttack
+
+Attack
+	Name	Charge
+	Type	Normal
+	Power	35
+	NbUse	30
+	Fail	0.02
+EndAttack
+
+Attack
+	Name	Griffe
+	Type	Normal
+	Power	40
+	NbUse	35
+	Fail	0.03
+EndAttack
+
+Attack
+	Name	Ultimapoing
+	Type	Normal
+	Power	75
+	NbUse	15
+	Fail	0.15
+EndAttack
+
+Attack
+	Name	Uppercut
+	Type	Normal
+	Power	70
+	NbUse	15
+	Fail	0.12
+EndAttack
+
+Attack
+	Name	Tranche
+	Type	Normal
+	Power	70
+	NbUse	20
+	Fail	0.15
+EndAttack
+
+Attack
+	Name	Ultimawashi
+	Type	Normal
+	Power	120
+	NbUse	5
+	Fail	0.25
+EndAttack
+
+Attack
+	Name	Mania
+	Type	Normal
+	Power	120
+	NbUse	10
+	Fail	0.30
+EndAttack

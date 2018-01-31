@@ -1,0 +1,182 @@
+Monster
+	Name		Pukachi
+	Type		Electric
+	HP			110		141
+	Speed		110		141
+	Attack		75		106
+	Defense		50		82
+	Paralysis	0.18
+EndMonster
+
+Monster
+	Name		Cerapuca
+	Type		Water
+	HP			119		150
+	Speed		68		99
+	Attack		63		94
+	Defense		85		116
+	Flood		0.20
+	Fall		0.25
+EndMonster
+
+Monster
+	Name		Teupiquaur
+	Type		Rock
+	HP			85		116
+	Defense		45		76
+	Attack		75		106
+	Protect		0.08
+	Speed		115		146
+EndMonster
+
+Monster
+	Name		Selamecha
+	Type		Fire
+	HP			114		145
+	Speed		85		116
+	Burn		0.12
+	Attack		72		103
+	Defense		63		94
+EndMonster
+
+Monster
+	Name		Belbizarru
+	Type		Plant
+	HP			120		151
+	Defense		69		100
+	Attack		69		100
+	Heal		0.15
+	Speed		65		96
+EndMonster
+
+Monster
+	Name		Popilusian
+	Type		Insect
+	HP			135		161
+	Speed		65		96
+	Attack		65		96
+	Defense		70		101
+	Poison		0.10
+EndMonster
+
+Monster
+	Name		Megicarpa
+	Type		Water
+	Defense		75		106
+	HP			95		126
+	Fall		0.33
+	Speed		100		131
+	Attack		30		61
+	Flood		0.19
+EndMonster
+
+Monster
+	Name		Roucailla
+	Type		Rock
+	HP			115		147
+	Protect		0.06
+	Attack		100		132
+	Speed		40		71
+	Defense		120		151
+EndMonster
+
+Monster
+	Name		Mestherby
+	Type		Plant
+	HP			120		151
+	Defense		75		106
+	Attack		70		101
+	Heal		0.13
+	Speed		50		81
+EndMonster
+
+Monster
+	Name		Migneta
+	Type		Electric
+	Attack		55		86
+	HP			100		131
+	Defense		90		121
+	Speed		65		96
+	Paralysis	0.16
+EndMonster
+
+Monster
+	Name		Piroly
+	Type		Fire
+	HP			120		152
+	Attack		95		127
+	Defense		57		89
+	Burn		0.11
+	Speed		93		135
+EndMonster
+
+Monster
+	Name		Ospicat
+	Type		Insect
+	HP			140		172
+	Speed		70		102
+	Attack		55		87
+	Defense		70		101
+	Poison		0.07
+EndMonster
+
+Monster
+	Name		Viltalo
+	Type		Electric
+	Attack		55		86
+	HP			100		131
+	Defense		90		121
+	Speed		65		96
+	Paralysis	0.17
+EndMonster
+
+Monster
+	Name		Iquala
+	Type		Water
+	HP			125		157
+	Speed		63		95
+	Attack		85		117
+	Defense		80		110
+	Flood		0.21
+	Fall		0.27
+EndMonster
+
+Monster
+	Name		Salfuru
+	Type		Fire
+	HP			120		165
+	Attack		108		120
+	Defense		99		110
+	Burn		0.11
+	Speed		99		110
+EndMonster
+
+Monster
+	Name		Inox
+	Type		Rock
+	HP			110		142
+	Defense		65		97
+	Attack		65		96
+	Protect		0.09
+	Speed		90		122
+EndMonster
+
+Monster
+	Name		Chotifler
+	Type		Plant
+	HP			125		156
+	Defense		55		87
+	Attack		95		126
+	Heal		0.14
+	Speed		60		91
+EndMonster
+
+Monster
+	Name		Scerabruta
+	Type		Insect
+	HP			115		147
+	Speed		50		92
+	Attack		80		112
+	Defense		60		92
+	Poison		0.09
+EndMonster

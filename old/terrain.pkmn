@@ -1,0 +1,39 @@
+terrain
+	Name	Arene 1
+	Id	1
+	Water	0.0
+	Rock	0.0
+	Electric	0.0
+	Fire	0.0
+	Grass	0.0
+Endterrain
+
+terrain
+	Name	Small River
+	Id	2
+	Water	0.25
+	Rock	0.0
+	Electric	-0.15
+	Fire	-0.25
+	Grass	0.1
+Endterrain
+ 
+terrain
+	Name	Volcano
+	Id	3
+	Water	0.0
+	Rock	0.0
+	Electric	0.0
+	Fire	0.0
+	Grass	0.0
+Endterrain
+
+terrain
+	Name	Arene 2
+	Id	4
+	Water	1.0
+	Rock	1.0
+	Electric	1.0
+	Fire	1.0
+	Grass	1.0
+Endterrain
