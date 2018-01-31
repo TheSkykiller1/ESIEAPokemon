@@ -192,13 +192,22 @@
 	}
 	void CWorld::move_player(int id, int x, int y)
 	{
+		//float flood, fall, paralysis, poison, burn, heal;
+		Joueurs[id].move(x, y);
+		Joueurs[id].set_terrain(&cases[x][y]);
+
 		for (int i = 0;i < Joueurs.size();i++)
 		{
-			if (((Joueurs[i].positionX() == x) && (Joueurs[i].positionY() == y)) && Joueurs[i].get_id() != Joueurs[id].get_id())
+			if (((Joueurs[i].positionX() == x) && (Joueurs[i].positionY() == y)) && (Joueurs[i].get_id() != Joueurs[id].get_id()))
 			{
-				Joueurs[id].move(x, y, &cases[x][y], &Joueurs[i]);
+				std::cout << "Ton joueur ce trouve sur la meme case qu'un autre: Combat! \n Voici ton id et le sien: " << Joueurs[i].get_id() << " -> Ennemi / " << Joueurs[id].get_id() << " -> Toi\n";
+				system("pause");
+
+				Joueurs[id].set_target(&Joueurs[i]);
+
 				Joueurs[id].match_reset();
 				Joueurs[i].match_reset();
+
 				bool player_win = 0;
 				while (true)
 				{
@@ -217,10 +226,6 @@
 						break;
 					}
 				}
-			}
-			else
-			{
-				Joueurs[id].move(x, y);
 			}
 		}
 	}

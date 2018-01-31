@@ -116,8 +116,8 @@ void CPlayer::use_object()
 			if (objects_player[i]->getGenre() == "Potion")
 			{
 				std::cout << objects_player[i]->getGenre() << "\n \t";
-				std::cout << "Statistiques: " << objects_player[i]->getAtt() << " Attack " << objects_player[i]->getDef() <<\
-					" Def " << objects_player[i]->getHP() << " HP " << objects_player[i]->getVit() << " Speed \n";
+				std::cout << "Statistiques: \t" << objects_player[i]->getAtt() << " Attack \t" << objects_player[i]->getDef() <<\
+					" Def \t" << objects_player[i]->getHP() << " HP \t" << objects_player[i]->getVit() << " Speed \n";
 			}
 			if (objects_player[i]->getGenre() == "Drug")
 			{
@@ -126,10 +126,13 @@ void CPlayer::use_object()
 			}
 		}
 	}
-	int choix;
+	int choix=0;
+	std::cout << "Votre choix: ";
 	std::cin >> choix;
 	Pokeballs[id_actif]->useObject(objects_player[choix]);
 	nb_objects[choix]--;
+	std::cout << "TTJTJTJJ";
+
 }
 bool CPlayer::check()
 {

@@ -237,8 +237,8 @@ void jouer()
 	int dimX=-1, dimY=-1;
 	while ((dimX < 0) || (dimX > 20) || (dimY < 0) || (dimY > 20))
 	{
-		std::cout << "\t\t\tCreation du monde: ";
-		std::cout << "\tChoisir les dimensions: \nX:";
+		std::cout << "\t\t\tCreation du monde: \n";
+		std::cout << "Choisir les dimensions: \nX:";
 		std::cin >> dimX;
 		std::cout << "Y:";
 		std::cin >> dimY;
@@ -386,7 +386,125 @@ void jouer()
 		system("pause");
 		//float flood, fall, paralysis, poison, burn, heal;
 	}
+	std::cout<<"\t\t\tCommencement du jeu Pokeleague! \n";
+	int nb_tour_max = 100; //nb de deplacement avant la fin
+	int nb_tour = 0;
+	int joueur = 0;
 
+	while (nb_tour < nb_tour_max)
+	{
+		
+		//Monde.map_view_terrain();
+		int choix = 0, tour_joueur = 1;
+		while (tour_joueur)
+		{
+			int posX = Monde.Joueurs[0].positionX(), posY = Monde.Joueurs[0].positionY();
+			Monde.map_view_terrain();
+			std::cout << "Le joueur 1 " << " joue! \t Position actuelle X: " << posX << " Y: " << posY << " TYPE: "<< Monde.Joueurs[0].type_terrain()->Title() << "\n";
+			std::cout << "Choix du deplacement: \n\
+\t\t    1)Haut\n\
+\t 2) Gauche \t\t 3) Droite\n\
+\t\t    4) Bas\n";
+			std::cin >> choix;
+			std::string test = "Joueur1";
+			if (choix == 1)
+			{
+				posX--;
+				if (posX >= 0)
+				{
+					Monde.move_player(0, posX, posY);
+					tour_joueur = 0;
+				}
+			}
+			else if (choix == 2)
+			{
+				posY--;
+				if (posY >= 0)
+				{
+					Monde.move_player(0, posX, posY);
+					tour_joueur = 0;
+				}
+			}
+			else if (choix == 3)
+			{
+				posY++;
+				if (posY < dimY)
+				{
+					Monde.move_player(0, posX, posY);
+					tour_joueur = 0;
+				}
+			}
+			else if (choix == 4)
+			{
+				posX++;
+				if (posX < dimX)
+				{
+					Monde.move_player(0, posX, posY);
+					tour_joueur = 0;
+				}
+			}
+			else
+			{
+				std::cout << "Mauvaise valeure! \n";
+			}
+		}
+
+		Monde.map_view_terrain();
+		choix = 0; tour_joueur = 1;
+		while (tour_joueur)
+		{
+			int posX = Monde.Joueurs[1].positionX(), posY = Monde.Joueurs[1].positionY();
+			Monde.map_view_terrain();
+			std::cout << "Le joueur 2 " << " joue! \t Position actuelle X: " << posX << " Y: " << posY << " TYPE: " << Monde.Joueurs[1].type_terrain()->Title() << "\n";
+			std::cout << "Choix du deplacement: \n\
+\t\t    1)Haut\n\
+\t 2) Gauche \t\t 3) Droite\n\
+\t\t    4) Bas\n";
+			std::cin >> choix;
+			std::string test = "Joueur2";
+			if (choix == 1)
+			{
+				posX--;
+				if (posX >= 0)
+				{
+					Monde.move_player(1, posX, posY);
+					tour_joueur = 0;
+				}
+			}
+			else if (choix == 2)
+			{
+				posY--;
+				if (posY >= 0)
+				{
+					Monde.move_player(1, posX, posY);
+					tour_joueur = 0;
+				}
+			}
+			else if (choix == 3)
+			{
+				posY++;
+				if (posY < dimY)
+				{
+					Monde.move_player(1, posX, posY);
+					tour_joueur = 0;
+				}
+			}
+			else if (choix == 4)
+			{
+				posX++;
+				if (posX < dimX)
+				{
+					Monde.move_player(1, posX, posY);
+					tour_joueur = 0;
+				}
+			}
+			else
+			{
+				std::cout << "Mauvaise valeure! \n";
+			}
+		}
+		nb_tour++;
+	}
 }
 		
 

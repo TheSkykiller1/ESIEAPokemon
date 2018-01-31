@@ -30,9 +30,8 @@ object
 	Type	Plant	Insect
 Endobject
 
-
 object
-	Name	Saut d'eau (reveil)
+	Name	Saut d'eau
 	Id	5
 	Genre	Drug
 	State	Normal
