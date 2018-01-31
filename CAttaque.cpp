@@ -2,21 +2,13 @@
 
 CAttaque::CAttaque()
 {
-
 }
-
-CAttaque::CAttaque(std::string nom, std::string type, int nu, int pa, float pe)
+CAttaque::CAttaque(std::string nom, std::string type, int nu, int pa, float pe):\
+m_nom(nom),m_type(type),m_nu(nu),m_power(pa),m_fail(pe)
 {
-	m_nom = nom;
-	m_type = type;
-	m_nu = nu;
-	m_pAttaque = pa;
-	m_pEchec = pe;
 }
-
 CAttaque::~CAttaque()
 {
-
 }
 
 //GETTERS
@@ -31,46 +23,17 @@ std::string CAttaque::getType()
 	return m_type;
 }
 
-int CAttaque::getNU()
+int CAttaque::get_NbUse()
 {
 	return m_nu;
 }
 
-int CAttaque::getPA()
+int CAttaque::get_Power()
 {
-	return m_pAttaque;
+	return m_power;
 }
 
-float CAttaque::getPE()
+float CAttaque::get_Fail()
 {
-	return m_pEchec;
+	return m_fail;
 }
-
-//SETTERS
-
-void CAttaque::setNom(std::string nom)
-{
-	m_nom = nom;
-}
-
-void CAttaque::setType(std::string type)
-{
-	m_type = type;
-}
-
-void CAttaque::setNU(int nu)
-{
-	m_nu = nu;
-}
-
-void CAttaque::setPA(int pa)
-{
-	m_pAttaque = pa;
-}
-
-void CAttaque::setPE(float pe)
-{
-	m_pEchec = pe;
-}
-
-//METHODES

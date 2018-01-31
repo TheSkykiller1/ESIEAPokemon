@@ -2,7 +2,6 @@
 
 CMonster::CMonster()
 {
-
 }
 
 CMonster::CMonster(int id, std::string type, std::string nom, int HP, int vit, int att, int def)
@@ -29,6 +28,15 @@ CMonster::~CMonster()
 }
 
 //GETTERS
+void CMonster::set_attaques_disp(std::vector<CAttaque*> Attac)
+{
+	Attaques_list = Attac;
+	for (int i = 0;i < Attaques_list.size();i++)
+	{
+		Attaques_actives.push_back(false);
+		Attaques_utilisation.push_back(0);
+	}
+}
 
 int CMonster::getId()
 {
@@ -110,36 +118,6 @@ float CMonster::getFall()
 	return 0.0f;
 }
 
-std::vector<std::string> CMonster::getNAttaques()
-{
-	return m_nom_attaque;
-}
-
-std::vector<std::string> CMonster::getTAttaques()
-{
-	return m_type_attaque;
-}
-
-std::vector<int> CMonster::getNU()
-{
-	return m_nu;
-}
-
-std::vector<int> CMonster::getPAtt()
-{
-	return m_pAttaques;
-}
-
-std::vector<float> CMonster::getPEchec()
-{
-	return m_pEchec;
-}
-
-std::vector<CAttaque*> CMonster::getAttaques()
-{
-	return m_attaques;
-}
-
 //SETTERS
 
 void CMonster::setId(int id)
@@ -217,36 +195,6 @@ void CMonster::setCache(bool cache)
 	m_cache = cache;
 }
 
-void CMonster::setNAttaques(std::vector<std::string> nomAttaque)
-{
-	m_nom_attaque = nomAttaque;
-}
-
-void CMonster::setTAttaques(std::vector<std::string> typeAttaque)
-{
-	m_type_attaque = typeAttaque;
-}
-
-void CMonster::setNU(std::vector<int> NU)
-{
-	m_nu = NU;
-}
-
-void CMonster::setPA(std::vector<int> PA)
-{
-	m_pAttaques = PA;
-}
-
-void CMonster::setPE(std::vector<float> PE)
-{
-	m_pEchec = PE;
-}
-
-void CMonster::setAttaques(std::vector<CAttaque*> attaques)
-{
-	m_attaques = attaques;
-}
-
 void CMonster::reset()
 {
 	m_HP_act = m_HP;
@@ -258,59 +206,6 @@ void CMonster::reset()
 	m_cache = false;
 	//TO DO : RETIRER L'INNONDATION SI LE MONSTRE EN A DECLENCHE UNE 
 }
-
-//METHODES
-
-struct Attaques {
-	std::string name, type;
-	int power, nbuse;
-	float fail;
-};
-
-
-void read_config_attack()
-{
-	std::string row;
-	std::ifstream File("attacks.pkmn", std::ios::in);
-	int id = 0;
-	if (File.is_open())
-	{
-		while (getline(File, row))
-		{
-			if (row == "Attack")//Debut du bloc
-			{
-				Attaques attaque;
-				attaque.id = id++;
-				while (row != "EndAttack")//Tant que l'on est dans le bloc
-				{
-					getline(File, row);
-					if (row == "EndAttack") { break; }//Si on a fini le bloc on quitte
-					std::vector<std::string> token = split(row, '\t\t');
-					std::vector<std::string> element;
-					for (int i = 0; i < token.size(); i++)//On clear les elements vides
-					{
-						if (token[i] != "") { element.push_back(token[i]); }
-					}
-
-					//Analyse des resultats
-					if (element[0] == "Name") { attaque.name = element[1]; }
-					else if (element[0] == "Type") { attaque.type = element[1]; }
-					else if (element[0] == "Power") { attaque.power = element[1]; }
-					else if (element[0] == "NbUse") { attaque.nbuse = element[1]; }
-					else if (element[0] == "Fail") { attaque.fail = element[1]; }
-				}
-				m_attaques.push_back(attaque);
-			}
-		}
-		File.close();
-	}
-	else
-	{
-		std::cout << "Impossible d’ouvrir le fichier \n";
-	}
-}
-
-//PARSER DE CATTAQUE : A MODIFIER
 
 
 std::string CMonster::updateEtat() //todo etat a finir
@@ -465,58 +360,6 @@ bool CMonster::tour(CMonster* monstre, CTerrain* terrain)
 	{
 		this->attaquer(num_att, monstre);
 	}
-	/*std::cout << monstre->getNom()<< " :\n"; //J'ai modif ça aussi ^^'
-	std::cout << "Choix de l'attaque :\n";
-	std::cout << "0) Coup de griffes\n";
-	std::cout << "1) "<< monstre->getNAttaques[0]<< "\n";
-	std::cout << "2) "<< monstre->getNAttaques[1]<< "\n";
-	std::cout << "3) "<< monstre->getNAttaques[2]<< "\n";
-	std::cout << "4) "<< monstre->getNAttaques[3]<< "\n";
-	int num_att2;
-	std::cin >> num_att2;
-	if (init_combat(*this, monstre))
-	{
-		//TOUR IMPOSSIBLE, plus de HP sur l'un des monstres
-		return 1;
-	}*/
-
-	/*
-	if (&objet1 != NULL)
-	{
-		this->setAttaqueAct(this->getAttaqueAct() + objet1.getAtt());
-		this->setDefenseAct(this->getDefenseAct() + objet1.getDef());
-		this->setHPAct(this->getHPAct() + objet1.getHP());
-		this->setVitesseAct(this->getVitesseAct() + objet1.getVit());
-		this->setEtat(objet1.getEtat());
-	}
-	if (&objet2 != NULL)
-	{
-		monstre.setAttaqueAct(monstre.getAttaqueAct() + objet2.getAtt());
-		monstre.setDefenseAct(monstre.getDefenseAct() + objet2.getDef());
-		monstre.setHPAct(monstre.getHPAct() + objet2.getHP());
-		monstre.setVitesseAct(monstre.getVitesseAct() + objet2.getVit());
-		monstre.setEtat(objet2.getEtat());
-	}
-	*/
-	/*
-	if (analyse_speed(*this, monstre))
-	{
-		//monstre2 commence
-		monstre.attaquer(num_att2, monstre);
-		if (this->getHPAct() != 0)
-		{
-			this->attaquer(num_att1, monstre);
-		}
-	}
-	else
-	{
-		//monstre1 commence
-		this->attaquer(num_att1, monstre);
-		if (monstre.getHPAct() != 0)
-		{
-			monstre.attaquer(num_att2, *this);
-		}
-	}*/
 	return 0;
 }
 

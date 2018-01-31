@@ -1,14 +1,17 @@
 #ifndef _CMONSTER_H_
 #define _CMONSTER_H_
 #include <iostream>
-#include <vector>
 #include <string>
+#include <vector>
+#include <fstream>//ifstream
+#include <sstream>
+#include <time.h>
+#include <stdio.h>
+#include <stdlib.h>
 
 #include "CAttaque.h"
 #include "CObject.h"
 #include "CTerrain.h"
-
-#include <iostream>
 
 class CMonster
 {
@@ -29,19 +32,24 @@ protected:
 	std::vector<std::string> m_force; //liste des types de monstres étant des cibles plus faciles
 	bool m_cache; //etat du cachage des monstres Rock
 
-	std::vector<std::string> m_nom_attaque; //vecteur des noms d'attaque
-	std::vector<std::string> m_type_attaque; //vecteur des types d'attaque
-	std::vector<int> m_nu; //vecteur des nombres d'utilisations restantes
-	std::vector<int> m_pAttaques; //vecteur des puissances d'attaques
-	std::vector<float> m_pEchec; //vecteur des probabilités d'echecs
 
-	std::vector<CAttaque*> m_attaques; //vecteur des attaques
+	template<typename Out>
+	void split(const std::string &s, char delim, Out result);
+	std::vector<std::string> split(const std::string &s, char delim);
 
 public:
 	CMonster();
 	CMonster(int id, std::string type, std::string nom, int HP, int vit, int att, int def);
 	~CMonster();
 
+	std::vector<CAttaque*> Attaques_list;
+
+	std::vector<bool> Attaques_actives;
+	std::vector<int> Attaques_utilisation;
+
+	void set_attaques_disp(std::vector<CAttaque*> Attac);
+
+#pragma region GETSET
 	virtual int getId();
 	virtual std::string getType();
 	virtual std::string getNom();
@@ -58,12 +66,6 @@ public:
 	virtual std::vector<std::string> getForce();
 	virtual bool getCache();
 	virtual float getFall();
-	virtual std::vector<std::string> getNAttaques();
-	virtual std::vector<std::string> getTAttaques();
-	virtual std::vector<int> getNU();
-	virtual std::vector<int> getPAtt();
-	virtual std::vector<float> getPEchec();
-	virtual std::vector<CAttaque*> getAttaques();
 
 	virtual void setId(int id);
 	virtual void setType(std::string type);
@@ -81,13 +83,9 @@ public:
 	virtual void setEtatTours(int tours);
 	virtual void setCache(bool cache);
 	virtual void reset();
-	virtual void setNAttaques(std::vector<std::string> nomAttaque);
-	virtual void setTAttaques(std::vector<std::string> typeAttaque);
-	virtual void setNU(std::vector<int> NU);
-	virtual void setPA(std::vector<int> PA);
-	virtual void setPE(std::vector<float> PE);
-	virtual void setAttaques(std::vector<CAttaque*> attaques);
 	
+#pragma endregion
+
 	std::string updateEtat(); //mise à jour des états des monstres (à chaque tour)
 	virtual bool attaquer(int num_att, CMonster* cible); //attaque d'un monstre vers un autre avec une attaque determinée
 	int degat(int num_att, CMonster* def); //calcul des dégâts d'une attaque

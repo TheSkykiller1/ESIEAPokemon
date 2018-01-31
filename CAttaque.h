@@ -10,8 +10,8 @@ protected:
 	std::string m_nom; //nom de l'attaque
 	std::string m_type; //type de l'attaque
 	int m_nu; //nombre d'utilisation de l'attaque
-	int m_pAttaque; //puissance d'attaque
-	float m_pEchec; //probabilité d'échec
+	int m_power; //puissance d'attaque
+	float m_fail; //probabilité d'échec
 
 public:
 	CAttaque();
@@ -20,15 +20,9 @@ public:
 
 	std::string getNom();
 	std::string getType();
-	int getNU();
-	int getPA();
-	float getPE();
-
-	void setNom(std::string nom);
-	void setType(std::string type);
-	void setNU(int nu);
-	void setPA(int pa);
-	void setPE(float pe);
+	int get_NbUse();
+	int get_Power();
+	float get_Fail();
 };
 
 #endif

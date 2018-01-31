@@ -17,7 +17,7 @@ int nb_joueurs = 0;
 
 std::vector<CMonster*> ListePokemon;
 std::vector<TypePokemon> ListeTypePokemon;
-
+std::vector<CAttaque*> ListeAttaques;
 std::vector<CObject*> ListeObject;
 
 CWorld Monde;
@@ -119,6 +119,67 @@ void read_config_pokemon()
 	{
 		std::cout << "Impossible d’ouvrir le fichier \n";
 	}
+}
+
+
+void read_config_attaque()
+{
+	std::string row;
+	std::ifstream File("attacks.pkmn", std::ios::in);
+	if (File.is_open())
+	{
+		while (getline(File, row))
+		{
+			if (row == "Attack")//Debut du bloc
+			{	//Value only!
+				std::string name, type;
+				int power = 0, nbuse = 0;
+				float fail = 0.0f;
+				while (row != "EndAttack")//Tant que l'on est dans le bloc
+				{
+					getline(File, row);
+					if (row == "EndAttack") { break; }//Si on a fini le bloc on quitte
+					std::vector<std::string> token = split(row, '\t\t');
+					std::vector<std::string> element;
+					for (int i = 0;i < token.size();i++)//On clear les elements vides
+					{
+						if (token[i] != "") { element.push_back(token[i]); }
+					}
+
+					//Analyse des resultats
+					if (element[0] == "Name")
+					{
+						name = element[1];
+					}
+					else if (element[0] == "Type")
+					{
+						type = element[1];
+					}
+					else if (element[0] == "Power")
+					{
+						power = stoi(element[1]);
+					}
+					else if (element[0] == "NbUse")
+					{
+						nbuse = stoi(element[1]);
+					}
+					else if (element[0] == "Fail")
+					{
+						fail = stof(element[1]);
+					}
+				}
+				CAttaque *attac;
+				attac = new CAttaque(name, type, power, nbuse, fail);
+				ListeAttaques.push_back(attac);
+			}
+		}
+		File.close();
+	}
+	else
+	{
+		std::cout << "Impossible d’ouvrir le fichier attacks.pkmn \n";
+	}
+
 }
 
 void read_config_object()
