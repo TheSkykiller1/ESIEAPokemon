@@ -2,6 +2,246 @@
 #include "CMonster.h"
 #include "CPlayer.h"
 #include "CWorld.h"
+
+
+//Save les types de pokemons pour les "construire"
+struct TypePokemon {
+	std::string type, name;
+	int id, HP_min, HP_max, VIT_min, VIT_max, \
+		ATT_min, ATT_max, DEF_min, DEF_max;
+
+	float flood, fall, paralysis, poison, burn, heal;
+};
+
+int nb_joueurs = 0;
+std::vector<CPlayer> Joueurs;
+
+std::vector<CMonster*> ListePokemon;
+
+/*std::vector<CFire> Fire;
+std::vector<CElectric> Electric;
+std::vector<CRock> Rock;
+std::vector<CWater> Water;
+std::vector<CPlant> Plant;
+std::vector<CInsect> Insect;*/
+
+std::vector<TypePokemon> ListeTypePokemon;
+
+
+//===================PARSER==========================
+template<typename Out>
+void split(const std::string &s, char delim, Out result)
+{
+	std::stringstream ss(s);
+	std::string item;
+	while (std::getline(ss, item, delim)) { *(result++) = item; }
+}
+std::vector<std::string> split(const std::string &s, char delim)
+{
+	std::vector<std::string> elems;
+	split(s, delim, std::back_inserter(elems));
+	return elems;
+}
+//====================================================
+
+void read_config_pokemon()
+{
+	std::string row;
+	std::ifstream File("monsters.pkmn", std::ios::in);
+	int id = 0;
+	if (File.is_open())
+	{
+		while (getline(File, row))
+		{
+			if (row == "Monster")//Debut du bloc
+			{
+				TypePokemon pokemon;
+				pokemon.id = id++;
+				while (row != "EndMonster")//Tant que l'on est dans le bloc
+				{
+					getline(File, row);
+					if (row == "EndMonster") { break; }//Si on a fini le bloc on quitte
+					std::vector<std::string> token = split(row, '\t\t');
+					std::vector<std::string> element;
+					for (int i = 0;i < token.size();i++)//On clear les elements vides
+					{
+						if (token[i] != "") { element.push_back(token[i]); }
+					}
+
+					//Analyse des resultats
+					if (element[0] == "Name") { pokemon.name = element[1]; }
+					else if (element[0] == "Type") { pokemon.type = element[1]; }
+					else if (element[0] == "HP")
+					{
+						pokemon.HP_min = std::stoi(element[1]);
+						pokemon.HP_max = std::stoi(element[2]);
+					}
+					else if (element[0] == "Speed")
+					{
+						pokemon.VIT_min = std::stoi(element[1]);
+						pokemon.VIT_max = std::stoi(element[2]);
+					}
+					else if (element[0] == "Attack")
+					{
+						pokemon.ATT_min = std::stoi(element[1]);
+						pokemon.ATT_max = std::stoi(element[2]);
+					}
+					else if (element[0] == "Defense")
+					{
+						pokemon.DEF_min = std::stoi(element[1]);
+						pokemon.DEF_max = std::stoi(element[2]);
+					}
+					else if (element[0] == "Paralysis")
+					{
+						pokemon.paralysis = stof(element[1]);
+					}
+					else if (element[0] == "Flood")
+					{
+						pokemon.flood = stof(element[1]);
+					}
+					else if (element[0] == "Fall")
+					{
+						pokemon.fall = stof(element[1]);
+					}
+					else if (element[0] == "Poison")
+					{
+						pokemon.poison = stof(element[1]);
+					}
+					else if (element[0] == "Burn")
+					{
+						pokemon.burn = stof(element[1]);
+					}
+					else if (element[0] == "Heal")
+					{
+						pokemon.heal = stof(element[1]);
+					}
+				}
+				ListeTypePokemon.push_back(pokemon);
+			}
+		}
+		File.close();
+	}
+	else
+	{
+		std::cout << "Impossible d’ouvrir le fichier \n";
+	}
+}
+//Todo corriger
+
+
+void jouer()
+{
+	system("cls");
+	std::cout << "Creation de deux joueurs:\n";
+	for (int i = 0; i < 2; i++)
+	{
+		std::cout << "Speudo joueur " << i + 1 << ": ";
+		std::string pseudo;
+		std::cin >> pseudo;
+		CPlayer joueur(nb_joueurs++, pseudo);
+		Joueurs.push_back(joueur);
+	}
+	for (int i = 0; i < 2; i++)
+	{
+		system("cls");
+		std::cout << "Creation des pokemons pour chaque joueurs:\n";
+		for (int u = 0;u < ListeTypePokemon.size();u++)
+		{
+			TypePokemon pk = ListeTypePokemon[u];
+			std::cout << "\t-" << pk.id << ") " << pk.name << " type: " << pk.type << \
+				" HP (min/max): " << pk.HP_min << "/" << pk.HP_max << " Attack (min/max): " << pk.ATT_min << "/" << pk.ATT_max << \
+				" Defense (min/max): " << pk.DEF_min << "/" << pk.DEF_max << " Speed (min/max): " << pk.VIT_min << "/" << pk.VIT_max << \
+				"\n";
+		}
+		std::cout << "Choisir 3 pokemons (ID) \n";
+		int nbchoix = 0;
+		while (nbchoix < 3)
+		{
+			std::cout << "Choix " << nbchoix + 1 << "/3 \n";
+			int choix;
+			std::cin >> choix;
+			for (int u = 0;u < ListeTypePokemon.size();u++) //on recherche l'id
+			{
+				if (choix == ListeTypePokemon[u].id)
+				{
+					TypePokemon pokemon_choisi = ListeTypePokemon[u];
+
+					int hp = rand() % (pokemon_choisi.HP_max - pokemon_choisi.HP_min) + pokemon_choisi.HP_min, \
+						att = rand() % (pokemon_choisi.ATT_max - pokemon_choisi.ATT_min) + pokemon_choisi.ATT_min, \
+						def = rand() % (pokemon_choisi.DEF_max - pokemon_choisi.DEF_min) + pokemon_choisi.DEF_min, \
+						vit = rand() % (pokemon_choisi.VIT_max - pokemon_choisi.VIT_min) + pokemon_choisi.VIT_min;
+
+					if (pokemon_choisi.type == "Electric")
+					{
+						CElectric *poke;
+						poke = new CElectric(pokemon_choisi.id, pokemon_choisi.type, pokemon_choisi.name, hp, vit, att, def, pokemon_choisi.paralysis);
+						ListePokemon.push_back(poke);
+						int pos = std::find(ListePokemon.begin(), ListePokemon.end(), poke) - ListePokemon.begin();
+						Joueurs[i].add_pokemon(ListePokemon[pos]);
+						std::cout << "Ajout d'un pokemon " << pokemon_choisi.type << "\n";
+					}
+					else if (pokemon_choisi.type == "Water")
+					{
+						CWater *poke;
+						poke = new CWater(pokemon_choisi.id, pokemon_choisi.type, pokemon_choisi.name, hp, vit, att, def);
+						ListePokemon.push_back(poke);
+						int pos = std::find(ListePokemon.begin(), ListePokemon.end(), poke) - ListePokemon.begin();
+						Joueurs[i].add_pokemon(ListePokemon[pos]);
+						std::cout << "Ajout d'un pokemon " << pokemon_choisi.type << "\n";
+					}
+					else if (pokemon_choisi.type == "Rock")
+					{
+						CRock *poke;
+						poke = new CRock(pokemon_choisi.id, pokemon_choisi.type, pokemon_choisi.name, hp, vit, att, def);
+						ListePokemon.push_back(poke);
+						int pos = std::find(ListePokemon.begin(), ListePokemon.end(), poke) - ListePokemon.begin();
+						Joueurs[i].add_pokemon(ListePokemon[pos]);
+						std::cout << "Ajout d'un pokemon " << pokemon_choisi.type << "\n";
+					}
+					else if (pokemon_choisi.type == "Fire")
+					{
+						CFire *poke;
+						poke = new CFire(pokemon_choisi.id, pokemon_choisi.type, pokemon_choisi.name, hp, vit, att, def);
+						ListePokemon.push_back(poke);
+						int pos = std::find(ListePokemon.begin(), ListePokemon.end(), poke) - ListePokemon.begin();
+						Joueurs[i].add_pokemon(ListePokemon[pos]);
+						std::cout << "Ajout d'un pokemon " << pokemon_choisi.type << "\n";
+					}
+					else if (pokemon_choisi.type == "Insect")
+					{
+						CInsect *poke;
+						poke = new CInsect(pokemon_choisi.id, pokemon_choisi.type, pokemon_choisi.name, hp, vit, att, def);
+						ListePokemon.push_back(poke);
+						int pos = std::find(ListePokemon.begin(), ListePokemon.end(), poke) - ListePokemon.begin();
+						Joueurs[i].add_pokemon(ListePokemon[pos]);
+						std::cout << "Ajout d'un pokemon " << pokemon_choisi.type << "\n";
+					}
+					else if (pokemon_choisi.type == "Plant")
+					{
+						CPlant *poke;
+						poke = new CPlant(pokemon_choisi.id, pokemon_choisi.type, pokemon_choisi.name, hp, vit, att, def);
+						ListePokemon.push_back(poke);
+						int pos = std::find(ListePokemon.begin(), ListePokemon.end(), poke) - ListePokemon.begin();
+						Joueurs[i].add_pokemon(ListePokemon[pos]);
+
+					}
+					nbchoix++;
+					break;
+				}
+			}
+
+		}
+		std::cout << "Votre joueur possede : ";
+		Joueurs[i].list_pokemon();
+
+		system("pause");
+		//float flood, fall, paralysis, poison, burn, heal;
+	}
+
+}
+
+
+
 /*Fonction regroupant tout le jeu*/
 void jeux()
 {
@@ -157,47 +397,12 @@ void jeux()
 
 /*Menu de control du jeu*/
 
-void menu()
-{
-	while (1)
-	{
-		system("CLS");
-		std::cout << "\t\t\t Bienvenue dans PokeLeague \n\
-Que voulez-vous faire : \n\
-\t 1) Lancer une partie \n\
-\t 2) Quitter\n";
-		int choix = 0;
-		std::cin >> choix;
-		switch (choix) {
-		case 1:
-			jeux();
-			break;
-		case 2:
-			exit(0);
-			break;
-		default:
-			std::cout << "Aucune commande associe a l'entree! \n";
-			break;
-		}
-		system("pause");
-	}
-}
 
 int main()
 {
-	menu();
+	jouer();
+	
 
-	/*CPlayer Sacha("Sacha", true, 0, 0);
-	Sacha.add_pokemon(FEU, "Salameche", 10, 50, 254, 5);
-	Sacha.add_pokemon(FEU, "salo", 10, 50, 254, 5);
-	Sacha.add_pokemon(FEU, "sali", 11, 51, 25, 5);g
-	Sacha.add_pokemon(FEU, "salut", 12, 52, 15, 5);
-	Sacha.add_pokemon(FEU, "salto", 13, 53, 45, 5);
-	Sacha.add_pokemon(FEU, "saloute", 14, 54, 65, 5);
-	Sacha.add_pokemon(FEU, "sallumer", 15, 55, 84, 5);
-	Sacha.add_pokemon(FEU, "salouminer", 16, 56, 45, 5);
-	Sacha.delete_pokemon();*/
-	//CPlayer Sacha("Sacha", true, 0, 0);
 	system("pause");
 
 }

@@ -77,7 +77,7 @@ public:
 	void reset();
 	
 	std::string updateEtat(); //mise à jour des états des monstres (à chaque tour)
-	virtual bool attaquer(int num_att, CMonster* cible); //attaque d'un monstre vers un autre avec une attaque determinée
+	virtual bool attaquer(int num_att, CMonster* cible)=0; //attaque d'un monstre vers un autre avec une attaque determinée
 	int degat(int num_att, CMonster* def); //calcul des dégâts d'une attaque
 	bool echec(int num_att); //booléen de test de l'echec de l'attaque
 	bool init_combat(CMonster* monstre); //vérification de l'état initial des monstres
