@@ -20,7 +20,7 @@ void jeux()
 		std::cin >> tailleX;
 		std::cout << "Y:";
 		std::cin >> tailleY;
-		if ((tailleX > 0) && (tailleX < 20) && (tailleY > 0) && (tailleY < 20)) { invalid = false; }
+		if ((tailleX > 0) && (tailleX <= 20) && (tailleY > 0) && (tailleY <= 20)) { invalid = false; }
 	}
 	std::cout << "Taille choisie: X: " << tailleX << " Y: " << tailleY << "\n";
 	CWorld Monde;
@@ -87,7 +87,7 @@ void jeux()
 				}
 				std::cout << " \t\t| Att: " << att << " \t| Def: " << def << " \t| Vit : " << vit << " \t| HP  :" << HP << "\n";
 			}
-			std::cout << "\nChoix des monstres : " << nb << "/3\n";
+			std::cout << "\nChoix des monstres : " << nb+1 << "/3\n";
 			std::cout << "Sélectionner le nom du monstre voulu : \t";
 			std::string nom;
 			bool test = 0;

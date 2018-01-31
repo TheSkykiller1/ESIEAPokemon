@@ -1,15 +1,11 @@
 #include "CElectric.h"
 
-CElectric::CElectric()
+CElectric::CElectric() : CMonster()
 {
-	CMonster();
 }
 
-CElectric::CElectric(int id, std::string type, std::string nom, int HP, int vit, int att, int def, float paralysis)
+CElectric::CElectric(int id, std::string type, std::string nom, int HP, int vit, int att, int def, float paralysis) : CMonster(id, type, nom, HP, vit, att, def), m_paralysis(paralysis), m_force ( 0 )
 {
-	CMonster(id, type, nom, HP, vit, att, def);
-	m_paralysis = paralysis;
-	m_force = { 0 };
 }
 
 CElectric::~CElectric()
