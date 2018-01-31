@@ -29,10 +29,6 @@ protected:
 	int id_player;
 	std::string s_pseudo="Unknow";
 
-	short s_level=0;
-	int s_exp=0;//exp du level
-	int s_exp_up=0; //exp necessaire pour level up
-
 	int s_nb_fight=0;
 	int s_nb_win=0;
 
@@ -45,43 +41,24 @@ protected:
 	int maxpokeballs = 3;
 	int maxobjects = 5;
 
-	//==================Methodes======================
-
-	//-------------Parser------------
-
-	template<typename Out>
-	void split(const std::string &s, char delim, Out result);
-	std::vector<std::string> split(const std::string &s, char delim);
-
-	//---------Methodes discretes----
-
-	void level_refresh();		//refresh player level
-
 ///========================================================================
 public:
 	//===================Variables=====================
 
-	int id_actif = 0;	//Quel pokemon est actif en ce moment dans le vector<CMonster> Pokeballs
-
-	//-------config----------------------------
-
-
+	int id_actif = 0;	//Quel pokemon est actif en ce moment dans le vector<CMonster*> Pokeballs
 
 	//==================Methodes======================
 	//---------Constructeurs / Destructeur-------
 
 	CPlayer();
-	CPlayer(int id, std::string name, int posX, int posY, int fight_count = 0, int fight_win = 0, short level = 0, int xp = 0);
-	CPlayer(int id, std::string name, int posX, int posY, std::vector<CMonster> Pokeball, int fight_count = 0, int fight_win = 0, short level = 0, int xp = 0);
+	CPlayer(int id, std::string name, int posX, int posY, int fight_count = 0, int fight_win = 0);
 	~CPlayer();
 
 	//---------Variables discretes----//Temporairement public
 
-	std::vector<int> Liste_level;
+	std::vector<CMonster*> Pokeballs;
 
-	std::vector<CMonster> Pokeballs;
-
-	std::vector<CObject> objects;
+	std::vector<CObject*> objects;
 	std::vector<int> nb_objects_base;		//combien on a selectionner chaque objets
 	std::vector<int> nb_objects;			//combien il reste d'utilisation des objets
 
@@ -91,47 +68,32 @@ public:
 	int get_id();
 	std::string pseudo();
 
-	short level();
-	int xp();
-	int xp_up();
-	void read_level_requirement();	//read level and xp needed from config
-	void tableau_level();
-
 	int fight_count();
 	int fight_win();
 
-	int id_pokemon_actif();
 	void list_pokemon();			//Affiche les pokemon et leur stats de base (base_damage, etc)
 
 	CPlayer* target();
 
 	int positionX();
 	int positionY();
+
 	CTerrain* type_terrain();
 	
 	//---------Setters-----
 
-	void set_pseudo(std::string pseudo);
-	void change_level(short s_level);	//debug call level refresh
-
-	void set_exp(int exp);
-	void give_exp(int exp);
-
-	void match_fini(bool win, int exp = 0);	 //add 1 match to the counter, and 1 to win if match is won, exp gain are handled by this function
+	void match_fini(bool win);	 //add 1 match to the counter, and 1 to win if match is won, exp gain are handled by this function
 	void match_reset();		//remet au stade initial le joueur et ses pokemons
 
-	void set_object(std::vector<CObject> listeobject);	//set object list (copy from CWorld)
+	void set_object(std::vector<CObject*> listeobject);	//set object list (copy from CWorld)
 	void set_nb_oject(int id, int nb);
 
-	bool add_pokemon(std::string type, std::string nom, int hpe, int vitesse, int attaque, int defense);
-	bool add_pokemon(CMonster pokemon);
-	void delete_pokemon(int id_pokemon);//Delete directement le pokemon
-	void delete_pokemon();//Affiche les pokemon et demande lequel supprimer
+	bool add_pokemon(CMonster* pokemon);
 
 	void move(int X, int Y);
 	void move(int X, int Y, CTerrain* terrain, CPlayer* cible);
-	void set_target(CPlayer* cible); //debug only
-	void set_terrain(CTerrain* terrain); //debug only
+	void set_target(CPlayer* cible);
+	void set_terrain(CTerrain* terrain);
 
 	void attaquer();
 	void use_object();
