@@ -11,10 +11,13 @@ CMonster::CMonster(int id, std::string type, std::string nom, int HP, int vit, i
 	m_type = type;
 	m_nom = nom;
 	m_HP = HP;
+	m_HP_act = HP;
 	m_vitesse = vit;
+	m_vitesse_act = vit;
 	m_attaque = att;
 	m_attaque_act = att;
 	m_defense = def;
+	m_defense_act = def;
 	m_etat = "Normal";
 	m_etat_tours = 0;
 	m_cache = 0;
@@ -102,6 +105,11 @@ bool CMonster::getCache()
 	return m_cache;
 }
 
+float CMonster::getFall()
+{
+	return 0.0f;
+}
+
 std::vector<std::string> CMonster::getNAttaques()
 {
 	return m_nom_attaque;
@@ -125,6 +133,11 @@ std::vector<int> CMonster::getPAtt()
 std::vector<float> CMonster::getPEchec()
 {
 	return m_pEchec;
+}
+
+std::vector<CAttaque*> CMonster::getAttaques()
+{
+	return m_attaques;
 }
 
 //SETTERS
@@ -184,6 +197,11 @@ void CMonster::setDefenseAct(int defense_act)
 	m_defense_act = defense_act;
 }
 
+void CMonster::setForce(std::vector<std::string> force)
+{
+	m_force = force;
+}
+
 void CMonster::setEtat(std::string etat)
 {
 	m_etat = etat;
@@ -197,6 +215,36 @@ void CMonster::setEtatTours(int tours)
 void CMonster::setCache(bool cache)
 {
 	m_cache = cache;
+}
+
+void CMonster::setNAttaques(std::vector<std::string> nomAttaque)
+{
+	m_nom_attaque = nomAttaque;
+}
+
+void CMonster::setTAttaques(std::vector<std::string> typeAttaque)
+{
+	m_type_attaque = typeAttaque;
+}
+
+void CMonster::setNU(std::vector<int> NU)
+{
+	m_nu = NU;
+}
+
+void CMonster::setPA(std::vector<int> PA)
+{
+	m_pAttaques = PA;
+}
+
+void CMonster::setPE(std::vector<float> PE)
+{
+	m_pEchec = PE;
+}
+
+void CMonster::setAttaques(std::vector<CAttaque*> attaques)
+{
+	m_attaques = attaques;
 }
 
 void CMonster::reset()
@@ -335,6 +383,21 @@ bool CMonster::analyse_speed(CMonster* monstre)
 	}
 }
 
+bool CMonster::verifTerrain(int num_att, CMonster* cible, CTerrain* terrain)
+{
+	if (terrain->isflooded() && m_type != "Water")
+	{
+		short val = cible->getFall() + rand() / RAND_MAX;
+		if (val)
+		{
+			int val_degat = degat(num_att, cible);
+			this->recevoirDegat(val_degat/4);
+			return 0;
+		}
+	}
+	return 1;
+}
+
 bool CMonster::tour(CMonster* monstre, CTerrain* terrain)
 {
 	std::cout << m_nom << " :\n";
@@ -346,7 +409,10 @@ bool CMonster::tour(CMonster* monstre, CTerrain* terrain)
 	std::cout << "4) " << m_nom_attaque[3] << "\n";
 	int num_att;
 	std::cin >> num_att;
-	this->attaquer(num_att, monstre);
+	if (verifTerrain(num_att, monstre, terrain))
+	{
+		this->attaquer(num_att, monstre);
+	}
 	/*std::cout << monstre->getNom()<< " :\n"; //J'ai modif ça aussi ^^'
 	std::cout << "Choix de l'attaque :\n";
 	std::cout << "0) Coup de griffes\n";
@@ -416,7 +482,7 @@ void CMonster::recevoirDegat(int degat)
 	this->setHPAct(this->getHPAct() - degat);
 }
 
-void CMonster::checkHP()
+void CMonster::checkHP(CTerrain* terrain)
 {
 	if ((this->getHPAct()) <= 0)
 	{

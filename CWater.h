@@ -26,8 +26,9 @@ public:
 
 	bool flood();
 	bool fall();
-	void checkHP();
-	bool attaquer(int num_att, CMonster* cible);
+	void checkHP(CTerrain* terrain);
+	bool attaquer(int num_att, CMonster* cible, CTerrain* terrain);
+	bool verifTerrain(int num_att, CMonster* cible, CTerrain* terrain);
 };
 
 #endif

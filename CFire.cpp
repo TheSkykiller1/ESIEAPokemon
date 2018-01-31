@@ -4,7 +4,7 @@ CFire::CFire() : CMonster()
 {
 }
 
-CFire::CFire(int id, std::string type, std::string nom, int HP, int vit, int att, int def) : CMonster(id, type, nom, HP, vit, att, def)
+CFire::CFire(int id, std::string type, std::string nom, int HP, int vit, int att, int def) : CMonster(id, type, nom, HP, vit, att, def), m_force({"Insect", "Plant"})
 {
 }
 
@@ -26,7 +26,7 @@ bool CFire::burn()
 	}
 }
 
-bool CFire::attaquer(int num_att, CMonster* cible)
+bool CFire::attaquer(int num_att, CMonster* cible, CTerrain* terrain)
 {
 	if (m_etat == "Paralyzed") //paralysie
 	{
@@ -40,6 +40,7 @@ bool CFire::attaquer(int num_att, CMonster* cible)
 		int val_degat = degat(num_att, cible);
 		cible->recevoirDegat(val_degat);
 		m_nu[num_att]--;
+		cible->checkHP(terrain);
 		if (burn() && m_type_attaque[num_att] != "Normal")
 		{
 			if (cible->getEtat() == "Normal")

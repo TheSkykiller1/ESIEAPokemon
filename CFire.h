@@ -15,7 +15,7 @@ public:
 	~CFire();
 	
 	bool burn(); //booléen de test brulure
-	bool attaquer(int m_num, CMonster* cible);
+	bool attaquer(int m_num, CMonster* cible, CTerrain* terrain);
 };
 
 #endif

@@ -43,7 +43,7 @@ bool CPlant::heal()
 	}
 }
 
-bool CPlant::attaquer(int num_att, CMonster* cible)
+bool CPlant::attaquer(int num_att, CMonster* cible, CTerrain* terrain)
 {
 	if (m_etat == "Paralyzed") //paralysie
 	{
@@ -57,6 +57,7 @@ bool CPlant::attaquer(int num_att, CMonster* cible)
 		int val_degat = degat(num_att, cible);
 		cible->recevoirDegat(val_degat);
 		m_nu[num_att]--;
+		cible->checkHP(terrain);
 		if (heal() && m_type_attaque[num_att] != "Normal")
 		{
 			m_HP_act = m_HP;
