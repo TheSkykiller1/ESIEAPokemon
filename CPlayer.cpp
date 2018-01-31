@@ -89,53 +89,51 @@ void CPlayer::set_terrain(CTerrain* terrain) { s_cases = terrain; }
 void CPlayer::attaquer()
 {
 	system("CLS");
+	CPlayer* pointer = s_target;
 	std::cout << "Joueur " << s_pseudo << " , c'est votre tour! Que voulez-vous faire ? \n\
 \t 1) Utiliser un object \n\
-\t 2) Attaquer le pokemon adverse " << s_target->Pokeballs[s_target->id_actif]->getNom() << " de type: " << s_target->Pokeballs[s_target->id_actif]->getType() << "\n";
+\t 2) Attaquer le pokemon adverse " << pointer->Pokeballs[pointer->id_actif]->getNom() << " de type: " << pointer->Pokeballs[pointer->id_actif]->getType() << "\n";
 	int choix;
+	
 	std::cin >> choix;
 	if (choix == 1)
 	{
-		use_object();
+		std::cout << "Quel objet voulez-vous utiliser sur "<< pointer->Pokeballs[pointer->id_actif]->getNom() << "?\n";
+		for (int i = 0; i < objects_player.size();i++)
+		{
+			if (nb_objects[i] > 0)
+			{
+				std::cout << "\t ID: " << i << " " << objects_player[i]->getNom() << " peut etre utiliser sur votre pokemon \n \t";
+				std::cout << "Genre: ";
+				if (objects_player[i]->getGenre() == "Potion")
+				{
+					std::cout << objects_player[i]->getGenre() << "\n \t";
+					std::cout << "Statistiques: \t\t" << objects_player[i]->getAtt() << " Attack \t" << objects_player[i]->getDef() << \
+						" Def \t" << objects_player[i]->getHP() << " HP \t" << objects_player[i]->getVit() << " Speed \n";
+				}
+				if (objects_player[i]->getGenre() == "Drug")
+				{
+					std::cout << objects_player[i]->getGenre() << "\n \t";
+					std::cout << "Statistiques: \t\t" << objects_player[i]->getEtat() << " etat \n";
+				}
+			}
+		}
+		int choix2 = 0;
+		std::cout << "Votre choix: ";
+		std::cin >> choix2;
+		//Pokeballs[id_actif]->useObject(objects_player[choix]);
+		nb_objects[choix2]--;
 	}
 	else if (choix == 2)
 	{
 		CMonster* Pukatchika = Pokeballs[id_actif];
-		Pukatchika->tour(s_target->Pokeballs[s_target->id_actif], s_cases);
+		//Pukatchika->tour(s_target->Pokeballs[s_target->id_actif], s_cases);
 	}
 }
-void CPlayer::use_object()
-{
-	std::cout << "Quel objet voulez-vous utiliser ? \n";
-	for (int i = 0; i < objects_player.size();i++)
-	{
-		if (nb_objects[i] > 0)
-		{
-			std::cout << "\t -" << i << ") " << objects_player[i]->getNom() << " peut etre utiliser sur votre pokemon \n \t";
-			std::cout << "Genre: ";
-			if (objects_player[i]->getGenre() == "Potion")
-			{
-				std::cout << objects_player[i]->getGenre() << "\n \t";
-				std::cout << "Statistiques: \t" << objects_player[i]->getAtt() << " Attack \t" << objects_player[i]->getDef() <<\
-					" Def \t" << objects_player[i]->getHP() << " HP \t" << objects_player[i]->getVit() << " Speed \n";
-			}
-			if (objects_player[i]->getGenre() == "Drug")
-			{
-				std::cout << objects_player[i]->getGenre() << "\n \t";
-				std::cout << "Statistiques: " << objects_player[i]->getEtat() << " etat \n";
-			}
-		}
-	}
-	int choix=0;
-	std::cout << "Votre choix: ";
-	std::cin >> choix;
-	Pokeballs[id_actif]->useObject(objects_player[choix]);
-	nb_objects[choix]--;
-	std::cout << "TTJTJTJJ";
 
-}
 bool CPlayer::check()
 {
+	/*
 	if (Pokeballs[id_actif]->getHPAct() <= 0)
 	{
 		id_actif++;
@@ -145,7 +143,8 @@ bool CPlayer::check()
 	else
 	{
 		return true;//toujours au moins 1 pokemon en vie
-	}
+	}*/
+	return false;
 }
 
  ///========================================================================

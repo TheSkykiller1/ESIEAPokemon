@@ -96,7 +96,6 @@ public:
 	void set_terrain(CTerrain* terrain);
 
 	void attaquer();
-	void use_object();
 	bool check();//false: perdu, true: encore des pokemon en vie;
 
 
