@@ -116,7 +116,6 @@
 			std::cout << " \t Terrain : " << terrain.id() << " nom: " << terrain.Title() << "\n";
 		}
 	}
-
 	int CWorld::dimension(bool xy)
 	{
 		if (xy) { return dimensionY; }
