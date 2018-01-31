@@ -27,6 +27,11 @@ float CWater::getFall()
 	return m_fall;
 }
 
+bool CWater::getFloodActivation()
+{
+	return m_flood_activation;
+}
+
 //SETTERS
 
 void CWater::setFlood(float flood)
@@ -37,6 +42,11 @@ void CWater::setFlood(float flood)
 void CWater::setFall(float fall)
 {
 	m_fall = fall;
+}
+
+void CWater::setFloodActivation(bool FA)
+{
+	m_flood_activation = FA;
 }
 
 //METHODES
@@ -54,6 +64,32 @@ bool CWater::flood()
 	}
 }
 
+bool CWater::fall()
+{
+	short val = m_fall + rand() / RAND_MAX;
+	if (val)
+	{
+		return 0;
+	}
+	else
+	{
+		return 1;
+	}
+}
+
+void CWater::checkHP()
+{
+	if (m_HP_act <= 0)
+	{
+		setHPAct(0);
+		if (m_flood_activation == 1)
+		{
+			m_flood_activation = 0;
+			//DESACTIVER L'INONDATION
+		}
+	}
+}
+
 bool CWater::attaquer(int num_att, CMonster* cible)
 {
 	if (m_etat == "Paralyzed") //paralysie
@@ -68,6 +104,12 @@ bool CWater::attaquer(int num_att, CMonster* cible)
 		int val_degat = degat(num_att, cible);
 		cible->recevoirDegat(val_degat);
 		m_nu[num_att]--;
+		if (flood())
+		{
+			//ACTIVER INNONDATION
+			//INDIQUER AU TERRAIN QUE LE MONSTRE RESPONSABLE EST CELUI-CI
+		}
+		cible->checkHP();
 		return 0;
 	}
 	else
