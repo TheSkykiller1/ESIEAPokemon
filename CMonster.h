@@ -3,8 +3,6 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include <fstream>//ifstream
-#include <sstream>
 #include <time.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -31,11 +29,6 @@ protected:
 	int m_etat_tours; //nombre de tours dans un état non normal
 	std::vector<std::string> m_force; //liste des types de monstres étant des cibles plus faciles
 	bool m_cache; //etat du cachage des monstres Rock
-
-
-	template<typename Out>
-	void split(const std::string &s, char delim, Out result);
-	std::vector<std::string> split(const std::string &s, char delim);
 
 public:
 	CMonster();

@@ -3,6 +3,19 @@
 #include "CPlayer.h"
 #include "CWorld.h"
 
+/*Informations
+*L'utilisation de \x82"" est pour affiché le caractère é dans la console windows
+ü : \x81
+â : \x83
+ä : \x84
+à : \x85
+ç : \x87
+ê : \x88
+ë : \x89
+è : \x8A
+ï : \x8B
+î : \x8C
+*/
 
 //Save les types de pokemons pour les "construire"
 struct TypePokemon {
@@ -293,6 +306,7 @@ void afficher_objets_joueur(int id)
 	}
 }
 
+
 void jouer()
 {
 	system("cls");
@@ -367,6 +381,31 @@ void jouer()
 					{
 						CElectric *poke;
 						poke = new CElectric(pokemon_choisi.id, pokemon_choisi.type, pokemon_choisi.name, hp, vit, att, def, pokemon_choisi.paralysis);
+						poke->set_attaques_disp(ListeAttaques);
+
+						std::cout << "Choisir 4 Attaques (ID) \n"; //todo Afficher attaque creation
+						//afficher_attaques();
+						nbchoix = 0;
+						while (nbchoix < 4)
+						{
+							std::cout << "Choix " << nbchoix + 1 << "/4 \n";
+							int choix;
+							std::cin >> choix;
+							if ((choix < ListeAttaques.size()) && (poke->getType() == ListeAttaques[choix]->getType()) && (poke->Attaques_actives[choix] == false))
+							{
+								poke->Attaques_actives[choix] = true;
+								std::cout << "Attaque choisie : " << poke->Attaques_list[choix]->getNom() << "\n";
+								nbchoix++;
+							}
+							else if ((choix < ListeAttaques.size()) &&  (poke->getType() != ListeAttaques[choix]->getType()))
+							{
+								std::cout << "Choix hors plage, ou attaque invalide sur ce pokemon\n";
+							}
+							else
+							{
+								std::cout << "Choix hors plage, ou attaque deja active sur ce pokemon\n";
+							}
+						}
 						ListePokemon.push_back(poke);
 						int pos = std::find(ListePokemon.begin(), ListePokemon.end(), poke) - ListePokemon.begin();
 						Monde.Joueurs[i].add_pokemon(ListePokemon[pos]);
@@ -376,6 +415,31 @@ void jouer()
 					{
 						CWater *poke;
 						poke = new CWater(pokemon_choisi.id, pokemon_choisi.type, pokemon_choisi.name, hp, vit, att, def);
+						poke->set_attaques_disp(ListeAttaques);
+
+						std::cout << "Choisir 4 Attaques (ID) \n"; //todo Afficher attaque creation
+																   //afficher_attaques();
+						nbchoix = 0;
+						while (nbchoix < 4)
+						{
+							std::cout << "Choix " << nbchoix + 1 << "/4 \n";
+							int choix;
+							std::cin >> choix;
+							if ((choix < ListeAttaques.size()) && (poke->getType() == ListeAttaques[choix]->getType()) && (poke->Attaques_actives[choix] == false))
+							{
+								poke->Attaques_actives[choix] = true;
+								std::cout << "Attaque choisie : " << poke->Attaques_list[choix]->getNom() << "\n";
+								nbchoix++;
+							}
+							else if ((choix < ListeAttaques.size()) && (poke->getType() != ListeAttaques[choix]->getType()))
+							{
+								std::cout << "Choix hors plage, ou attaque invalide sur ce pokemon\n";
+							}
+							else
+							{
+								std::cout << "Choix hors plage, ou attaque deja active sur ce pokemon\n";
+							}
+						}
 						ListePokemon.push_back(poke);
 						int pos = std::find(ListePokemon.begin(), ListePokemon.end(), poke) - ListePokemon.begin();
 						Monde.Joueurs[i].add_pokemon(ListePokemon[pos]);
@@ -385,6 +449,31 @@ void jouer()
 					{
 						CRock *poke;
 						poke = new CRock(pokemon_choisi.id, pokemon_choisi.type, pokemon_choisi.name, hp, vit, att, def);
+						poke->set_attaques_disp(ListeAttaques);
+
+						std::cout << "Choisir 4 Attaques (ID) \n"; //todo Afficher attaque creation
+																   //afficher_attaques();
+						nbchoix = 0;
+						while (nbchoix < 4)
+						{
+							std::cout << "Choix " << nbchoix + 1 << "/4 \n";
+							int choix;
+							std::cin >> choix;
+							if ((choix < ListeAttaques.size()) && (poke->getType() == ListeAttaques[choix]->getType()) && (poke->Attaques_actives[choix] == false))
+							{
+								poke->Attaques_actives[choix] = true;
+								std::cout << "Attaque choisie : " << poke->Attaques_list[choix]->getNom() << "\n";
+								nbchoix++;
+							}
+							else if ((choix < ListeAttaques.size()) && (poke->getType() != ListeAttaques[choix]->getType()))
+							{
+								std::cout << "Choix hors plage, ou attaque invalide sur ce pokemon\n";
+							}
+							else
+							{
+								std::cout << "Choix hors plage, ou attaque deja active sur ce pokemon\n";
+							}
+						}
 						ListePokemon.push_back(poke);
 						int pos = std::find(ListePokemon.begin(), ListePokemon.end(), poke) - ListePokemon.begin();
 						Monde.Joueurs[i].add_pokemon(ListePokemon[pos]);
@@ -394,6 +483,30 @@ void jouer()
 					{
 						CFire *poke;
 						poke = new CFire(pokemon_choisi.id, pokemon_choisi.type, pokemon_choisi.name, hp, vit, att, def);
+						poke->set_attaques_disp(ListeAttaques);
+						std::cout << "Choisir 4 Attaques (ID) \n"; //todo Afficher attaque creation
+																   //afficher_attaques();
+						nbchoix = 0;
+						while (nbchoix < 4)
+						{
+							std::cout << "Choix " << nbchoix + 1 << "/4 \n";
+							int choix;
+							std::cin >> choix;
+							if ((choix < ListeAttaques.size()) && (poke->getType() == ListeAttaques[choix]->getType()) && (poke->Attaques_actives[choix] == false))
+							{
+								poke->Attaques_actives[choix] = true;
+								std::cout << "Attaque choisie : " << poke->Attaques_list[choix]->getNom() << "\n";
+								nbchoix++;
+							}
+							else if ((choix < ListeAttaques.size()) && (poke->getType() != ListeAttaques[choix]->getType()))
+							{
+								std::cout << "Choix hors plage, ou attaque invalide sur ce pokemon\n";
+							}
+							else
+							{
+								std::cout << "Choix hors plage, ou attaque deja active sur ce pokemon\n";
+							}
+						}
 						ListePokemon.push_back(poke);
 						int pos = std::find(ListePokemon.begin(), ListePokemon.end(), poke) - ListePokemon.begin();
 						Monde.Joueurs[i].add_pokemon(ListePokemon[pos]);
@@ -403,6 +516,30 @@ void jouer()
 					{
 						CInsect *poke;
 						poke = new CInsect(pokemon_choisi.id, pokemon_choisi.type, pokemon_choisi.name, hp, vit, att, def);
+						poke->set_attaques_disp(ListeAttaques);
+						std::cout << "Choisir 4 Attaques (ID) \n"; //todo Afficher attaque creation
+																   //afficher_attaques();
+						nbchoix = 0;
+						while (nbchoix < 4)
+						{
+							std::cout << "Choix " << nbchoix + 1 << "/4 \n";
+							int choix;
+							std::cin >> choix;
+							if ((choix < ListeAttaques.size()) && (poke->getType() == ListeAttaques[choix]->getType()) && (poke->Attaques_actives[choix] == false))
+							{
+								poke->Attaques_actives[choix] = true;
+								std::cout << "Attaque choisie : " << poke->Attaques_list[choix]->getNom() << "\n";
+								nbchoix++;
+							}
+							else if ((choix < ListeAttaques.size()) && (poke->getType() != ListeAttaques[choix]->getType()))
+							{
+								std::cout << "Choix hors plage, ou attaque invalide sur ce pokemon\n";
+							}
+							else
+							{
+								std::cout << "Choix hors plage, ou attaque deja active sur ce pokemon\n";
+							}
+						}
 						ListePokemon.push_back(poke);
 						int pos = std::find(ListePokemon.begin(), ListePokemon.end(), poke) - ListePokemon.begin();
 						Monde.Joueurs[i].add_pokemon(ListePokemon[pos]);
@@ -412,6 +549,30 @@ void jouer()
 					{
 						CPlant *poke;
 						poke = new CPlant(pokemon_choisi.id, pokemon_choisi.type, pokemon_choisi.name, hp, vit, att, def);
+						poke->set_attaques_disp(ListeAttaques);
+						std::cout << "Choisir 4 Attaques (ID) \n"; //todo Afficher attaque creation
+																   //afficher_attaques();
+						nbchoix = 0;
+						while (nbchoix < 4)
+						{
+							std::cout << "Choix " << nbchoix + 1 << "/4 \n";
+							int choix;
+							std::cin >> choix;
+							if ((choix < ListeAttaques.size()) && (poke->getType() == ListeAttaques[choix]->getType()) && (poke->Attaques_actives[choix] == false))
+							{
+								poke->Attaques_actives[choix] = true;
+								std::cout << "Attaque choisie : " << poke->Attaques_list[choix]->getNom() << "\n";
+								nbchoix++;
+							}
+							else if ((choix < ListeAttaques.size()) && (poke->getType() != ListeAttaques[choix]->getType()))
+							{
+								std::cout << "Choix hors plage, ou attaque invalide sur ce pokemon\n";
+							}
+							else
+							{
+								std::cout << "Choix hors plage, ou attaque deja active sur ce pokemon\n";
+							}
+						}
 						ListePokemon.push_back(poke);
 						int pos = std::find(ListePokemon.begin(), ListePokemon.end(), poke) - ListePokemon.begin();
 						Monde.Joueurs[i].add_pokemon(ListePokemon[pos]);
