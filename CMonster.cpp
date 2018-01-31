@@ -207,7 +207,6 @@ void CMonster::reset()
 	//TO DO : RETIRER L'INNONDATION SI LE MONSTRE EN A DECLENCHE UNE 
 }
 
-
 std::string CMonster::updateEtat() //todo etat a finir
 {
 	std::string etat = getEtat();

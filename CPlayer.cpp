@@ -103,6 +103,7 @@ void CPlayer::attaquer()
 		{
 			if (nb_objects[i] > 0)
 			{
+				
 				std::cout << "\t ID: " << i << " " << objects_player[i]->getNom() << " peut etre utiliser sur votre pokemon \n \t";
 				std::cout << "Genre: ";
 				if (objects_player[i]->getGenre() == "Potion")
