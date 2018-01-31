@@ -10,5 +10,4 @@ CGrass::CGrass(int id, std::string type, std::string nom, int HP, int vit, int a
 
 CGrass::~CGrass()
 {
-	CMonster();
 }
