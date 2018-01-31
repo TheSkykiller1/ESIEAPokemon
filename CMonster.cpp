@@ -135,6 +135,11 @@ std::vector<float> CMonster::getPEchec()
 	return m_pEchec;
 }
 
+std::vector<CAttaque*> CMonster::getAttaques()
+{
+	return m_attaques;
+}
+
 //SETTERS
 
 void CMonster::setId(int id)
@@ -192,6 +197,11 @@ void CMonster::setDefenseAct(int defense_act)
 	m_defense_act = defense_act;
 }
 
+void CMonster::setForce(std::vector<std::string> force)
+{
+	m_force = force;
+}
+
 void CMonster::setEtat(std::string etat)
 {
 	m_etat = etat;
@@ -205,6 +215,36 @@ void CMonster::setEtatTours(int tours)
 void CMonster::setCache(bool cache)
 {
 	m_cache = cache;
+}
+
+void CMonster::setNAttaques(std::vector<std::string> nomAttaque)
+{
+	m_nom_attaque = nomAttaque;
+}
+
+void CMonster::setTAttaques(std::vector<std::string> typeAttaque)
+{
+	m_type_attaque = typeAttaque;
+}
+
+void CMonster::setNU(std::vector<int> NU)
+{
+	m_nu = NU;
+}
+
+void CMonster::setPA(std::vector<int> PA)
+{
+	m_pAttaques = PA;
+}
+
+void CMonster::setPE(std::vector<float> PE)
+{
+	m_pEchec = PE;
+}
+
+void CMonster::setAttaques(std::vector<CAttaque*> attaques)
+{
+	m_attaques = attaques;
 }
 
 void CMonster::reset()

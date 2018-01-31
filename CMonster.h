@@ -34,48 +34,59 @@ protected:
 	std::vector<int> m_nu; //vecteur des nombres d'utilisations restantes
 	std::vector<int> m_pAttaques; //vecteur des puissances d'attaques
 	std::vector<float> m_pEchec; //vecteur des probabilités d'echecs
+
+	std::vector<CAttaque*> m_attaques; //vecteur des attaques
+
 public:
 	CMonster();
 	CMonster(int id, std::string type, std::string nom, int HP, int vit, int att, int def);
 	~CMonster();
 
-	int getId();
-	std::string getType();
-	std::string getNom();
-	int getHP();
-	int getHPAct();
-	int getVitesse();
-	int getVitesseAct();
-	int getAttaque();
-	int getAttaqueAct();
-	int getDefense();
-	int getDefenseAct();
-	std::string getEtat();
-	int getEtatTours();
+	virtual int getId();
+	virtual std::string getType();
+	virtual std::string getNom();
+	virtual int getHP();
+	virtual int getHPAct();
+	virtual int getVitesse();
+	virtual int getVitesseAct();
+	virtual int getAttaque();
+	virtual int getAttaqueAct();
+	virtual int getDefense();
+	virtual int getDefenseAct();
+	virtual std::string getEtat();
+	virtual int getEtatTours();
 	virtual std::vector<std::string> getForce();
-	bool getCache();
+	virtual bool getCache();
 	virtual float getFall();
-	std::vector<std::string> getNAttaques();
-	std::vector<std::string> getTAttaques();
-	std::vector<int> getNU();
-	std::vector<int> getPAtt();
-	std::vector<float> getPEchec();
+	virtual std::vector<std::string> getNAttaques();
+	virtual std::vector<std::string> getTAttaques();
+	virtual std::vector<int> getNU();
+	virtual std::vector<int> getPAtt();
+	virtual std::vector<float> getPEchec();
+	virtual std::vector<CAttaque*> getAttaques();
 
-	void setId(int id);
-	void setType(std::string type);
-	void setNom(std::string nom);
-	void setHP(int HP);
-	void setHPAct(int HP_act);
-	void setVitesse(int vitesse);
-	void setVitesseAct(int vitesse_act);
-	void setAttaque(int attaque);
-	void setAttaqueAct(int attaque_act);
-	void setDefense(int defense);
-	void setDefenseAct(int defense_act);
-	void setEtat(std::string etat);
-	void setEtatTours(int tours);
-	void setCache(bool cache);
-	void reset();
+	virtual void setId(int id);
+	virtual void setType(std::string type);
+	virtual void setNom(std::string nom);
+	virtual void setHP(int HP);
+	virtual void setHPAct(int HP_act);
+	virtual void setVitesse(int vitesse);
+	virtual void setVitesseAct(int vitesse_act);
+	virtual void setAttaque(int attaque);
+	virtual void setAttaqueAct(int attaque_act);
+	virtual void setDefense(int defense);
+	virtual void setDefenseAct(int defense_act);
+	virtual void setForce(std::vector<std::string> force);
+	virtual void setEtat(std::string etat);
+	virtual void setEtatTours(int tours);
+	virtual void setCache(bool cache);
+	virtual void reset();
+	virtual void setNAttaques(std::vector<std::string> nomAttaque);
+	virtual void setTAttaques(std::vector<std::string> typeAttaque);
+	virtual void setNU(std::vector<int> NU);
+	virtual void setPA(std::vector<int> PA);
+	virtual void setPE(std::vector<float> PE);
+	virtual void setAttaques(std::vector<CAttaque*> attaques);
 	
 	std::string updateEtat(); //mise à jour des états des monstres (à chaque tour)
 	virtual bool attaquer(int num_att, CMonster* cible); //attaque d'un monstre vers un autre avec une attaque determinée
