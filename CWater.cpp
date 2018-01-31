@@ -1,13 +1,13 @@
 #include "CWater.h"
 
-CWater::CWater()
+CWater::CWater() : CMonster()
 {
-	CMonster();
+	
 }
 
-CWater::CWater(int id, std::string type, std::string nom, int HP, int vit, int att, int def)
+CWater::CWater(int id, std::string type, std::string nom, int HP, int vit, int att, int def): CMonster(id, type, nom, HP, vit, att, def)
 {
-	CMonster(id, type, nom, HP, vit, att, def);
+	
 }
 
 CWater::~CWater()

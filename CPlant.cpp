@@ -1,14 +1,12 @@
 #include "CPlant.h"
 
-CPlant::CPlant()
+CPlant::CPlant(): CGrass()
 {
-	CMonster();
+	
 }
 
-CPlant::CPlant(int id, std::string type, std::string nom, int HP, int vit, int att, int def, float heal)
+CPlant::CPlant(int id, std::string type, std::string nom, int HP, int vit, int att, int def, float heal): CGrass(id, type, nom, HP, vit, att, def), m_heal(heal)
 {
-	CGrass(id, type, nom, HP, vit, att, def);
-	m_heal = heal;
 }
 
 CPlant::~CPlant()
