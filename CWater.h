@@ -9,6 +9,7 @@ protected:
 	std::vector<std::string> m_force = { "Fire" };
 	float m_flood;
 	float m_fall;
+	bool m_flood_activation; //est-ce que le monstre a déclencher une inondation
 
 public:
 	CWater();
@@ -17,11 +18,15 @@ public:
 
 	float getFlood();
 	float getFall();
+	bool getFloodActivation();
 
 	void setFlood(float flood);
 	void setFall(float fall);
+	void setFloodActivation(bool FA);
 
 	bool flood();
+	bool fall();
+	void checkHP();
 	bool attaquer(int num_att, CMonster* cible);
 };
 

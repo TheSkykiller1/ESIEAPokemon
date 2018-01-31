@@ -208,6 +208,7 @@ void CMonster::reset()
 	m_etat = "Normal";
 	m_etat_tours = 0;
 	m_cache = false;
+	//TO DO : RETIRER L'INNONDATION SI LE MONSTRE EN A DECLENCHE UNE 
 }
 
 //METHODES
@@ -413,4 +414,12 @@ void CMonster::useObject(CObject* objet)
 void CMonster::recevoirDegat(int degat)
 {
 	this->setHPAct(this->getHPAct() - degat);
+}
+
+void CMonster::checkHP()
+{
+	if ((this->getHPAct()) <= 0)
+	{
+		this->setHPAct(0);
+	}
 }

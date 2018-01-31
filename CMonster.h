@@ -85,6 +85,7 @@ public:
 	bool tour(CMonster* monstre, CTerrain* terrain); //demande de l'attaque et exécution de cette dernière
 	void useObject(CObject* objet); //utilisation des objets
 	void recevoirDegat(int degat); //reception des dégâts
+	virtual void checkHP(); //vérification des HP du monstre, pour exécution d'actions spécifiques
 };
 
 #endif
