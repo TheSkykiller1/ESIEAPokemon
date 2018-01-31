@@ -120,6 +120,7 @@ void read_config_pokemon()
 		std::cout << "Impossible d’ouvrir le fichier \n";
 	}
 }
+
 void read_config_object()
 {
 	std::string row;

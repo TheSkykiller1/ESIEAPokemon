@@ -261,6 +261,58 @@ void CMonster::reset()
 
 //METHODES
 
+struct Attaques {
+	std::string name, type;
+	int power, nbuse;
+	float fail;
+};
+
+
+void read_config_attack()
+{
+	std::string row;
+	std::ifstream File("attacks.pkmn", std::ios::in);
+	int id = 0;
+	if (File.is_open())
+	{
+		while (getline(File, row))
+		{
+			if (row == "Attack")//Debut du bloc
+			{
+				Attaques attaque;
+				attaque.id = id++;
+				while (row != "EndAttack")//Tant que l'on est dans le bloc
+				{
+					getline(File, row);
+					if (row == "EndAttack") { break; }//Si on a fini le bloc on quitte
+					std::vector<std::string> token = split(row, '\t\t');
+					std::vector<std::string> element;
+					for (int i = 0; i < token.size(); i++)//On clear les elements vides
+					{
+						if (token[i] != "") { element.push_back(token[i]); }
+					}
+
+					//Analyse des resultats
+					if (element[0] == "Name") { attaque.name = element[1]; }
+					else if (element[0] == "Type") { attaque.type = element[1]; }
+					else if (element[0] == "Power") { attaque.power = element[1]; }
+					else if (element[0] == "NbUse") { attaque.nbuse = element[1]; }
+					else if (element[0] == "Fail") { attaque.fail = element[1]; }
+				}
+				m_attaques.push_back(attaque);
+			}
+		}
+		File.close();
+	}
+	else
+	{
+		std::cout << "Impossible d’ouvrir le fichier \n";
+	}
+}
+
+//PARSER DE CATTAQUE : A MODIFIER
+
+
 std::string CMonster::updateEtat() //todo etat a finir
 {
 	std::string etat = getEtat();
