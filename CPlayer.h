@@ -88,7 +88,7 @@ public:
 	void set_object(std::vector<CObject*> listeobject);	//set object list (copy from CWorld)
 	void set_nb_oject(int id, int nb);
 
-	bool add_pokemon(CMonster* pokemon);
+	void add_pokemon(CMonster* pokemon);
 
 	void move(int X, int Y);
 	void move(int X, int Y, CTerrain* terrain, CPlayer* cible);

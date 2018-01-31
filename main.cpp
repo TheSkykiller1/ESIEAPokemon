@@ -17,16 +17,11 @@ int nb_joueurs = 0;
 std::vector<CPlayer> Joueurs;
 
 std::vector<CMonster*> ListePokemon;
-
-/*std::vector<CFire> Fire;
-std::vector<CElectric> Electric;
-std::vector<CRock> Rock;
-std::vector<CWater> Water;
-std::vector<CPlant> Plant;
-std::vector<CInsect> Insect;*/
-
 std::vector<TypePokemon> ListeTypePokemon;
 
+std::vector<CObject*> ListeObject;
+
+CWorld Monde;
 
 //===================PARSER==========================
 template<typename Out>
@@ -126,7 +121,98 @@ void read_config_pokemon()
 		std::cout << "Impossible d’ouvrir le fichier \n";
 	}
 }
-//Todo corriger
+void CWorld::read_config_object()
+{
+	std::string row;
+	std::ifstream File("object.pkmn", std::ios::in);
+	if (File.is_open())
+	{
+		while (getline(File, row))
+		{
+			if (row == "object")//Debut du bloc
+			{
+				std::string name, genre, etat;
+				int id;
+				int attack = 0, defense = 0, hp = 0, speed = 0;
+				std::vector<std::string> type;
+
+				while (row != "Endobject")//Tant que l'on est dans le bloc
+				{
+					getline(File, row);
+					if (row == "Endobject") { break; }//Si on a fini le bloc on quitte
+					std::vector<std::string> token = split(row, '\t\t');
+					std::vector<std::string> element;
+					for (int i = 0;i < token.size();i++)//On clear les elements vides
+					{
+						if (token[i] != "") { element.push_back(token[i]); }
+					}
+
+					if (element[0] == "Name") { name = element[1]; }
+					else if (element[0] == "Id")
+					{
+						id = stoi(element[1]);
+					}
+					else if (element[0] == "Genre")
+					{
+						genre = element[1];
+					}
+					else if (element[0] == "Type")
+					{
+						for (int b = 1;b < element.size();b++)
+						{
+							type.push_back(element[b]);
+							//std::cout << "TYPE : " << element[b] << " -" << b << ") \t";
+						}
+						std::cout << "\n";
+					}
+					else if (element[0] == "Heal")
+					{
+						hp = stoi(element[1]);
+					}
+					else if (element[0] == "Speed")
+					{
+						speed = stoi(element[1]);
+					}
+					else if (element[0] == "Attack")
+					{
+						attack = stoi(element[1]);
+					}
+					else if (element[0] == "Defense")
+					{
+						defense = stoi(element[1]);
+					}
+					else if (element[0] == "State")
+					{
+						etat = element[1];
+					}
+				}
+				//std::cout << "Info id: " << id << " genre:" << genre << " name:" << name << " speed:" << speed << " attack:" << attack << " defense:" << defense << " hp:" << hp << "\n";
+				if (genre == "Potion")
+				{
+					CPotion *potion;
+					potion = new CPotion(id, genre, name, type, speed, attack, defense, hp);
+					ListeObject.push_back(potion);
+					int pos = std::find(ListeObject.begin(), ListeObject.end(), potion) - ListeObject.begin();
+					Monde.ListeObjets.push_back(ListeObject[pos]);
+					//std::cout << "Potion id: " << potion.getId() << " genre:" << potion.getGenre() << " name:" << potion.getNom() << " speed:" << potion.getVit() << " attack:" << potion.getAtt() << " defense:" << potion.getDef() << " hp:" << potion.getHP() << "\n\n";
+				}
+				if (genre == "Drug")
+				{
+					CDrug *drug;
+					drug = new CDrug(id, genre, name, type, etat);
+					ListeObject.push_back(drug);
+					int pos = std::find(ListeObject.begin(), ListeObject.end(), drug) - ListeObject.begin();
+					Monde.ListeObjets.push_back(ListeObject[pos]);
+				}
+			}
+		}
+		File.close();
+	}
+	else
+	{
+		std::cout << "Impossible d’ouvrir le fichier \n";
+	}
+}
 
 
 void jouer()

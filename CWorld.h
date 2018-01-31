@@ -23,13 +23,6 @@ protected:
 	int dimensionY;
 
 	//Save les types de pokemons pour les "construire"
-	struct TypePokemon {
-		std::string type, name;
-		int id, HP_min, HP_max, VIT_min, VIT_max, \
-			ATT_min, ATT_max, DEF_min, DEF_max;
-
-		float flood, fall, paralysis, poison, burn, heal;
-	};
 
 	//==================Methodes======================
 	//---------Parser----------------
@@ -40,22 +33,23 @@ protected:
 
 	//---------Methodes discretes----
 
-	void read_config_pokemon();
 	void read_config_terrain();
-	void read_config_object();
 
 ///========================================================================
 public:
 	//===================Variables=====================
 
-	std::vector<CPlayer> joueurs;
+	std::vector<CPlayer> Joueurs;
+
+	std::vector<CObject*> ListeObjets;
+
 	std::vector <std::vector <CTerrain> > cases;
+
+	void set_liste_objet(std::vector<CObject*> obj);
 
 	 //-------config----------------------------
 
-	std::vector<TypePokemon> ListePokemon;
 	std::vector<CTerrain> ListeTerrain;
-	std::vector<CObject> ListeObject;
 
 	//==================Methodes======================
 	//---------Constructeurs / Destructeur-------
