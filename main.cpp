@@ -323,18 +323,18 @@ void jouer()
 						ListePokemon.push_back(poke);
 						int pos = std::find(ListePokemon.begin(), ListePokemon.end(), poke) - ListePokemon.begin();
 						Joueurs[i].add_pokemon(ListePokemon[pos]);
-
 					}
 					nbchoix++;
 					break;
 				}
 			}
-
 		}
 		std::cout << "Votre joueur possede : ";
 		Joueurs[i].list_pokemon();
-		std::cout << "Choisir vos objets: \n";
+		std::cout << "Choisir vos objets: MAIN\n";
 		afficher_objets();
+
+
 		system("pause");
 		Monde.list_player();
 		system("pause");
@@ -487,7 +487,7 @@ void jeux()
 				std::cout<<"Vous avez ajouter: "<< Monde.joueurs[i].objects[j].getNom()<<", le total de cet objet est de: "<< Monde.joueurs[i].nb_objects_base[j]<<"\n";
 				object_nb++;
 				system("pause");
-				}*/
+				}
 			}
 			if (test == 0)
 			{
@@ -497,7 +497,7 @@ void jeux()
 			test = 0;
 		}
 	}
-}
+}*/
 
 int main()
 {

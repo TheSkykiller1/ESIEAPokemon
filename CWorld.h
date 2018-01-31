@@ -45,7 +45,6 @@ public:
 
 	std::vector <std::vector <CTerrain> > cases;
 
-	void set_liste_objet(std::vector<CObject*> obj);
 
 	 //-------config----------------------------
 
@@ -61,9 +60,7 @@ public:
 
 	void set_liste_objet(std::vector<CObject*> obj);
 
-	void afficher_pokemon();
 	void afficher_terrain();
-	void afficher_objets();
 
 	//---------Methodes--------------------------
 
