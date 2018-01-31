@@ -90,7 +90,7 @@
 		}
 	}
 	
-	void set_liste_objet(std::vector<CObject*> obj);
+	
 ///========================================================================
 /*Public*/
 	//==================Methodes======================
@@ -99,23 +99,20 @@
 	CWorld::CWorld()//todo affichage par le menu non pas à la creation
 	{
 		read_config_terrain();
-		afficher_pokemon();
 		afficher_terrain();
-		afficher_objets();
 	}
 	CWorld::~CWorld(){}
 
 	//---------Methodes discretes----
-
-	void CWorld::afficher_pokemon()//todo afficher plus d'infos
+	void CWorld::set_liste_objet(std::vector<CObject*> obj)
 	{
-		std::cout << "Tous les pokemons lu dans la config: \n";
-		for (int i = 0;i < ListePokemon.size();i++)
-		{
-			TypePokemon pokedex = ListePokemon[i];
-			std::cout << " \t Pokemon : " << pokedex.id << " nom: " << pokedex.name << " type: " << pokedex.type << "\n";
-		}
+		ListeObjets = obj;
 	}
+	
+	//---------Methodes--------------------------
+
+	//---------Getters-----
+
 	void CWorld::afficher_terrain()//todo afficher mieux le terrain
 	{
 		std::cout << "Tous les terrains lu dans la config: \n";
@@ -125,25 +122,7 @@
 			std::cout << " \t Terrain : " << terrain.id() << " nom: " << terrain.Title() << "\n";
 		}
 	}
-	void CWorld::afficher_objets()
-	{
-		std::cout << "Tous les objets lu dans la config: \n";
-		for (int i = 0;i < ListeObject.size();i++)
-		{
-			CObject objets = ListeObject[i];
 
-			std::cout << "\t -" << ListeObject[i].getId() << ") Nom : \"" << ListeObject[i].getNom() << "\"\t | Genre : \"" <<\
-				ListeObject[i].getGenre() << "\"\t | Attack : " << ListeObject[i].getAtt() << "\t | Defense : " <<\
-				ListeObject[i].getDef() << "\t | Vitesse : " << ListeObject[i].getVit() << "\t | HP : " <<\
-				ListeObject[i].getHP() << "\t | etat : " << ListeObject[i].getEtat() << "\n";
-
-
-			//std::cout << " \t Objet id: " << objets.getId() << " nom: \"" << objets.getNom() << "\" type: " << objets.getGenre() << "\n";
-		}
-	}
-	//---------Methodes--------------------------
-
-	//---------Getters-----
 	int CWorld::dimension(bool xy)
 	{
 		if (xy) { return dimensionY; }
@@ -178,24 +157,15 @@
 		}
 		std::cout << "\n\n";
 	}
-
-	int CWorld::connected_player() { return (joueurs.size() - 1); }
 	void CWorld::list_player()
 	{
-		for (int i = 0;i < joueurs.size();i++)
+		for (int i = 0;i < Joueurs.size();i++)
 		{
-			std::cout << "Joueur n°" << i << " : " << joueurs[i].pseudo() << " lvl: " << joueurs[i].level() << " xp: " << joueurs[i].xp() << "/" << joueurs[i].xp_up() << "\n";
-		}
-	}
-	void CWorld::detail_list_player()
-	{
-		for (int i = 0;i < joueurs.size();i++)
-		{
-			std::cout << "Joueur n°" << i << " : " << joueurs[i].pseudo() << " lvl: " << joueurs[i].level() << " xp: " << joueurs[i].xp() << "/" << joueurs[i].xp_up() << \
-				"\n a comme pokemon: \n \t";
-			for (int o = 0; o < joueurs[i].Pokeballs.size();o++)
+			std::cout << "Joueur n°" << i << " : " << Joueurs[i].pseudo() << " a comme pokemon: \n";
+			for (int o = 0; o < Joueurs[i].Pokeballs.size();o++)
 			{
-				std::cout << joueurs[i].Pokeballs[o].getNom() << " de type " << joueurs[i].Pokeballs[o].getType() << "\n \t";
+				std::cout << "\t-"<< Joueurs[i].Pokeballs[o]->getId()<<") "<< Joueurs[i].Pokeballs[o]->getNom() << " de type " << Joueurs[i].Pokeballs[o]->getType() << "\n \t" \
+					<< Joueurs[i].Pokeballs[o]->getAttaque() << " Damage \n";
 			}
 		}
 	}

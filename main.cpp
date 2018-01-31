@@ -121,7 +121,7 @@ void read_config_pokemon()
 		std::cout << "Impossible d’ouvrir le fichier \n";
 	}
 }
-void CWorld::read_config_object()
+void read_config_object()
 {
 	std::string row;
 	std::ifstream File("object.pkmn", std::ios::in);
@@ -211,6 +211,20 @@ void CWorld::read_config_object()
 	else
 	{
 		std::cout << "Impossible d’ouvrir le fichier \n";
+	}
+}
+
+void afficher_objets()
+{
+	std::cout << "Tous les objets disponibles: \n";
+	for (int i = 0;i < ListeObject.size();i++)
+	{
+		CObject* objets = ListeObject[i];
+
+		std::cout << "\t -" << objets->getId() << ") Nom : \"" << objets->getNom() << "\"\t | Genre : \"" << \
+			objets->getGenre() << "\"\t | Attack : " << objets->getAtt() << "\t | Defense : " << \
+			objets->getDef() << "\t | Vitesse : " << objets->getVit() << "\t | HP : " << \
+			objets->getHP() << "\t | etat : " << objets->getEtat() << "\n";
 	}
 }
 
@@ -319,7 +333,10 @@ void jouer()
 		}
 		std::cout << "Votre joueur possede : ";
 		Joueurs[i].list_pokemon();
-
+		std::cout << "Choisir vos objets: \n";
+		afficher_objets();
+		system("pause");
+		Monde.list_player();
 		system("pause");
 		//float flood, fall, paralysis, poison, burn, heal;
 	}
@@ -327,8 +344,9 @@ void jouer()
 }
 
 
-
 /*Fonction regroupant tout le jeu*/
+
+/*
 void jeux()
 {
 	//====================Etape 1: Creation du monde==========================
@@ -481,14 +499,13 @@ void jeux()
 	}
 }
 
-/*Menu de control du jeu*/
-
-
 int main()
 {
+	read_config_object();
+	read_config_pokemon();
+
+	Monde.set_liste_objet(ListeObject);
+
 	jouer();
-	
-
 	system("pause");
-
 }

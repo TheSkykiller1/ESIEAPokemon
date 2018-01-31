@@ -51,7 +51,7 @@ public:
 	//---------Constructeurs / Destructeur-------
 
 	CPlayer();
-	CPlayer(int id, std::string name, int posX, int posY, int fight_count = 0, int fight_win = 0);
+	CPlayer(int id, std::string name, int posX=0, int posY=0, int fight_count = 0, int fight_win = 0);
 	~CPlayer();
 
 	//---------Variables discretes----//Temporairement public

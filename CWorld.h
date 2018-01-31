@@ -59,6 +59,8 @@ public:
 
 	//---------Methodes discretes----
 
+	void set_liste_objet(std::vector<CObject*> obj);
+
 	void afficher_pokemon();
 	void afficher_terrain();
 	void afficher_objets();
@@ -69,9 +71,7 @@ public:
 	int dimension(bool xy);// 0=x et 1=y
 	void map_view_terrain();
 
-	int connected_player();
 	void list_player();
-	void detail_list_player();
 
 	//---------Setters-----
 
