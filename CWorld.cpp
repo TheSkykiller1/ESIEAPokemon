@@ -224,5 +224,9 @@
 			}
 		}
 	}
+	void CWorld::set_terrain_player(int id, int x, int y)
+	{
+		Joueurs[id].set_terrain(&cases[x][y]);
+	}
 
 ///========================================================================

@@ -73,6 +73,7 @@ public:
 
 	void add_player(CPlayer player);
 	void move_player(int id, int x, int y);
+	void set_terrain_player(int id, int x, int y);
 
 	///========================================================================
 };

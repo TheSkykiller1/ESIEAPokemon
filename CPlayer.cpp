@@ -63,6 +63,7 @@ void CPlayer::set_object(std::vector<CObject*> listeobject)
 	objects_player = listeobject;
 	for (int i = 0;i < listeobject.size();i++)//init nb of object
 	{
+		nb_objects_base.push_back(0);
 		nb_objects.push_back(0);
 	}
 }
@@ -70,7 +71,7 @@ void CPlayer::set_object(std::vector<CObject*> listeobject)
 void CPlayer::set_nb_oject(int id, int nb)
 {
 	nb_objects_base[id] = nb;
-	nb_objects = nb_objects_base;
+	nb_objects[id] = nb;
 }
 
 void CPlayer::add_pokemon(CMonster* pokemon)
