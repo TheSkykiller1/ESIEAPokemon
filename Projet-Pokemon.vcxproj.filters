@@ -97,9 +97,6 @@
     <ClInclude Include="CDrug.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
-    <ClInclude Include="CWorld.h">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
     <ClInclude Include="CTerrain.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
@@ -140,6 +137,9 @@
       <Filter>Fichiers d%27en-tête\ClassMonstre</Filter>
     </ClInclude>
     <ClInclude Include="CJeux.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="CWorld.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
   </ItemGroup>
