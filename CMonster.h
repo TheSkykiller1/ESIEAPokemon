@@ -54,6 +54,7 @@ public:
 	int getEtatTours();
 	std::vector<std::string> getForce();
 	bool getCache();
+	virtual float getFall();
 	std::vector<std::string> getNAttaques();
 	std::vector<std::string> getTAttaques();
 	std::vector<int> getNU();
@@ -85,7 +86,8 @@ public:
 	bool tour(CMonster* monstre, CTerrain* terrain); //demande de l'attaque et exécution de cette dernière
 	void useObject(CObject* objet); //utilisation des objets
 	void recevoirDegat(int degat); //reception des dégâts
-	virtual void checkHP(); //vérification des HP du monstre, pour exécution d'actions spécifiques
+	virtual void checkHP(CTerrain* terrain); //vérification des HP du monstre, pour exécution d'actions spécifiques
+	virtual bool verifTerrain(int num_att, CMonster* monstre, CTerrain* terrain); //vérification de l'état du terrain
 };
 
 #endif

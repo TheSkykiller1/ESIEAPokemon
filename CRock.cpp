@@ -20,7 +20,7 @@ CRock::~CRock()
 //SETTERS
 
 //METHODES
-bool CRock::attaquer(int num_att, CMonster* cible)
+bool CRock::attaquer(int num_att, CMonster* cible, CTerrain* terrain)
 {
 	if (m_etat == "Paralyzed") //paralysie
 	{
@@ -34,6 +34,7 @@ bool CRock::attaquer(int num_att, CMonster* cible)
 		int val_degat = degat(num_att, cible);
 		cible->recevoirDegat(val_degat);
 		m_nu[num_att]--;
+		cible->checkHP(terrain);
 		return 0;
 	}
 	else

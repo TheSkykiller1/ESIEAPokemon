@@ -28,7 +28,7 @@ bool CElectric::paralyze()
 	}
 }
 
-bool CElectric::attaquer(int num_att, CMonster* cible)
+bool CElectric::attaquer(int num_att, CMonster* cible, CTerrain* terrain)
 {
 	if (m_etat == "Paralyzed") //paralysie
 	{
@@ -49,6 +49,7 @@ bool CElectric::attaquer(int num_att, CMonster* cible)
 				cible->setEtat("Paralyzed"); //paralysie
 			}
 		}
+		cible->checkHP(terrain);
 		return 0;
 	}
 	else

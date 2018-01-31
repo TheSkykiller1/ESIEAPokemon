@@ -102,6 +102,11 @@ bool CMonster::getCache()
 	return m_cache;
 }
 
+float CMonster::getFall()
+{
+	return 0.0f;
+}
+
 std::vector<std::string> CMonster::getNAttaques()
 {
 	return m_nom_attaque;
@@ -335,6 +340,21 @@ bool CMonster::analyse_speed(CMonster* monstre)
 	}
 }
 
+bool CMonster::verifTerrain(int num_att, CMonster* cible, CTerrain* terrain)
+{
+	if (terrain->isflooded() && m_type != "Water")
+	{
+		short val = cible->getFall() + rand() / RAND_MAX;
+		if (val)
+		{
+			int val_degat = degat(num_att, cible);
+			this->recevoirDegat(val_degat/4);
+			return 0;
+		}
+	}
+	return 1;
+}
+
 bool CMonster::tour(CMonster* monstre, CTerrain* terrain)
 {
 	std::cout << m_nom << " :\n";
@@ -346,7 +366,10 @@ bool CMonster::tour(CMonster* monstre, CTerrain* terrain)
 	std::cout << "4) " << m_nom_attaque[3] << "\n";
 	int num_att;
 	std::cin >> num_att;
-	this->attaquer(num_att, monstre);
+	if (verifTerrain(num_att, monstre, terrain))
+	{
+		this->attaquer(num_att, monstre);
+	}
 	/*std::cout << monstre->getNom()<< " :\n"; //J'ai modif ça aussi ^^'
 	std::cout << "Choix de l'attaque :\n";
 	std::cout << "0) Coup de griffes\n";
@@ -416,7 +439,7 @@ void CMonster::recevoirDegat(int degat)
 	this->setHPAct(this->getHPAct() - degat);
 }
 
-void CMonster::checkHP()
+void CMonster::checkHP(CTerrain* terrain)
 {
 	if ((this->getHPAct()) <= 0)
 	{

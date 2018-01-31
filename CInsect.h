@@ -13,7 +13,7 @@ public:
 	~CInsect();
 
 	bool poison(); //booléen de test empoisonnement
-	bool attaquer(int m_num, CMonster* cible);
+	bool attaquer(int m_num, CMonster* cible, CTerrain* terrain);
 };
 
 #endif

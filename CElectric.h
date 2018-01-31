@@ -20,7 +20,7 @@ public:
 
 	void setParalysis(float paralysis);
 
-	bool attaquer(int num_att, CMonster* cible);
+	bool attaquer(int num_att, CMonster* cible, CTerrain* terrain);
 };
 
 #endif

@@ -77,7 +77,7 @@ bool CWater::fall()
 	}
 }
 
-void CWater::checkHP()
+void CWater::checkHP(CTerrain* terrain)
 {
 	if (m_HP_act <= 0)
 	{
@@ -85,12 +85,12 @@ void CWater::checkHP()
 		if (m_flood_activation == 1)
 		{
 			m_flood_activation = 0;
-			//DESACTIVER L'INONDATION
+			terrain->isflooded(0);
 		}
 	}
 }
 
-bool CWater::attaquer(int num_att, CMonster* cible)
+bool CWater::attaquer(int num_att, CMonster* cible, CTerrain* terrain)
 {
 	if (m_etat == "Paralyzed") //paralysie
 	{
@@ -104,16 +104,22 @@ bool CWater::attaquer(int num_att, CMonster* cible)
 		int val_degat = degat(num_att, cible);
 		cible->recevoirDegat(val_degat);
 		m_nu[num_att]--;
+		cible->checkHP(terrain);
 		if (flood())
 		{
 			//ACTIVER INNONDATION
 			//INDIQUER AU TERRAIN QUE LE MONSTRE RESPONSABLE EST CELUI-CI
 		}
-		cible->checkHP();
+		cible->checkHP(terrain);
 		return 0;
 	}
 	else
 	{
 		return 1;
 	}
+}
+
+bool CWater::verifTerrain(int num_att, CMonster* cible, CTerrain* terrain)
+{
+	return 1;
 }
