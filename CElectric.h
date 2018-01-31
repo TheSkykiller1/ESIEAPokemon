@@ -9,8 +9,6 @@ protected:
 	std::vector<std::string> m_force = { "Water" }; //vecteur des types de victimes à privilégier
 	float m_paralysis; //probabilité de se faire paralyser
 
-	bool paralyze(); //booléen de test paralysie
-
 public:
 	CElectric();
 	CElectric(int id, std::string type, std::string nom, int HP, int vit, int att, int def, float paralysis=0.0f);
@@ -21,6 +19,7 @@ public:
 	void setParalysis(float paralysis);
 
 	bool attaquer(int num_att, CMonster* cible, CTerrain* terrain);
+	bool paralyze(); //booléen de test paralysie
 };
 
 #endif

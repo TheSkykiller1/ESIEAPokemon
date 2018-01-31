@@ -52,7 +52,7 @@ public:
 	int getDefenseAct();
 	std::string getEtat();
 	int getEtatTours();
-	std::vector<std::string> getForce();
+	virtual std::vector<std::string> getForce();
 	bool getCache();
 	virtual float getFall();
 	std::vector<std::string> getNAttaques();

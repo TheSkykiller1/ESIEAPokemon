@@ -5,7 +5,7 @@ CRock::CRock() : CMonster()
 	
 }
 
-CRock::CRock(int id, std::string type, std::string nom, int HP, int vit, int att, int def): CMonster(id, type, nom, HP, vit, att, def)
+CRock::CRock(int id, std::string type, std::string nom, int HP, int vit, int att, int def): CMonster(id, type, nom, HP, vit, att, def), m_force({"Electric"})
 {
 	
 }
@@ -34,7 +34,6 @@ bool CRock::attaquer(int num_att, CMonster* cible, CTerrain* terrain)
 		int val_degat = degat(num_att, cible);
 		cible->recevoirDegat(val_degat);
 		m_nu[num_att]--;
-		cible->checkHP(terrain);
 		return 0;
 	}
 	else

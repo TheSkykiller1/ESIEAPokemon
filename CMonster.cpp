@@ -11,10 +11,13 @@ CMonster::CMonster(int id, std::string type, std::string nom, int HP, int vit, i
 	m_type = type;
 	m_nom = nom;
 	m_HP = HP;
+	m_HP_act = HP;
 	m_vitesse = vit;
+	m_vitesse_act = vit;
 	m_attaque = att;
 	m_attaque_act = att;
 	m_defense = def;
+	m_defense_act = def;
 	m_etat = "Normal";
 	m_etat_tours = 0;
 	m_cache = 0;
